@@ -15,7 +15,7 @@
 (defun string-to-file (name content)
   (with-open-file (stream name
                            :direction :output
-                           :if-exists :overwrite
+                           :if-exists :rename-and-delete
                            :if-does-not-exist :create )
     (format stream content))
   name)
@@ -52,8 +52,10 @@
     result))
 
 (defun make-post(name)
-  (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                     (gh-markdown (truename (concatenate 'string "./md/" name ".md")))))
+  (regex-replace-all "#THE-TITLE#"
+                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
+                                        (gh-markdown (truename (concatenate 'string "./md/" name ".md"))))
+                     (get-title (truename (concatenate 'string "./md/" name ".md")))))
 
 (defun write-post(name)
   (format t "WRITING POST ~A ~A" name #\newline)
@@ -61,19 +63,23 @@
                   (make-post name)))
 
 (defun make-index()
-  (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                     (let* ((the-list-html))
-                       (dolist (x (the-list))
-                         (setf the-list-html
-                               (concatenate 'string the-list-html
-                                            (concatenate 'string "<a href='" (car x) ".html'>" (cdr x) "</a>"))))
-                       (concatenate 'string "<div class='index'>" the-list-html "</div>"))))
+  (regex-replace-all "#THE-TITLE#"
+                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
+                                        (let* ((the-list-html))
+                                          (dolist (x (the-list))
+                                            (setf the-list-html
+                                                  (concatenate 'string the-list-html
+                                                               (concatenate 'string "<a href='" (car x) ".html'>" (cdr x) "</a>"))))
+                                          (concatenate 'string "<div class='index'>" the-list-html "</div>")))
+                     "Vito Van"))
 
 (defun write-index()
   (string-to-file "./html/index.html"
                   (make-index)))
 
-(defun write-all-post(&optional (force-rebuild nil))
+(defun write-all-posts(&optional (force-rebuild nil))
   (dolist (x (the-list))
     (if (or force-rebuild (not (find (car x) (the-html-list) :test #'equal)))
-        (write-post (car x)))))
+        (write-post (car x))))
+  (if force-rebuild
+      (make-index)))

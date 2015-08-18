@@ -1,0 +1,19 @@
+body{
+    font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB","Microsoft Yahei","å¾®è½¯é›…é»‘",sans-serif;
+    color: #000;
+    background: #FFF none repeat scroll 0% 0%;
+    font-size: 10pt;
+    clear: both;
+    padding: 0;
+    margin: 0;
+}
+.head{
+    padding-left: 10px;
+}
+.content{
+    padding: 10px;
+}
+.index>a{
+    display: block;
+    line-height: 2em;
+}
