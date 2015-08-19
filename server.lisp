@@ -20,6 +20,8 @@
     (format stream content))
   name)
 
+(defvar *target-path* "/vito-storage/WORK/dev/gits/vitovan.com/html/")
+
 (defun the-tmpl()
   (file-to-string #p"./tmpl/the.tmpl"))
 
@@ -40,7 +42,7 @@
 
 (defun the-html-list()
   (let* ((the-html-list))
-    (dolist (md-file (list-directory "./html"))
+    (dolist (md-file (list-directory *target-path*))
       (push
        (pathname-name md-file)
        the-html-list))
@@ -62,7 +64,7 @@
 
 (defun write-post(name)
   (format t "WRITING POST ~A ~A" name #\newline)
-  (string-to-file (concatenate 'string "./html/" name ".html")
+  (string-to-file (concatenate 'string *target-path* name ".html")
                   (make-post name)))
 
 (defun make-index()
@@ -90,12 +92,12 @@
                      "Projects"))
 
 (defun write-projects()
-  (string-to-file "./html/projects.html"
+  (string-to-file (concatenate 'string *target-path* "projects.html")
                   (make-projects)))
 
 
 (defun write-index()
-  (string-to-file "./html/index.html"
+  (string-to-file (concatenate 'string *target-path* "index.html")
                   (make-index)))
 
 (defun write-all-posts(&optional (force-rebuild nil))
