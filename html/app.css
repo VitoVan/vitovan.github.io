@@ -7,18 +7,50 @@ body{
     padding: 0;
     margin: 0;
 }
+*{
+    margin: 0;
+    padding: 0;
+}
+.panel{
+    float: left;
+    padding: 0.9em;
+    line-height: 1.6em;
+    background-color: #EEE;
+    min-height: 20em;
+    background-color: #4088C0;
+    margin-right: 1em;
+}
+.panel>ul{
+    list-style:none;
+}
+.panel a{
+    text-decoration: none;
+    color: #FFF;
+}
+.panel>ul>li{
+    border-bottom-color: white;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+}
+.panel a:hover{
+    color: #EEE;
+}
 .head{
-    padding-left: 10px;
+    padding: 1em;
+    text-transform: uppercase;
+}
+.container{
+    float: left;
+    max-width: 50em;
 }
 .head>h1>a{
     color: #DDD;
     text-decoration: none;
 }
-.head>h1>a:hover{
-    text-decoration: underline;
-}
 .content{
-    padding: 10px;
+    padding:0 1em;
+    font-size: 1.1em;
+    line-height: 1.9em;
 }
 .content a:visited{
     color: #555;

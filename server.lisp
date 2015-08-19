@@ -76,6 +76,24 @@
                                           (concatenate 'string "<div class='index'>" the-list-html "</div>")))
                      "Vito Van"))
 
+(defun make-projects()
+  (regex-replace-all "#THE-TITLE#"
+                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
+                                        (let* ((the-list-html))
+                                          (dolist (x '(
+                                                       ("http://whereisjob.com" . "Where is job?")
+                                                       ("http://clcf.la" . "出来吃饭")))
+                                            (setf the-list-html
+                                                  (concatenate 'string the-list-html
+                                                               (concatenate 'string "<a href='" (car x) "'>" (cdr x) "</a>"))))
+                                          (concatenate 'string "<div class='index'>" the-list-html "</div>")))
+                     "Projects"))
+
+(defun write-projects()
+  (string-to-file "./html/projects.html"
+                  (make-projects)))
+
+
 (defun write-index()
   (string-to-file "./html/index.html"
                   (make-index)))
@@ -84,5 +102,4 @@
   (dolist (x (the-list))
     (if (or force-rebuild (not (find (car x) (the-html-list) :test #'equal)))
         (write-post (car x))))
-  (if force-rebuild
-      (write-index)))
+  (write-index))
