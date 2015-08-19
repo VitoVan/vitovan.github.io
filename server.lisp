@@ -25,7 +25,7 @@
 (defvar *target-path* "/vito-storage/WORK/dev/gits/vitovan.com/html/")
 
 (defun the-tmpl()
-  (file-to-string *tmpl-path*))
+  (file-to-string (concatenate 'string *tmpl-path* "the.tmpl")))
 
 (defun get-title (md-file)
   (with-open-file (stream md-file)
@@ -62,7 +62,7 @@
   (regex-replace-all "#THE-TITLE#"
                      (regex-replace-all "#THE-CONTENT#" (the-tmpl)
                                         (gh-markdown (truename (concatenate 'string *md-path* name ".md"))))
-                     (get-title (truename (concatenate 'string "./md/" name ".md")))))
+                     (get-title (truename (concatenate 'string *md-path* name ".md")))))
 
 (defun write-post(name)
   (format t "WRITING POST ~A ~A" name #\newline)
