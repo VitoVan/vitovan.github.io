@@ -29,7 +29,10 @@
 
 (defun the-list()
   (let* ((the-list))
-    (dolist (md-file (list-directory "./md"))
+    (dolist (md-file
+              (sort (list-directory "./md")
+                    #'(lambda(fa fb)
+                        (< (file-write-date fa) (file-write-date fb)))))
       (push
        (cons (pathname-name md-file) (get-title md-file))
        the-list))
@@ -82,4 +85,4 @@
     (if (or force-rebuild (not (find (car x) (the-html-list) :test #'equal)))
         (write-post (car x))))
   (if force-rebuild
-      (make-index)))
+      (write-index)))

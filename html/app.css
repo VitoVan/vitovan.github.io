@@ -10,8 +10,18 @@ body{
 .head{
     padding-left: 10px;
 }
+.head>h1>a{
+    color: #DDD;
+    text-decoration: none;
+}
+.head>h1>a:hover{
+    text-decoration: underline;
+}
 .content{
     padding: 10px;
+}
+.content a:visited{
+    color: #555;
 }
 .index>a{
     display: block;
