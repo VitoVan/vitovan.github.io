@@ -20,10 +20,12 @@
     (format stream content))
   name)
 
+(defvar *md-path* "/vito-storage/WORK/dev/gits/vitovan.com/md/")
+(defvar *tmpl-path* "/vito-storage/WORK/dev/gits/vitovan.com/tmpl/")
 (defvar *target-path* "/vito-storage/WORK/dev/gits/vitovan.com/html/")
 
 (defun the-tmpl()
-  (file-to-string #p"./tmpl/the.tmpl"))
+  (file-to-string *tmpl-path*))
 
 (defun get-title (md-file)
   (with-open-file (stream md-file)
@@ -32,7 +34,7 @@
 (defun the-list()
   (let* ((the-list))
     (dolist (md-file
-              (sort (list-directory "./md")
+              (sort (list-directory *md-path*)
                     #'(lambda(fa fb)
                         (< (file-write-date fa) (file-write-date fb)))))
       (push
@@ -59,7 +61,7 @@
 (defun make-post(name)
   (regex-replace-all "#THE-TITLE#"
                      (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                        (gh-markdown (truename (concatenate 'string "./md/" name ".md"))))
+                                        (gh-markdown (truename (concatenate 'string *md-path* name ".md"))))
                      (get-title (truename (concatenate 'string "./md/" name ".md")))))
 
 (defun write-post(name)
