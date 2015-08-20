@@ -17,7 +17,7 @@
                            :direction :output
                            :if-exists :rename-and-delete
                            :if-does-not-exist :create )
-    (format stream content))
+    (format stream "~A" content))
   name)
 
 (defvar *md-path* "/vito-storage/WORK/dev/gits/vitovan.com/md/")
@@ -56,7 +56,7 @@
                                      :method :post
                                      :content-type "text/x-markdown; charset=utf-8"
                                      :content md-file)))
-    result))
+    (regex-replace-all "id=\"user-content-" result "name=\"")))
 
 (defun make-post(name)
   (regex-replace-all "#THE-TITLE#"

@@ -113,7 +113,8 @@
 }
 
 .markdown-body blockquote {
-  margin: 0;
+    margin: 0;
+    line-height: 1em !important;    
 }
 
 .markdown-body ul,
