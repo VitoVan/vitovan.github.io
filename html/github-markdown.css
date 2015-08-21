@@ -73,8 +73,16 @@
 
 .markdown-body a {
   color: #4078c0;
-  text-decoration: none;
 }
+
+.markdown-body a:link {
+    text-decoration: none;
+}
+
+.markdown-body a:visited{
+    color: #7A92B3;
+}
+
 
 .markdown-body a:hover,
 .markdown-body a:active {

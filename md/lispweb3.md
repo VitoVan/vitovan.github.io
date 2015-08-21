@@ -24,7 +24,7 @@ It's been more than half a century since Lisp first appeared, she's like the [Th
 
 If you need some other reasons beside awesome, here is some [quotes](http://www.paulgraham.com/quotes.html) and [articles](http://www.paulgraham.com/lisp.html) about Lisp, enjoy them.
 
-### Let's Talk about Business
+### Let's Do It
 
 What to do?
 
@@ -39,7 +39,8 @@ As you have had some web development skills, we'll focus on the server part, and
 * [Hello Lisp!](#hello-lisp)
 * [Hello World!](#hello-world)
 * [Let's Be JSON](#lets-be-json)
-* [Storing Data to Disk](#storing-data-to-disk)
+* [Data Storage](#data-storage)
+* [Modern Client](#modern-client)
 
 #### Hello, Lisp!
 
@@ -66,7 +67,37 @@ We assume that you have no knowledge about Lisp, so let's say hello:
 
     >distribution for more information.
 
-    >\* 
+    >\*
+
+
+Before we start coding, let's talk about the basic grammar in Lisp. Many people say "It's weird!", but it is also the charming part.
+
+You can imagine Lisp grammar like [Pac Man](http://www.webpacman.com/pacman.php) eating the dots: `ᗧ••••`, and there is no ghosts here. Pac Man is the function in Lisp, and the dots are arguments. After Pac Man eat up all the dots (the function is executed with all these arguments), it becames a dot: `•` . and a dot is able to be eaten by another Pac Man.
+
+So, you can imagine a Lisp program like this:
+
+```Lisp
+;;Day 1, we created Pac Men and dots
+(ᗧ• (ᗧ••••
+ (ᗧ••
+ (ᗧ•••))))
+;;Day 2, The innermost Pac Man eat up all the dots in front of him/her
+;;and, turns into a dot 
+(ᗧ• (ᗧ••••
+ (ᗧ••
+ •)))
+;;Day 3, Eating is not stopping
+(ᗧ• (ᗧ••••
+•))
+;;Day 4, The last Pac Man
+(ᗧ• •)
+;;Day 5, Finally, Pac Man is just another dot
+•
+```
+
+Yes, they are just Pac Man and dots! When there is multiple Pac Men and dots, the innermost Pac Man will eat first, then it turns into a dot, waiting to be eaten by other Pac Man. It's funny, isn't it?
+
+Now, let's get back:
 
 
 * Type `(format t "Hello, Lisp!")`, then hit <kbd>Enter</kbd>
@@ -81,9 +112,9 @@ We assume that you have no knowledge about Lisp, so let's say hello:
 
 * Now, you have learned Lisp!
 
-"You must be kidding!!", yes. Now let's do something more complicated:
+"YOU MUST BE KIDDING!!", yes. Now let's do something more complicated:
 
-* Open a file, paste codes below, then save it as `say-hello.lisp`:
+* Open a file, paste code below, then save it as `say-hello.lisp`:
 
     ```Lisp
     (defun say-hello (to)
@@ -196,9 +227,9 @@ So, let's say hello to the world.
 
 \- Isaac Newton
 
-* Go to [quicklisp.org](http://quicklisp.org), follow the [installation guide](https://www.quicklisp.org/beta/#installation)(yes, the paragraph with the dark background, copy and paste and execute all the bold lines in your terminal), install it.
+* Go to [quicklisp.org](http://quicklisp.org), follow the [installation guide](https://www.quicklisp.org/beta/#installation) (yes, the paragraph with the dark background, copy and paste and execute all the bold lines in your terminal), install it.
 
-* Open a file, paste codes below, then save it as `server.lisp`:
+* Open a file, paste code below, then save it as `server.lisp`:
 
     ```Lisp
     (ql:quickload :hunchentoot)
@@ -216,7 +247,7 @@ So, let's say hello to the world.
 * YOU ARE AWESOME!!!
 
 
-Ok, calm down, let's do something to make people know that it's _YOU_ who created a website with lisp. Add below codes to your `server.lisp` file:
+Ok, calm down, let's do something to make people know that it's _YOU_ who created a website with Lisp. Add the code below to your `server.lisp` file:
 
 ```Lisp
  ;;remeber to change Vito to your name.
@@ -239,7 +270,9 @@ It's not so hard to understand, isn't it?
 
 First, we should thank Quicklisp, it is a library manager for Common Lisp, and it has [over 1,200 libraries](https://www.quicklisp.org/beta/releases.html), after install it, you can ride a bike with NO HANDS!
 
-Second, we should thank [Edi Weitz](http://weitz.de/), he/she is an extremely awesome and fascinating Lisper on this planet. You will meet so many Lisp projects under Edi Weitz's magic hands after surfing a while in the Lisp world, and then you will be subdued by the charm of the codes. Ok, after the words of praise, we just used [Hunchentoot](http://weitz.de/hunchentoot/) as the server, it's well documented, you will love it.
+Second, we should thank [Edi Weitz](http://weitz.de/), he/she is an extremely awesome and fascinating Lisper on this planet. You will meet so many Lisp projects under Edi Weitz's magic hands after surfing a while in the Lisp world, and then you will be subdued by the charm of the code. Ok, after the words of praise, we just used [Hunchentoot](http://weitz.de/hunchentoot/) as the server, it's well documented, you will love it.
+
+We just load [Hunchentoot](http://weitz.de/hunchentoot/) with Quicklisp, like this: `(ql:quickload :hunchentoot)`, and then start the Hunchentoot Server on port 4242: `(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))`. At last, we defined a HTTP handler with Hunchentoot's [define-easy-handler](http://weitz.de/hunchentoot/#define-easy-handler).
 
 #### Let's Be JSON
 
@@ -247,7 +280,7 @@ Yes yes, I know I know. The HTML5 + JavaScript client likes JSON, the front team
 
 So, how to do it in Common Lisp?
 
-* Open a file, paste codes below, then save it as `json-server.lisp`:
+* Open a file, paste code below, then save it as `json-server.lisp`:
 
 ```Lisp
 (ql:quickload '(hunchentoot cl-json))
@@ -296,8 +329,291 @@ For now, I don't think you need explains in detail anymore. We just created a cl
 
 * [CL-JSON](https://common-lisp.net/project/cl-json/)
 
-#### Storing Data to Disk
+#### Data Storage
 
-For now, we've made a **`Server with JSON output`**. But, we never store anything.
+Where we are now?
 
-So, let's store every instance of people which is created when [http://localhost:4242/you?name=Jack](http://localhost:4242/you?name=Jack) is requested.
+We've made a **`Server with JSON output`**, it's a big deal. But, we never store any data yet. So, let's give him/her a shot who ever visit [http://localhost:4242/you?name=Jack](http://localhost:4242/you?name=Jack).
+
+Here is the original code for that request:
+
+```Lisp
+;;Dynamic build a people, and response back in JSON.
+(hunchentoot:define-easy-handler (say-you :uri "/you") (name)
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   (make-instance
+    'people
+    :name name
+    :language "English"
+    :bio (format nil "I am ~a's colon. I get cancer, I kill ~a. " name name))))
+```
+
+We could let's make it better:
+
+```Lisp
+;;Store the people instance
+(defun store-people (people)
+  (ᗧ• people •)
+  people)
+;;Make a people instance by name
+(defun make-people (name)
+  (make-instance
+   'people
+   :name name
+   :language "English"
+   :bio (format nil "I am ~a's colon. I get cancer, I kill ~a. " name name)))
+;;Dynamic build a people, and response back in JSON.
+(hunchentoot:define-easy-handler (say-you :uri "/you") (name)
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   (store-people
+    (make-people name))))
+```
+We just added a function `make-people`, it makes the code concise. And we know that Pac Man in the code won't really work, let's fix it.
+
+What's the common sence for storing data? Database Products, yes. But we won't use database today, because:
+
+* It's not awesome, everybody is using it.
+
+* It's complicated, we have to learn how to use a Database Product.
+
+* I have the data in the memory, why not just make it AS IS?
+
+So, we could do it like this:
+
+```Lisp
+(defvar *people-list* nil)
+;;Store the people instance
+(defun store-people (people)
+  (push people *people-list*)
+  people)
+```
+
+Yes! We just store the people in the variable `*people-list*`! How to send the people list to browser?
+
+```Lisp
+pp(hunchentoot:define-easy-handler (people :uri "/people") (name)
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   *people-list*))
+```
+
+Here is the minimal part to test out memory storage:
+
+```Lisp
+(ql:quickload '(hunchentoot cl-json))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
+;;Create a class called people.
+(defclass people()
+  ((name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+;;Define a list
+(defvar *people-list* nil)
+;;Store the people instance
+(defun store-people (people)
+  (push people *people-list*)
+  people)
+;;Make a people instance by name
+(defun make-people (name)
+  (make-instance
+   'people
+   :name name
+   :language "English"
+   :bio (format nil "I am ~a's colon. I get cancer, I kill ~a. " name name)))
+;;Dynamic build a people, and response back in JSON.
+(hunchentoot:define-easy-handler (say-you :uri "/you") (name)
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   (store-people
+    (make-people name))))
+(hunchentoot:define-easy-handler (people :uri "/people") ()
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   *people-list*))
+```
+
+You can save the code above to file `storage-server.lisp`, and then loaded with `sbcl --load storage-server.lisp` (remember to quit all the other REPLs to avoid port number conflicts).
+
+Then click these links first: [Jack](http://localhost:4242/you?name=Jack), [Tyler](http://localhost:4242/you?name=Tyler), [Marla](http://localhost:4242/you?name=Marla).
+
+And then check here to see if they are stored: [http://localhost:4242/people](http://localhost:4242/people).
+
+What happend? It just works.
+
+**What? You wanna store them into the disk?**
+
+Since we decide not to use a Database Product, then how to store the data to the disk and can retrieve them as easily as in the memory? Let's try [OBJECT PREVALENCE](http://www.advogato.org/article/398.html).
+
+Of course we can build out own implementation, but thank to [Sven Van Caekenberghe](http://www.cliki.net/Sven Van Caekenberghe), we can use [CL-PREVALENCE](https://common-lisp.net/project/cl-prevalence/). It's not very well documented as [Hunchentoot](http://weitz.de/hunchentoot/), but we have the [API](https://common-lisp.net/project/cl-prevalence/CL-PREVALENCE.html) and the source code, do we?
+
+* First, add `cl-prevalence` to your quicklisp load list:
+
+```Lisp
+(ql:quickload '(hunchentoot cl-json cl-prevalence))
+```
+
+* Then initialize your prevalence system:
+
+```Lisp
+;;We add "id" to the people class, it's because the prevalence system need it.
+(defclass people()
+  ((id :reader id
+       :initarg :id)
+   (name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+(defvar *p-system* (cl-prevalence:make-prevalence-system #p"./p-system/"))
+(or (> (length (cl-prevalence:find-all-objects *p-system* 'people)) 0)
+	(cl-prevalence:tx-create-id-counter *p-system*))
+```
+
+* Modify the original function `make-people`
+
+```Lisp
+(defun make-people (name)
+  (cl-prevalence:tx-create-object
+   *p-system*
+   'people
+   `((name ,name)
+     (language ,"English")
+     (bio ,(format nil "I am ~a's colon. I get cancer, I kill ~a. " name name)))))
+```
+* Delete function `store-people` and varible `*people-list*`, because we stored data into the prevalence system when we call `make-people`
+
+* Modify our controllers
+
+```Lisp
+;;Dynamic build a people, and response back in JSON.
+(hunchentoot:define-easy-handler (say-you :uri "/you") (name)
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   (make-people name)))
+;;Get all the people in our prevalence system
+(hunchentoot:define-easy-handler (people :uri "/people") ()
+  (setf (hunchentoot:content-type*) "application/json")
+  ;;Here we take a snapshot to disk, you can do this whenever you want.
+  (cl-prevalence:snapshot *p-system*)
+  (json:encode-json-to-string
+   (cl-prevalence:find-all-objects *p-system* 'people)))
+```
+
+* And finally, we got this
+
+```Lisp
+(ql:quickload '(hunchentoot cl-json cl-prevalence))
+;;Create a class called people.
+(defclass people()
+  ((id :reader id
+       :initarg :id)
+   (name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+(defvar *p-system* (cl-prevalence:make-prevalence-system #p"./p-system/"))
+(or (> (length (cl-prevalence:find-all-objects *p-system* 'people)) 0)
+    (cl-prevalence:tx-create-id-counter *p-system*))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
+;;Make and sotre a people instance by name
+(defun make-people (name)
+  (cl-prevalence:tx-create-object
+   *p-system*
+   'people
+   `((name ,name)
+     (language ,"English")
+     (bio ,(format nil "I am ~a's colon. I get cancer, I kill ~a. " name name)))))
+;;Dynamic build a people, and response back in JSON.
+(hunchentoot:define-easy-handler (say-you :uri "/you") (name)
+  (setf (hunchentoot:content-type*) "application/json")
+  (json:encode-json-to-string
+   (make-people name)))
+;;Get all the people in our prevalence system
+(hunchentoot:define-easy-handler (people :uri "/people") ()
+  (setf (hunchentoot:content-type*) "application/json")
+  ;;Here we take a snapshot to disk, you can do this whenever you want.
+  (cl-prevalence:snapshot *p-system*)
+  (json:encode-json-to-string
+   (cl-prevalence:find-all-objects *p-system* 'people)))
+```
+
+* Save the code above to file `p-storage-server.lisp`, and then loaded with `sbcl --load p-storage-server.lisp` (remember to quit all the other REPLs to avoid port number conflicts).
+
+
+Then click these links first: [Robert Paulson](http://localhost:4242/you?name=Robert Paulson), [Tyler](http://localhost:4242/you?name=Tyler), [Jack](http://localhost:4242/you?name=Jack), [Lou](http://localhost:4242/you?name=Lou).
+
+And then check here to see if they are stored: [http://localhost:4242/people](http://localhost:4242/people).
+
+What happend? It just works.
+
+**To witness the miracle**
+
+Now, quit all your REPLs and close all the tabs in your browser (except this one).
+
+Reload your code: `sbcl --load p-storage-server.lisp`, then review the page: [http://localhost:4242/people](http://localhost:4242/people). Do you see Tyler?
+
+#### Modern Client
+
+I've create a single HTML file as [client](http://.........), you can [download](http://.....) and modify it, it's just the mix of HTML / JavaScript and CSS.
+
+**Then what's left?**
+
+We need to serve the HTML file, let's check the [document of Hunchentoot](http://weitz.de/hunchentoot/). Here we can see:
+
+>...... The location of the document root directory can be specified when creating a new ACCEPTOR instance by the way of the ACCEPTOR-DOCUMENT-ROOT. . ......
+
+\- [Hunchentoot](http://weitz.de/hunchentoot/)
+
+So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTML file into it: `wget -P www http://..../`
+
+Then do this:
+
+```Lisp
+;;Change this line:
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
+;;To this:
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242
+                                  :document-root "www/"))
+```
+
+Then Hunchentoot will use the "www/" in current folder as root directory, now try to reload our code.
+
+Then visit: [http://localhost:4242/lispweb3-client.html](http://localhost:4242/lispweb3-client.html), you got what you want.
+
+Suggestion: You do not really wanna use Hunchentoot to serve your static files, do you? You should try [Nginx](https://www.nginx.com/) as a [PROXY](https://www.nginx.com/resources/admin-guide/reverse-proxy/), and make your Hunchentoot as an application server only.
+
+### Before the End
+
+I have to say that I lied to you about the way we do when coding in Common Lisp for convenience of explanation.
+
+* We do not usually load file like this `sbcl --load xxx.lisp`. We directly type and eval in the REPL, that's the charming part of Lisp.
+
+* We do not usually directly run `sbcl` and then eval something, it sucks. You should try [SLIME](https://www.common-lisp.net/project/slime/), it makes life much more easier.
+
+And, one more thing:
+
+If you wanna surfing in the Lisp world in Lisp-way, [Emacs](https://www.gnu.org/software/emacs/) is your laser sword, my young Jedi.
+
+### References
+
+Thanks to:
+
+* [Lisp for the Web](http://www.adamtornhill.com/articles/lispweb.htm) by Adam Tornhill, April 2008
+
+* [Lisp for the Web, Part II](http://msnyder.info/posts/2011/07/lisp-for-the-web-part-ii/) by Matthew Snyder, July 2011
+
+I wish this piece of work could be:
+
+* [Lisp for the Web, Part III](http://vitovan.com/lispweb3.html) by Vito Van, August 2015
+
+That would be a great honor to me.
+
+Thanks for reading.
