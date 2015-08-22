@@ -10,7 +10,7 @@ August 2015
 
 This piece is about how to build a modern web application with Common Lisp in the backend, from scratch.
 
-You may need to have some knowledge about web developments to proceed, such as: HTML / CSS / JavaScript / ... etc, and some other related concepts.
+You may need to have some knowledge about [Front End Development](https://en.wikipedia.org/wiki/Front_end_development), cause we won't explain the steps for building the client.
 
 ### Why Lisp? Again
 
@@ -26,13 +26,13 @@ If you need some other reasons beside awesome, here is some [quotes](http://www.
 
 ### Let's Do It
 
-What to do?
+Do what?
 
 We are going to "build a modern web application with Commin Lisp in the backend", as mentioned before.
 
 In recent days, many people build web applications with a **`Server with JSON output`** and a **`Client with HTML5 + JavaScript`**. And we will do it the same way.
 
-As you have had some web development skills, we'll focus on the server part, and the client part will not be explained in detail.
+As you have had some Front End Development skills, we'll focus on the server part, and the client part will be provide as source code for you.
 
 ### The Steps
 
@@ -97,7 +97,7 @@ So, you can imagine a Lisp program like this:
 
 Yes, they are just Pac Man and dots! When there is multiple Pac Men and dots, the innermost Pac Man will eat first, then it turns into a dot, waiting to be eaten by other Pac Man. It's funny, isn't it?
 
-Now, let's get back:
+Now, let's get back to REPL:
 
 
 * Type `(format t "Hello, Lisp!")`, then hit <kbd>Enter</kbd>
@@ -157,7 +157,7 @@ Now, let's get back:
 
 **Ok, what we've done?**
 
-First, when we type `(format t "Hello, Lisp!")`, we called a function which name is `format`, and passed two arguments: `t` and `"Hello, Lisp!"`. Well then, what is function `format` about?
+First, when we type `(format t "Hello, Lisp!")`, we called a function which name is `format`, and passed with two arguments: `t` and `"Hello, Lisp!"`. Well then, what is function `format` about?
 
 Here is the document: [CLHS: Function FORMAT](http://www.lispworks.com/documentation/lw50/CLHS/Body/f_format.htm), and here is [A Few FORMAT Recipes](http://www.gigamonkeys.com/book/a-few-format-recipes.html). Typically, we can google it by these keywords: [_common lisp format_](https://www.google.com/search?q=common+lisp+format), thank google, we'll always get the answer.
 
@@ -200,7 +200,7 @@ Second, we wrote a file with:
  (format t "Hello, ~a" to))
 ```
 
-inside. Well, we know that `(format t "Hello, ~a" to)` means replace directive `~a` with the value of variable `to`, and then print them out to the standard output. But, what does `(defun say-hello (to)` mean?
+Well, we know that `(format t "Hello, ~a" to)` means replace directive `~a` with the value of variable `to`, and then print them out to the standard output. But, what does `(defun say-hello (to)` mean?
 
 Let's try google: [_common lisp defun_](https://www.google.com/search?q=common+lisp+defun).
 
@@ -208,7 +208,7 @@ Well, we got this: [CLHS: Macro DEFUN](http://www.lispworks.com/documentation/lw
 
 After read them, we know that `defun` is a Macro which is used to create funcion. The first argument of `defun` is the function name, and the second argument of `defun` is the arguments of the function, and typically, the rest will be the body of the function.
 
-So, it means we just created a function name by `say-hello` and takes one argument `to`. When the function is called, it concatenate the value of variable `to` with string `"Hello, "`, then print them to the standard output. This could be the JavaScript version:
+So, it means we just created a function named by `say-hello` and takes one argument `to`. When the function is called, it concatenate the value of variable `to` with string `"Hello, "`, then print them to the standard output. This could be the JavaScript version:
 
 ```JavaScript
 //It seems there is no string format function in JavaScript, so...
@@ -226,6 +226,8 @@ So, let's say hello to the world.
 >If I have seen further, it is by standing on the shoulders of giants.
 
 \- Isaac Newton
+
+Let's meet the giants:
 
 * Go to [quicklisp.org](http://quicklisp.org), follow the [installation guide](https://www.quicklisp.org/beta/#installation) (yes, the paragraph with the dark background, copy and paste and execute all the bold lines in your terminal), install it.
 
@@ -274,9 +276,11 @@ Second, we should thank [Edi Weitz](http://weitz.de/), he/she is an extremely aw
 
 We just load [Hunchentoot](http://weitz.de/hunchentoot/) with Quicklisp, like this: `(ql:quickload :hunchentoot)`, and then start the Hunchentoot Server on port 4242: `(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))`. At last, we defined a HTTP handler with Hunchentoot's [define-easy-handler](http://weitz.de/hunchentoot/#define-easy-handler).
 
+For further usage about Hunchentoot, you'll find them in the [document](http://weitz.de/hunchentoot).
+
 #### Let's Be JSON
 
-Yes yes, I know I know. The HTML5 + JavaScript client likes JSON, the front team won't be happy if we give them plain text response.
+Yes yes, I know I know. The Front Team won't be happy if we give them plain text response, they all like [JSON](http://json.org/).
 
 So, how to do it in Common Lisp?
 
@@ -374,7 +378,7 @@ We just added a function `make-people`, it makes the code concise. And we know t
 
 What's the common sence for storing data? Database Products, yes. But we won't use database today, because:
 
-* It's not awesome, everybody is using it.
+* It's not cool, everybody is using it.
 
 * It's complicated, we have to learn how to use a Database Product.
 
@@ -447,9 +451,9 @@ What happend? It just works.
 
 **What? You wanna store them into the disk?**
 
-Since we decide not to use a Database Product, then how to store the data to the disk and can retrieve them as easily as in the memory? Let's try [OBJECT PREVALENCE](http://www.advogato.org/article/398.html).
+Since we decide not to use a Database Product, then how to store the data to the disk and restore them easily? Let's try [OBJECT PREVALENCE](http://www.advogato.org/article/398.html), it means we are going to take a snapshot on current memory and save it as a file, then restore them anytime.
 
-Of course we can build out own implementation, but thank to [Sven Van Caekenberghe](http://www.cliki.net/Sven Van Caekenberghe), we can use [CL-PREVALENCE](https://common-lisp.net/project/cl-prevalence/). It's not very well documented as [Hunchentoot](http://weitz.de/hunchentoot/), but we have the [API](https://common-lisp.net/project/cl-prevalence/CL-PREVALENCE.html) and the source code, do we?
+Of course we can build our own implementation, but thank to [Sven Van Caekenberghe](http://www.cliki.net/Sven Van Caekenberghe), we can use [CL-PREVALENCE](https://common-lisp.net/project/cl-prevalence/). It's not very well documented as [Hunchentoot](http://weitz.de/hunchentoot/), but we have the [API](https://common-lisp.net/project/cl-prevalence/CL-PREVALENCE.html) and the source code, do we?
 
 * First, add `cl-prevalence` to your quicklisp load list:
 
@@ -457,10 +461,10 @@ Of course we can build out own implementation, but thank to [Sven Van Caekenberg
 (ql:quickload '(hunchentoot cl-json cl-prevalence))
 ```
 
-* Then initialize your prevalence system:
+* Then initialize your prevalence system (we should define the class first for prevalence system to use):
 
 ```Lisp
-;;We add "id" to the people class, it's because the prevalence system need it.
+;;We add "id" to the people class, the prevalence system will need it.
 (defclass people()
   ((id :reader id
        :initarg :id)
@@ -470,7 +474,9 @@ Of course we can build out own implementation, but thank to [Sven Van Caekenberg
              :initarg :language)
    (bio :accessor bio
         :initarg :bio)))
+;;Init the system
 (defvar *p-system* (cl-prevalence:make-prevalence-system #p"./p-system/"))
+;;Create counter if not exists
 (or (> (length (cl-prevalence:find-all-objects *p-system* 'people)) 0)
 	(cl-prevalence:tx-create-id-counter *p-system*))
 ```
@@ -486,7 +492,7 @@ Of course we can build out own implementation, but thank to [Sven Van Caekenberg
      (language ,"English")
      (bio ,(format nil "I am ~a's colon. I get cancer, I kill ~a. " name name)))))
 ```
-* Delete function `store-people` and varible `*people-list*`, because we stored data into the prevalence system when we call `make-people`
+* Delete function `store-people` and varible `*people-list*`, because the data is automatically stored into the prevalence system when we call `make-people`.
 
 * Modify our controllers
 
@@ -499,8 +505,6 @@ Of course we can build out own implementation, but thank to [Sven Van Caekenberg
 ;;Get all the people in our prevalence system
 (hunchentoot:define-easy-handler (people :uri "/people") ()
   (setf (hunchentoot:content-type*) "application/json")
-  ;;Here we take a snapshot to disk, you can do this whenever you want.
-  (cl-prevalence:snapshot *p-system*)
   (json:encode-json-to-string
    (cl-prevalence:find-all-objects *p-system* 'people)))
 ```
@@ -519,7 +523,9 @@ Of course we can build out own implementation, but thank to [Sven Van Caekenberg
              :initarg :language)
    (bio :accessor bio
         :initarg :bio)))
+;;Init the system
 (defvar *p-system* (cl-prevalence:make-prevalence-system #p"./p-system/"))
+;;Create counter if not exists
 (or (> (length (cl-prevalence:find-all-objects *p-system* 'people)) 0)
     (cl-prevalence:tx-create-id-counter *p-system*))
 (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
@@ -539,8 +545,6 @@ Of course we can build out own implementation, but thank to [Sven Van Caekenberg
 ;;Get all the people in our prevalence system
 (hunchentoot:define-easy-handler (people :uri "/people") ()
   (setf (hunchentoot:content-type*) "application/json")
-  ;;Here we take a snapshot to disk, you can do this whenever you want.
-  (cl-prevalence:snapshot *p-system*)
   (json:encode-json-to-string
    (cl-prevalence:find-all-objects *p-system* 'people)))
 ```
@@ -552,34 +556,44 @@ Then click these links first: [Robert Paulson](http://localhost:4242/you?name=Ro
 
 And then check here to see if they are stored: [http://localhost:4242/people](http://localhost:4242/people).
 
-What happend? It just works.
+What happend? It just works as the `*people-list*`.
 
 **To witness the miracle**
 
-Now, quit all your REPLs and close all the tabs in your browser (except this one).
+Now, type `(cl-prevalence:snapshot *p-system*)` in your REPL, hit <kbd>Enter</kbd>.
 
-Reload your code: `sbcl --load p-storage-server.lisp`, then review the page: [http://localhost:4242/people](http://localhost:4242/people). Do you see Tyler?
+Then, quit all your REPLs and close all the tabs in your browser (except this one).
+
+Reload your code: `sbcl --load p-storage-server.lisp`, then review the page: [http://localhost:4242/people](http://localhost:4242/people).
+
+Do you see Tyler? The CL-PREVALENCE automatically loaded the snapshot for us, we don't even noticed.
 
 #### Modern Client
 
-I've create a single HTML file as [client](http://.........), you can [download](http://.....) and modify it, it's just the mix of HTML / JavaScript and CSS.
+I've create a single file as client, you can [download](https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-client.htm) and modify it, it's just the mix of HTML / JavaScript and CSS.
 
 **Then what's left?**
 
-We need to serve the HTML file, let's check the [document of Hunchentoot](http://weitz.de/hunchentoot/). Here we can see:
+We need to serve this file, let's check the [document of Hunchentoot](http://weitz.de/hunchentoot/#start). Here we can see:
 
 >...... The location of the document root directory can be specified when creating a new ACCEPTOR instance by the way of the ACCEPTOR-DOCUMENT-ROOT. . ......
 
 \- [Hunchentoot](http://weitz.de/hunchentoot/)
 
-So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTML file into it: `wget -P www http://..../`
-
-Then do this:
+So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTML file into it:
 
 ```Lisp
-;;Change this line:
+wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-client.htm
+```
+
+Then change:
+
+```Lisp
 (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
-;;To this:
+```
+To this:
+
+```Lisp
 (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242
                                   :document-root "www/"))
 ```
@@ -596,7 +610,7 @@ I have to say that I lied to you about the way we do when coding in Common Lisp 
 
 * We do not usually load file like this `sbcl --load xxx.lisp`. We directly type and eval in the REPL, that's the charming part of Lisp.
 
-* We do not usually directly run `sbcl` and then eval something, it sucks. You should try [SLIME](https://www.common-lisp.net/project/slime/), it makes life much more easier.
+* We do not usually directly type and eval in the REPL created by `sbcl`, it hurts. You should try [SLIME](https://www.common-lisp.net/project/slime/), it makes life much more easier.
 
 And, one more thing:
 
