@@ -80,7 +80,7 @@
       (with-rss2 (s :encoding "UTF-8")
         (rss-channel-header "Vito Van" "http://vitovan.com/"
                             :description "Be Alive with Music and Program"
-                            :image "http://vitovan.com/favico.png"
+                            :image "http://vitovan.com/favicon.png"
                             :image-title "Vito's avatar")
         (dolist (x (the-list))
           (make-rss-item (car x) (cdr x))))))
