@@ -631,3 +631,5 @@ I wish this piece of work could be:
 That would be a great honor to me.
 
 Thanks for reading.
+
+This piece of work has been updated as the book [Lisp for the Modern Web](https://www.gitbook.com/book/vitovan/lispweb3), you can buy it from [GitBook](https://www.gitbook.com/book/vitovan/lispweb3/details).
