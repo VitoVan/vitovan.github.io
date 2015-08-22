@@ -69,6 +69,22 @@
   (string-to-file (concatenate 'string *target-path* name ".html")
                   (make-post name)))
 
+(defun make-rss-item(name title)
+  (rss-item title
+            :link (concatenate 'string "http://vitovan.com/" name ".html")
+            :author "Vito Van"))
+
+
+(defun make-rss()
+    (with-output-to-string (s)
+      (with-rss2 (s :encoding "UTF-8")
+        (rss-channel-header "Vito Van" "http://vitovan.com/"
+                            :description "Be Alive with Music and Program"
+                            :image "http://vitovan.com/favico.png"
+                            :image-title "Vito's avatar")
+        (dolist (x (the-list))
+          (make-rss-item (car x) (cdr x))))))
+
 (defun make-index()
   (regex-replace-all "#THE-TITLE#"
                      (regex-replace-all "#THE-CONTENT#" (the-tmpl)
@@ -101,6 +117,10 @@
 (defun write-index()
   (string-to-file (concatenate 'string *target-path* "index.html")
                   (make-index)))
+
+(defun write-rss()
+  (string-to-file (concatenate 'string *target-path* "rss.xml")
+                  (make-rss)))
 
 (defun write-all-posts(&optional (force-rebuild nil))
   (dolist (x (the-list))
