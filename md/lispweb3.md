@@ -28,7 +28,7 @@ If you need some other reasons beside awesome, here is some [quotes](http://www.
 
 Do what?
 
-We are going to "build a modern web application with Commin Lisp in the backend", as mentioned before.
+We are going to "build a modern web application with Common Lisp in the backend", as mentioned before.
 
 In recent days, many people build web applications with a **`Server with JSON output`** and a **`Client with HTML5 + JavaScript`**. And we will do it the same way.
 
@@ -50,24 +50,24 @@ We assume that you have no knowledge about Lisp, so let's say hello:
 
 * Then follow [this instruction](http://sbcl.org/getting.html) to install and run it.
 
-* Ok, now you have a [REPL](http://www.cliki.net/REPL)!
+* OK, now you have a [REPL](http://www.cliki.net/REPL)!
 
 
-    >This is SBCL 1.2.7, an implementation of ANSI Common Lisp.
+>This is SBCL 1.2.7, an implementation of ANSI Common Lisp.
 
-    >More information about SBCL is available at <http://www.sbcl.org/>.
+>More information about SBCL is available at <http://www.sbcl.org/>.
 
-    >
+>
 
-    >SBCL is free software, provided as is, with absolutely no warranty.
+>SBCL is free software, provided as is, with absolutely no warranty.
 
-    >It is mostly in the public domain; some portions are provided under
+>It is mostly in the public domain; some portions are provided under
 
-    >BSD-style licenses.  See the CREDITS and COPYING files in the
+>BSD-style licenses.  See the CREDITS and COPYING files in the
 
-    >distribution for more information.
+>distribution for more information.
 
-    >\*
+>\*
 
 
 Before we start coding, let's talk about the basic grammar in Lisp. Many people say "It's weird!", but it is also the charming part.
@@ -102,13 +102,13 @@ Now, let's get back to REPL:
 
 * Type `(format t "Hello, Lisp!")`, then hit <kbd>Enter</kbd>
 
-    >\* (format t "Hello, Lisp!")
+>\* (format t "Hello, Lisp!")
 
-    >**Hello, Lisp!**
+>**Hello, Lisp!**
 
-    >NIL
+>NIL
 
-    >\* 
+>\* 
 
 * Now, you have learned Lisp!
 
@@ -116,42 +116,42 @@ Now, let's get back to REPL:
 
 * Open a file, paste code below, then save it as `say-hello.lisp`:
 
-    ```Lisp
-    (defun say-hello (to)
-     (format t "Hello, ~a" to))
-    ```
+```Lisp
+(defun say-hello (to)
+ (format t "Hello, ~a" to))
+```
 
 * Open a terminal, and change to current directory
 
 * Type `sbcl --load say-hello.lisp`, hit <kbd>Enter</kbd>
 
-    >[vito@laptop lispweb3]$ sbcl --load say-hello.lisp
+>[vito@laptop lispweb3]$ sbcl --load say-hello.lisp
 
-    >This is SBCL 1.2.7, an implementation of ANSI Common Lisp.
+>This is SBCL 1.2.7, an implementation of ANSI Common Lisp.
 
-    >More information about SBCL is available at <http://www.sbcl.org/>.
+>More information about SBCL is available at <http://www.sbcl.org/>.
 
-    >
+>
 
-    >SBCL is free software, provided as is, with absolutely no warranty.
+>SBCL is free software, provided as is, with absolutely no warranty.
 
-    >It is mostly in the public domain; some portions are provided under
+>It is mostly in the public domain; some portions are provided under
 
-    >BSD-style licenses.  See the CREDITS and COPYING files in the
+>BSD-style licenses.  See the CREDITS and COPYING files in the
 
-    >distribution for more information.
+>distribution for more information.
 
-    >\*
+>\*
 
 * Then you'll get the REPL with the file loaded. Type `(say-hello "Vito")`, hit <kbd>Enter</kbd>
 
-    >\* (say-hello "Vito")
+>\* (say-hello "Vito")
 
-    >Hello, Vito
+>Hello, Vito
 
-    >NIL
+>NIL
 
-    >\*
+>\*
 
 * Now, you see, you are saying hello to me with Lisp!
 
@@ -233,10 +233,10 @@ Let's meet the giants:
 
 * Open a file, paste code below, then save it as `server.lisp`:
 
-    ```Lisp
-    (ql:quickload :hunchentoot)
-    (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
-    ```
+```Lisp
+(ql:quickload :hunchentoot)
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))
+```
 
 * Open a terminal, and change to current directory
 
