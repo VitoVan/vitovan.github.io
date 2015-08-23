@@ -14,7 +14,7 @@ body{
 .panel{
     float: left;
     padding: 0.9em;
-    line-height: 1.6em;
+    line-height: 1.2em;
     background-color: #EEE;
     min-height: 20em;
     background-color: #4088C0;
@@ -31,6 +31,7 @@ body{
     border-bottom-color: white;
     border-bottom-width: 1px;
     border-bottom-style: solid;
+    margin-bottom: 0.5em;
 }
 .panel a:hover{
     color: #EEE;
