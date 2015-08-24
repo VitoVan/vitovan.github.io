@@ -31,6 +31,7 @@ body{
 .panel a{
     text-decoration: none;
     color: #FFF;
+    display: block;
 }
 .panel>ul>li{
     border-bottom-color: white;
