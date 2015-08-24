@@ -36,6 +36,16 @@ body{
 .panel a:hover{
     color: #EEE;
 }
+@media (max-width: 600px) {
+  .panel {
+      min-height: 1em;
+      width: 100%;
+  }
+  .panel>ul>li{
+      float: left;
+      margin: 0 0.3em;
+  }
+}
 .head{
     padding: 1em;
     text-transform: uppercase;
