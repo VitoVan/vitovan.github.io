@@ -641,5 +641,5 @@ wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/li
 
 V2EX 讨论：[http://v2ex.com/t/215726](http://v2ex.com/t/215726)
 
-本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/446)，你可以从[SelfStore](https://selfstore.io/products/446)上购买。
+本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/446)，你可以从 [SelfStore](https://selfstore.io/products/446) 上购买。
 
