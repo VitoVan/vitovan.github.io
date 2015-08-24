@@ -397,7 +397,7 @@ So, we could do it like this:
 Yes! We just store the people in the variable `*people-list*`! How to send the people list to browser?
 
 ```Lisp
-pp(hunchentoot:define-easy-handler (people :uri "/people") (name)
+(hunchentoot:define-easy-handler (people :uri "/people") (name)
   (setf (hunchentoot:content-type*) "application/json")
   (json:encode-json-to-string
    *people-list*))
@@ -451,7 +451,7 @@ What happend? It just works.
 
 **What? You wanna store them into the disk?**
 
-Since we decide not to use a Database Product, then how to store the data to the disk and restore them easily? Let's try [OBJECT PREVALENCE](http://www.advogato.org/article/398.html), it means we are going to take a snapshot on current memory and save it as a file, then restore them anytime.
+Since we decide not to use a Database Product, then how to store the data to the disk and restore them easily? Let's try [OBJECT PREVALENCE](http://hillside.net/sugarloafplop/papers/5.pdf), it means we are going to take a snapshot on current memory and save it as a file, then restore them anytime.
 
 Of course we can build our own implementation, but thank to [Sven Van Caekenberghe](http://www.cliki.net/Sven Van Caekenberghe), we can use [CL-PREVALENCE](https://common-lisp.net/project/cl-prevalence/). It's not very well documented as [Hunchentoot](http://weitz.de/hunchentoot/), but we have the [API](https://common-lisp.net/project/cl-prevalence/CL-PREVALENCE.html) and the source code, do we?
 
@@ -580,7 +580,7 @@ We need to serve this file, let's check the [document of Hunchentoot](http://wei
 
 \- [Hunchentoot](http://weitz.de/hunchentoot/)
 
-So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTML file into it:
+So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTM file into it:
 
 ```Lisp
 wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-client.htm

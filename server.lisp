@@ -1,9 +1,9 @@
 (setf sb-impl::*default-external-format* :UTF-8)
 ;;(declaim (optimize (debug 3)))
-(ql:quickload '(drakma html-template cl-ppcre cl-fad))
+(ql:quickload '(drakma html-template cl-ppcre cl-fad xml-emitter))
 
 (defpackage vitovan
-  (:use :cl :drakma :html-template :cl-ppcre :cl-fad))
+  (:use :cl :drakma :html-template :cl-ppcre :cl-fad :xml-emitter))
 (in-package :vitovan)
 
 (defun file-to-string (path)
