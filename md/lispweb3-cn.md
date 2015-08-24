@@ -2,6 +2,8 @@
 
 八月 2015
 
+_For those who have read [Lisp for The Modern Web](http://vitovan.com/lispweb3.html): SKIP, please. This is just another language version._
+
 > Lisp 不是一门语言，它是一种构建素材。
 
 \-  艾伦·凯
@@ -14,7 +16,7 @@
 
 ### 为什么要用 Lisp？
 
-**因为它很酷**.
+**因为它很酷**。
 
 我是脑残我自豪，是不是神器又怎么样？光名字就看起来很牛的样子（好多人都不会喔 <(￣ˇ￣)/ ）。
 
@@ -635,8 +637,9 @@ wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/li
 谢谢观看。
 
 ---
+版权：禁止转载，禁止演绎，作者保留一切权利
 
 V2EX 讨论：[http://v2ex.com/t/xxx](http://v2ex.com/t/xxx)
 
-本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/xxx)，你可以从[SelfStore](https://selfstore.io/products/xxx)上购买。
+本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/446)，你可以从[SelfStore](https://selfstore.io/products/446)上购买。
 

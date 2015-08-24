@@ -634,6 +634,8 @@ Thanks for reading.
 
 ---
 
+License: GNU GPL v2.0
+
 Discuss on HN: [https://news.ycombinator.com/item?id=10102549](https://news.ycombinator.com/item?id=10102549)
 
 This piece of work has been updated as the book [Lisp for the Modern Web](https://www.gitbook.com/book/vitovan/lispweb3), you can buy it from [GitBook](https://www.gitbook.com/book/vitovan/lispweb3/details).
