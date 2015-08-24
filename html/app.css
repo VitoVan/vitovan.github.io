@@ -11,6 +11,11 @@ body{
     margin: 0;
     padding: 0;
 }
+.container{
+    float: left;
+    max-width: 50em;
+    padding-bottom: 50px;
+}
 .panel{
     float: left;
     padding: 0.9em;
@@ -52,11 +57,6 @@ body{
 .head{
     padding: 1em;
     text-transform: uppercase;
-}
-.container{
-    float: left;
-    max-width: 50em;
-    padding-bottom: 50px;
 }
 .head>h1>a{
     color: #DDD;
