@@ -45,6 +45,9 @@ body{
       float: left;
       margin: 0 0.3em;
   }
+  .container{
+      max-width: 100%;
+  }
 }
 .head{
     padding: 1em;
