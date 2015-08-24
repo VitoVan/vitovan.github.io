@@ -8,7 +8,7 @@
 
 ### 我们要讲什么？
 
-本文将介绍如何从 0 开始使用 Lisp 作为后端构建一个现代的 Web 应用程序。
+本文将介绍如何从零开始使用 Lisp 作为后端构建一个现代的 Web 应用程序。
 
 你可能需要一些前端开发的知识（如 Ajax 通信等），因为关于客户端这一方面我们将不再赘述。
 
@@ -40,11 +40,11 @@
 
 ### 步骤
 
-* [你好， Lisp！](#hello-lisp)
-* [面向世界的编程](#hello-world)
-* [他们都喜欢 JSON](#lets-be-json)
-* [把数据存起来](#data-storage)
-* [我们的客户端](#modern-client)
+* [你好， Lisp！](#你好lisp)
+* [面向世界的编程](#面向世界的编程)
+* [他们都喜欢 JSON](#他们都喜欢-json)
+* [把数据存起来](#把数据存起来)
+* [我们的客户端](#我们的客户端)
 
 #### 你好，Lisp！
 
@@ -320,7 +320,7 @@ function sayHello(to){
 
 * 退出所有打开的 REPL ，然后加载这个文件：`sbcl --load json-server.lisp`。
 
-* 点击这里： [http://localhost:4242/me](http://localhost:4242/me)， 和这里： [http://localhost:4242/you?name=悟空](http://localhost:4242/you?name=悟空)
+* 点击这里： [http://localhost:4242/me](http://localhost:4242/me)， 和这里： [http://localhost:4242/you?name=悟空](http://localhost:4242/you?name=悟空) (如果你看到了类似 `\u4E2D\u6587` 这样的结果，请打开浏览器的开发者工具，然后点击 Network 那一览进行监视)
 
 嗯～干的不错！
 
@@ -636,7 +636,7 @@ wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/li
 
 ---
 
-V2EX 讨论：[http://v2ex.com/t/215563](http://v2ex.com/t/215563)
+V2EX 讨论：[http://v2ex.com/t/xxx](http://v2ex.com/t/xxx)
 
-本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/341)，你可以从[SelfStore](https://selfstore.io/products/341)上购买。
+本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/xxx)，你可以从[SelfStore](https://selfstore.io/products/xxx)上购买。
 
