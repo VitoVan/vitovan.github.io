@@ -606,7 +606,7 @@ wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/li
 
 这样 Hunchentoot 就会使用当前目录下的 "www/" 文件夹作为根目录了。
 
-重新加载代码，然后访问：[http://localhost:4242/lispweb3-cn-client.html](http://localhost:4242/lispweb3-cn-client.html)，客户端便出来啦～
+重新加载代码，然后访问：[http://localhost:4242/lispweb3-cn-client.htm](http://localhost:4242/lispweb3-cn-client.htm)，客户端便出来啦～
 
 建议：出于性能考虑，不建议使用 Hunchentoot 托管静态文件。你可以试试用 [Nginx](https://www.nginx.com/) 做个 [代理](https://www.nginx.com/resources/admin-guide/reverse-proxy/)，然后把 Hunchentoot 仅仅作为一个应用服务器使用。
 

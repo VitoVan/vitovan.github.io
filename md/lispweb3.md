@@ -600,7 +600,7 @@ To this:
 
 Then Hunchentoot will use the "www/" in current folder as root directory, now try to reload our code.
 
-Then visit: [http://localhost:4242/lispweb3-client.html](http://localhost:4242/lispweb3-client.html), you got what you want.
+Then visit: [http://localhost:4242/lispweb3-client.htm](http://localhost:4242/lispweb3-client.htm), you got what you want.
 
 Suggestion: You do not really wanna use Hunchentoot to serve your static files, do you? You should try [Nginx](https://www.nginx.com/) as a [PROXY](https://www.nginx.com/resources/admin-guide/reverse-proxy/), and make your Hunchentoot as an application server only.
 
