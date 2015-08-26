@@ -1,6 +1,6 @@
 # Lisp for The Modern Web
 
-August 2015
+August 2015, rev. August 2015
 
 > Lisp isn't a language, it's a building material.
 
@@ -272,7 +272,7 @@ It's not so hard to understand, isn't it?
 
 First, we should thank Quicklisp, it is a library manager for Common Lisp, and it has [over 1,200 libraries](https://www.quicklisp.org/beta/releases.html), after install it, you can ride a bike with NO HANDS!
 
-Second, we should thank [Edi Weitz](http://weitz.de/), he/she is an extremely awesome and fascinating Lisper on this planet. You will meet so many Lisp projects under Edi Weitz's magic hands after surfing a while in the Lisp world, and then you will be subdued by the charm of the code. Ok, after the words of praise, we just used [Hunchentoot](http://weitz.de/hunchentoot/) as the server, it's well documented, you will love it.
+Second, we should thank [Edi Weitz](http://weitz.de/), he/she is an extremely awesome and fascinating Lisper on this planet. You will meet so many Lisp projects under Edi Weitz's magic hands after surfing a while in the Lisp world, and then you will be subdued by the charm of the code. Ok, after the words of praise, we just used [Hunchentoot](http://weitz.de/hunchentoot/) [\[1\]](#fn1) as the server, it's well documented, you will love it.
 
 We just load [Hunchentoot](http://weitz.de/hunchentoot/) with Quicklisp, like this: `(ql:quickload :hunchentoot)`, and then start the Hunchentoot Server on port 4242: `(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))`. At last, we defined a HTTP handler with Hunchentoot's [define-easy-handler](http://weitz.de/hunchentoot/#define-easy-handler).
 
@@ -631,6 +631,14 @@ I wish this piece of work could be:
 That would be a great honor to me.
 
 Thanks for reading.
+
+**Footnotes:**
+
+<a id="fn1">[1]</a> Hunchentoot is **NOT** a good choice for now:
+
+> **Stop using Hunchentoot directly.** Use Clack, or even better, one of the frameworks built on it.
+
+\- [State of the Common Lisp Ecosystem, 2015 ](http://eudoxia.me/article/common-lisp-sotu-2015/)
 
 ---
 

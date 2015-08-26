@@ -1,6 +1,6 @@
 # Lisp 与现代Web开发
 
-八月 2015
+2015年 八月，修订：2015年 八月
 
 _For those who have read [Lisp for The Modern Web](http://vitovan.com/lispweb3.html): SKIP, please. This is just another language version._
 
@@ -268,7 +268,7 @@ function sayHello(to){
 
 首先，多亏了 Quicklisp，它就相当于 Lisp 世界的包管理器。有了 Quicklisp ，我们才站在了巨人的肩膀上。在 Quicklisp 里，有[将近 1,200 个包](https://www.quicklisp.org/beta/releases.html)，虽然不多吧，但足够用了。有了它，就像是站在了风口，后果可想而知。
 
-其次，感谢巨人 [Edi Weitz](http://weitz.de/)，我们用了他（她）写的 [Hunchentoot](http://weitz.de/hunchentoot/) 作为我们的服务端实现。
+其次，感谢巨人 [Edi Weitz](http://weitz.de/)，我们用了他（她）写的 [Hunchentoot](http://weitz.de/hunchentoot/) [\[1\]](#fn1) 作为我们的服务端实现。
 
 我们刚才用 Quicklisp 加载了 Hunchentoot，像这样： `(ql:quickload :hunchentoot)`，然后在 4242 端口启动了 Hunchentoot 服务： `(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))`，最后，我们用 Hunchentoot 的 [define-easy-handler](http://weitz.de/hunchentoot/#define-easy-handler) 定义了一个名字叫做 `say-hello` 的 Handler。
 
@@ -635,6 +635,14 @@ wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/li
 给了我很大启发。
 
 谢谢观看。
+
+**脚注：**
+
+<a id="fn1">[1]</a> Hunchentoot **不是**当下最好的选择：
+
+> **不要再直接使用 Hunchentoot 。** 选择 [Clack](http://clacklisp.org/)，或者更好的一个基于 Clack 的框架。
+
+\- [2015年 Common Lisp 生态现状](http://eudoxia.me/article/common-lisp-sotu-2015/)
 
 ---
 版权：禁止转载，禁止演绎，作者保留一切权利
