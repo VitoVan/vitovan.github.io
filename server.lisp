@@ -96,19 +96,6 @@
                                           (concatenate 'string "<div class='index'>" the-list-html "</div>")))
                      "Vito Van"))
 
-(defun make-projects()
-  (regex-replace-all "#THE-TITLE#"
-                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                        (let* ((the-list-html))
-                                          (dolist (x '(
-                                                       ("http://whereisjob.com" . "Where is job?")
-                                                       ("http://clcf.la" . "出来吃饭")))
-                                            (setf the-list-html
-                                                  (concatenate 'string the-list-html
-                                                               (concatenate 'string "<a href='" (car x) "'>" (cdr x) "</a>"))))
-                                          (concatenate 'string "<div class='index'>" the-list-html "</div>")))
-                     "Projects"))
-
 (defun write-projects()
   (string-to-file (concatenate 'string *target-path* "projects.html")
                   (make-projects)))
