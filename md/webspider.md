@@ -73,3 +73,5 @@ All you have to do is: Have a Common Lisp environment and run the such-cute serv
 Just visit the link:
 
 [http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]](http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"])
+
+And check this: [http://sc.vitovan.com/](http://sc.vitovan.com/)
