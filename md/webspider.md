@@ -1,4 +1,4 @@
-# Web Spider
+# Web Spider: Converting Website to JSON, Without Coding
 
 September 2015
 
@@ -40,7 +40,7 @@ I created a project called [cl-spider](https://github.com/VitoVan/cl-spider). It
 
 \- Jack Pythonking
 
-> "It is useless."
+> "It is useless. Where is JSON?"
 
 \- Rose Javener
 
