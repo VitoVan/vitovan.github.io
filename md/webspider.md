@@ -20,11 +20,13 @@ It's funny, and works like charm. But seems no one need it, even myself.
 
 #### 4) You must realized something
 
-Me, too. It's not very hard to write a spider, but it costs your time, and may endup with useless.
+Me, too (ads coming).
+
+It's not very hard to write a spider, but it costs your time, and may endup with useless.
 
 You have to choose a programing language, then choose your library (http-request or dom-parse or something else), then start writing.
 
-Then debug and test and the sun is going down, stop it.
+Then debug and test and the sun is going down, it's time to stop that.
 
 #### 5) Eenough talk, show me the solution
 
@@ -74,4 +76,4 @@ Just visit the link:
 
 [http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]](http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"])
 
-And check this: [http://sc.vitovan.com/](http://sc.vitovan.com/)
+And check this: [http://vitovan.github.io/such-cute/](http://vitovan.github.io/such-cute/)
