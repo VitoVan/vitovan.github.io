@@ -78,4 +78,4 @@
 
 [http://sc.vitovan.com/get?uri=http://v2ex.com/&selector=a&attrs=["href","text"]](http://sc.vitovan.com/get?uri=http://v2ex.com/&selector=a&attrs=["href","text"])
 
-然后看这个：[http://vitovan.github.io/such-cute/index-cn.html](http://vitovan.github.io/such-cute/index-cn.html)
+然后看这个：[http://vitovan.github.io/such-cute/index-cn.html](http://vitovan.github.io/such-cute/index-cn.html) 
