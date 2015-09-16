@@ -77,3 +77,7 @@ Just visit the link:
 [http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"]](http://sc.vitovan.com/get?uri=https://news.ycombinator.com/&selector=a&attrs=["href","text"])
 
 And check this: [http://vitovan.github.io/such-cute/](http://vitovan.github.io/such-cute/)
+
+---
+
+Discuss on HN: [https://news.ycombinator.com/item?id=10214427](https://news.ycombinator.com/item?id=10214427)
