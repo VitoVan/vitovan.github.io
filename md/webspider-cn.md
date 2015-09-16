@@ -79,3 +79,7 @@
 [http://sc.vitovan.com/get?uri=http://v2ex.com/&selector=a&attrs=["href","text"]](http://sc.vitovan.com/get?uri=http://v2ex.com/&selector=a&attrs=["href","text"])
 
 然后看这个：[http://vitovan.github.io/such-cute/index-cn.html](http://vitovan.github.io/such-cute/index-cn.html) 
+
+---
+
+V2EX 讨论：[http://v2ex.com/t/220487](http://v2ex.com/t/220487)
