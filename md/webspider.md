@@ -28,7 +28,7 @@ You have to choose a programing language, then choose your library (http-request
 
 Then debug and test and the sun is going down, it's time to stop that.
 
-#### 5) Eenough talk, show me the solution
+#### 5) Enough talking, show me the solution
 
 I created a project called [cl-spider](https://github.com/VitoVan/cl-spider). It provides some some functions (2 for now), and takes **URI** and **CSS SELECTORS** and **HTML ATTRIBUTES** as arguments, then return the data you want. Such as:
 
