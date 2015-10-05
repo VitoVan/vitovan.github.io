@@ -75,6 +75,9 @@ body{
     display: block;
     line-height: 2em;
 }
+.index>div{
+    margin: 0.5em 0;    
+}
 .index>div>a:before{
     content: "* ";
 }
