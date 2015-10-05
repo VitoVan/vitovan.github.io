@@ -85,3 +85,8 @@ body{
 .index>div>a:before{
     content: "* ";
 }
+.markdown-body{
+    background-color: #F0F1EE;
+    padding: 1em;
+    border-radius: 0.3em;    
+}
