@@ -92,7 +92,7 @@
                                           (dolist (x (the-list))
                                             (setf the-list-html
                                                   (concatenate 'string the-list-html
-                                                               (concatenate 'string "<a href='" (car x) ".html'>" (cdr x) "</a>"))))
+                                                               (concatenate 'string "<div><a href='" (car x) ".html'>" (cdr x) "</a></div>"))))
                                           (concatenate 'string "<div class='index'>" the-list-html "</div>")))
                      "Vito Van"))
 
