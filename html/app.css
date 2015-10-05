@@ -37,8 +37,12 @@ body{
 .panel>ul>li{
     margin-bottom: 0.9em;
 }
+.panel>ul>li.current>a{
+    text-shadow: 0.25em 0.2em 0.5em #535C77;
+}
 .panel a:hover{
     text-decoration: underline;
+    text-shadow: 0.25em 0.2em 0.5em #535C77;
 }
 @media (max-width: 600px) {
     .panel {
