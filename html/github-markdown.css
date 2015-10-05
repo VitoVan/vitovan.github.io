@@ -166,7 +166,7 @@
 }
 
 .markdown-body .octicon-link:before {
-  content: '\f05c';
+  content: '#';
 }
 
 .markdown-body>*:first-child {
