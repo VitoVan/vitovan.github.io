@@ -72,7 +72,7 @@
 }
 
 .markdown-body a {
-  color: #4078c0;
+  color: blue;
 }
 
 .markdown-body a:link {
@@ -80,7 +80,7 @@
 }
 
 .markdown-body a:visited{
-    color: #7A92B3;
+    color: #4078c0;
 }
 
 

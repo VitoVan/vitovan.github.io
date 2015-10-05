@@ -18,38 +18,37 @@ body{
 }
 .panel{
     float: left;
-    padding: 0.9em;
+    padding: 2em 0.9em;
     line-height: 1.2em;
-    background-color: #EEE;
     min-height: 20em;
-    background-color: #4088C0;
     margin-right: 1em;
+    border-right-color: blue;
+    border-right-style: dashed;
+    border-right-width: 0.1em;
 }
 .panel>ul{
     list-style:none;
 }
 .panel a{
     text-decoration: none;
-    color: #FFF;
+    color: blue;
     display: block;
 }
 .panel>ul>li{
-    border-bottom-color: white;
-    border-bottom-width: 1px;
-    border-bottom-style: solid;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.9em;
 }
 .panel a:hover{
-    color: #EEE;
+    text-decoration: underline;
 }
 @media (max-width: 600px) {
-  .panel {
+    .panel {
+        padding: 0.9em 0.2em;
       min-height: 1em;
       width: 100%;
   }
   .panel>ul>li{
       float: left;
-      margin: 0 0.3em;
+      margin: 0 0.8em;
   }
   .container{
       max-width: 100%;
@@ -60,7 +59,7 @@ body{
     text-transform: uppercase;
 }
 .head>h1>a{
-    color: #DDD;
+    color: #D0D0D0;
     text-decoration: none;
 }
 .content{
@@ -71,4 +70,7 @@ body{
 .index>a{
     display: block;
     line-height: 2em;
+}
+.index>a:before{
+    content: "* ";
 }

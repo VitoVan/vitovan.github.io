@@ -20,9 +20,9 @@
     (format stream "~A" content))
   name)
 
-(defvar *md-path* "/vito-storage/WORK/dev/gits/vitovan.com/md/")
-(defvar *tmpl-path* "/vito-storage/WORK/dev/gits/vitovan.com/tmpl/")
-(defvar *target-path* "/vito-storage/WORK/dev/gits/vitovan.com/html/")
+(defvar *md-path* "~/Source/github/vitovan.com/md/")
+(defvar *tmpl-path* "~/Source/github/vitovan.com/tmpl/")
+(defvar *target-path* "~/Source/github/vitovan.com/html/")
 
 (defun the-tmpl()
   (file-to-string (concatenate 'string *tmpl-path* "the.tmpl")))
@@ -95,11 +95,6 @@
                                                                (concatenate 'string "<a href='" (car x) ".html'>" (cdr x) "</a>"))))
                                           (concatenate 'string "<div class='index'>" the-list-html "</div>")))
                      "Vito Van"))
-
-(defun write-projects()
-  (string-to-file (concatenate 'string *target-path* "projects.html")
-                  (make-projects)))
-
 
 (defun write-index()
   (string-to-file (concatenate 'string *target-path* "index.html")
