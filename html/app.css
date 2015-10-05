@@ -43,16 +43,20 @@ body{
 @media (max-width: 600px) {
     .panel {
         padding: 0.9em 0.2em;
-      min-height: 1em;
-      width: 100%;
-  }
-  .panel>ul>li{
-      float: left;
-      margin: 0 0.8em;
-  }
-  .container{
-      max-width: 100%;
-  }
+        min-height: 1em;
+        width: 100%;
+        border-right: none;
+        border-bottom-color: blue;
+        border-bottom-style: dashed;
+        border-bottom-width: 0.1em;      
+    }
+    .panel>ul>li{
+        float: left;
+        margin: 0 0.8em;
+    }
+    .container{
+        max-width: 100%;
+    }
 }
 .head{
     padding: 1em;
