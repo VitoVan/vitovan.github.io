@@ -1,4 +1,4 @@
-# Web Spider: Translate Web Page to JSON, Without Coding
+# Web Spider: Web Page to JSON
 
 September 2015
 
