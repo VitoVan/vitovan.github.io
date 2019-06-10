@@ -71,7 +71,7 @@
 (defvar *md-path* "./md/")
 (defvar *tmpl-path* "./tmpl/")
 (defvar *ori-files-path* "./ori-files/")
-(defvar *dist-path* "./doc/")
+(defvar *dist-path* "./docs/")
 (defvar *shit-list* '("lispweb3" "lispweb3-cn" "new"))
 
 
