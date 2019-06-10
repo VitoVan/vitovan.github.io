@@ -72,6 +72,7 @@
 (defvar *tmpl-path* "./tmpl/")
 (defvar *ori-files-path* "./ori-files/")
 (defvar *dist-path* "./doc/")
+(defvar *shit-list* '("lispweb3" "lispweb3-cn" "new"))
 
 
 (defun the-tmpl()
@@ -166,9 +167,19 @@
                      (regex-replace-all "#THE-CONTENT#" (the-tmpl)
                                         (let* ((the-list-html))
                                           (dolist (x (the-list))
+                                            (format t "~A~%" x)
                                             (setf the-list-html
                                                   (concat the-list-html
-                                                          (concat "<div><a href='" (car x) ".html'>" (cdr x) "</a></div>"))))
+                                                          (concat
+                                                           "<div"
+                                                           (when
+                                                               (member (car x) *shit-list* :test #'string=)
+                                                             " style='display:none;'")
+                                                           "><a href='"
+                                                           (car x)
+                                                           ".html'>"
+                                                           (cdr x)
+                                                           "</a></div>"))))
                                           (concat "<div class='index'>" the-list-html "</div>")))
                      "Vito Van"))
 
