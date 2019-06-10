@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta name="author" content="Vito Van"/>
+        <meta name="theme-color" content="#CC0000">        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="icon" type="image/png" href="/favicon.png"/>
+        <link rel="stylesheet" type="text/css" href="app.css">
+        <link rel="stylesheet" type="text/css" href="github-markdown.css">
+        <title>Dinosaur and Lisp</title>
+        <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+         ga('create', 'UA-69347509-2', 'auto');
+         ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div class="panel">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li class="current"><a href="/list.html">List</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/rss.xml">RSS</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="head">
+                <h1><a href="/">Vito Van</a></h1>
+            </div>
+            <div class="content markdown-body">
+                
+<h1>
+<a name="dinosaur-and-lisp" class="anchor" href="#dinosaur-and-lisp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dinosaur and Lisp</h1>
+<p>2016/08</p>
+<p><a href="dino/high-score.png" target="_blank" rel="noopener noreferrer"><img src="dino/high-score.png" alt="High Score" style="max-width:100%;"></a></p>
+<p>Dinosaur is old enough, as well as Lisp, they may like each other. When I am talking about dinosaur here, I mean the dinosaur hiding in Google Chrome, it shows up when "There is no Internet connection".</p>
+<h3>
+<a name="whats-this-all-about" class="anchor" href="#whats-this-all-about" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's This All about?</h3>
+<p>This is about writing some code in Common Lisp, which is capable of playing the Chrome Dinosaur Game itself (no <a href="https://en.wikipedia.org/wiki/Deep_learning" rel="nofollow">Deep Learning</a> involved).</p>
+<h3>
+<a name="what-do-we-have-in-hand" class="anchor" href="#what-do-we-have-in-hand" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What Do We Have in Hand?</h3>
+<p>When I'm trying to do this, I'm sitting in front of a computer with Linux installed, and of course it has a screen monitor. So, it is easy to set up a Common Lisp environment, here is my list:</p>
+<ul>
+<li>A Linux Machine (with screen monitor connected, to watch the dinosaur jump)</li>
+<li>
+<a href="http://www.sbcl.org/" rel="nofollow">SBCL</a> (I'm using 1.3.4 now, higher may be better)</li>
+<li>
+<a href="https://download-chromium.appspot.com/" rel="nofollow">Chromium</a> or <a href="https://www.google.com/chrome/browser/desktop/index.html" rel="nofollow">Google Chrome</a> (I'm using Chromium 52.0.2743.116 now)</li>
+</ul>
+<p>I also installed <a href="https://www.gnu.org/software/emacs/" rel="nofollow">Emacs</a> with <a href="https://common-lisp.net/project/slime/" rel="nofollow">SLIME</a> to play around with Lisp, you can have any other editor instead of this.</p>
+<p>Well, all set, let's start.</p>
+<h3>
+<a name="the-eyes" class="anchor" href="#the-eyes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>the Eyes</h3>
+<p>It's easy for us to recognize the dinosaur, a tiny cute creature with two short legs running on our screen, but it's not easy for Lisp. We can see the screen with our eyes, Lisp can't, so we gonna write some code to read the screen, and find the dinosaur.</p>
+<h5>
+<a name="read-the-screen" class="anchor" href="#read-the-screen" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Read the Screen</h5>
+<p>After searching the web, I found that there's no concept of Screen in Common Lisp. Actually, I found this:</p>
+<blockquote>
+<p>... There are only rudimentary libraries for manipulating strings, and <strong>almost none</strong> for talking to the operating system. For historical reasons, Common Lisp tries to pretend that <strong>the OS doesn't exist</strong> ...</p>
+</blockquote>
+<p>- <a href="http://www.paulgraham.com/popular.html" rel="nofollow">Being Popular (Section 6)</a></p>
+<p>"the OS doesn't exist", what the ... , I must be lost my mind to choose Common Lisp.</p>
+<p>But since that article is written in May 2001, it's been 15 years later, things must have been changed a lot. After digging around again, I found something very useful:</p>
+<ul>
+<li>
+<a href="http://www.cliki.net/CFFI" rel="nofollow">CFFI</a>, the Common Foreign Function Interface, and this means we can call any C (and not only) library from Lisp.</li>
+<li>
+<a href="http://www.cliki.net/CLX" rel="nofollow">CLX</a>, an implementation of the X Window System protocol to Lisp, and this means we can take control of the whole X Window System, of course we can read the screen! (if you are using <a href="https://support.apple.com/en-us/HT201341" rel="nofollow">OS X</a> or <a href="http://x.cygwin.com/" rel="nofollow">Windows</a>, this may be a little tricky)</li>
+<li>
+<a href="http://www.cliki.net/burgled-batteries" rel="nofollow">burgled-batteries</a>, a Python-Lisp bridge, and this means we can call any Python functions seamlessly in Common Lisp.</li>
+</ul>
+<p>Actually, there's <a href="http://www.cliki.net/current%20recommended%20libraries" rel="nofollow">plenty of libraries</a> out there today, you can basically do anything you want in Common Lisp, <strong>the OS does exist!</strong> Hooray~</p>
+<h5>
+<a name="finding-dinosaur" class="anchor" href="#finding-dinosaur" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Finding Dinosaur</h5>
+<p>After reading the <a href="https://common-lisp.net/project/cmucl/doc/clx/" rel="nofollow">CLX Manual</a>, we found that we can use function <code>get-raw-image</code> to directly <a href="https://common-lisp.net/project/cmucl/doc/clx/7_5_Direct_Image_Transfer.html" rel="nofollow">get the image data from the specific region</a>. Then what? Let's find out what we need to find the dinosaur:</p>
+<ul>
+<li>What's in my mind now? well, the dinosaur is keep running and running, we need to keep read the screen and find it's position. Yah, let's do it.</li>
+<li>OK, I am reading the screen every 0.1 seconds, and now I need to write some code to match the shape pattern of the dinosaur.</li>
+<li>Shape Matching, sounds thrilling, I've never been there before, then after another round of searching, I found some papers:
+<ul>
+<li><a href="http://graphics.stanford.edu/courses/cs468-08-fall/pdf/belongie-pami02.pdf" rel="nofollow">Shape Matching and Object Recognition Using Shape Contexts</a></li>
+<li><a href="http://www.cs.utexas.edu/~grauman/courses/spring2008/slides/ShapeMatching.pdf" rel="nofollow">Shape Matching</a></li>
+<li><a href="http://i.stanford.edu/pub/cstr/reports/cs/tr/99/1620/CS-TR-99-1620.pdf" rel="nofollow">FINDING COLOR AND SHAPE PATTERNS IN IMAGES</a></li>
+</ul>
+</li>
+<li>I started to read, the papers are obscure, Mm... they are talking about math, Mm... I don't recognize this mathematical formula, Mm...</li>
+<li>I have to take a break, let's play the Dinosaur Game.</li>
+<li>Oh, my! The dinosaur never moved! It is just keep dangling it's tiny legs and pretending: "Yah, I am running, I am running".</li>
+<li>This is the ultimate humiliation to my extraordinary human intelligence.</li>
+</ul>
+<p>But I've been over it almost immediately, cause I have no need to read those obscure papers anymore, phew~</p>
+<p>Then, what's left?</p>
+<p>All we have to do about this dinosaur now, is to determine the current state of our dinosaur: <strong>STAND</strong>ing / <strong>JUMP</strong>ing / <strong>BEND</strong>ing (yah, it can bend, try the down key).</p>
+<p><a href="dino/state.png" target="_blank" rel="noopener noreferrer"><img src="dino/state.png" alt="Three State of Dinosaur" style="max-width:100%;"></a></p>
+<p>Since the dinosaur never really moved forward or back, we can take screenshots of the different postures of our dinosaur, then open them in <a href="https://www.gimp.org/" rel="nofollow">GIMP</a> to get the corresponding position points, we can do this in our code:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defvar</span> <span class="pl-smi">*dino-standing-points*</span> '((<span class="pl-c1">207</span> <span class="pl-c1">238</span>) (<span class="pl-c1">242</span> <span class="pl-c1">223</span>)))
+(<span class="pl-k">defvar</span> <span class="pl-smi">*dino-bending-points*</span> '((<span class="pl-c1">209</span> <span class="pl-c1">240</span>) (<span class="pl-c1">262</span> <span class="pl-c1">243</span>)))</pre></div>
+<p>After we have these points, we can capture the image data of current screen, then get the colors of those specific dots, and determine if the color equals to the color of dinosaur, if all <code>*dino-standing-points*</code> matched, then it is standing, as well as <code>*dino-bending-points*</code>, otherwise it is jumping.</p>
+<p>But after playing a while, we know that the color of dinosaur is changing between day and night, so we should have a function to get the changing color of the dinosaur. Since the dinosaur is jumping or bending, it's much easier to locate the color picking point of background, then we can determine the state of the dinosaur by using the background color: If all the color of <code>*dino-standing-points*</code> <em>does not match</em> the background color, then it is standing.</p>
+<p>Dinosaur Finding Problem solved.</p>
+<h5>
+<a name="cactuses-and-birds" class="anchor" href="#cactuses-and-birds" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Cactuses and Birds</h5>
+<p>These front cactuses and birds could kill our dinosaur. So we have to detect them and take an action of <strong>JUMP</strong> / <strong>BEND</strong> or just <strong>STAND</strong> still (the time of action also matters). We can get the image data in front of the dinosaur, and check if there is a cactus or bird:</p>
+<p><a href="dino/search-square.png" target="_blank" rel="noopener noreferrer"><img src="dino/search-square.png" alt="Search Square" style="max-width:100%;"></a></p>
+<p>The search area could be narrowed down to a 500x35 square, and the position of this square is fixed, we can easily get it from a full screenshot with <a href="https://www.gimp.org/" rel="nofollow">GIMP</a>. Then we can write something like this:</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>; the block search square (x y weight height)</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*block-search-square*</span> '(<span class="pl-c1">265</span> <span class="pl-c1">220</span> <span class="pl-c1">500</span> <span class="pl-c1">35</span>))</pre></div>
+<p>And when we get the image data of this area, then compare the background color with each pixel, if it does not match, then the cactus or bird is found!</p>
+<p>When we comparing the pixels, we choose to scan the image from left/top to right/bottom, then we will get the top/left position of the front cactus or bird.</p>
+<p>Here are the cactuses and birds I collected (some kind of cactuses may be missed):</p>
+<p><a href="dino/cactuses-and-birds.png" target="_blank" rel="noopener noreferrer"><img src="dino/cactuses-and-birds.png" alt="Cactuses and Birds" style="max-width:100%;"></a></p>
+<p>Actually, the types of cactus make nothing different, no matter it is tall or short, wide or narrow, it will be successfully passed if we jump at the appropriate time. But for the birds, we should separate them out by LOW / MIDDLE / HIGH, when it is LOW type bird, we JUMP; when it is MIDDLE type bird, we BEND, when it is HIGH type bird, we do nothing.</p>
+<p>From the image above, we can see that those birds in different types have unique y-coordinates among themselves and cactuses, we can just tell which kind of bird it is by the value of it's y-coordinate.</p>
+<p>Actually, all we need is the unique y-coordinate of the MIDDLE type bird, cause we can treat the LOW type bird the same as cactuses, and the HIGH type bird, we just pretend they never exist (cause we gonna ignore them). So, all we need is:</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>; the y of middle flying bird</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*middle-bird-y*</span> <span class="pl-c1">220</span>)</pre></div>
+<p>Cactuses and Birds Detecting Problem solved.</p>
+<p>Now, here's what we got:</p>
+<ul>
+<li>We know the state of our dinosaur: STANDing / BENDing / JUMPing.</li>
+<li>We know the position of the front cactus or bird.</li>
+<li>We know what action we should take: JUMP / BEND or NOTHING.</li>
+</ul>
+<p>What's left?</p>
+<p>It's <strong>HOW</strong> and <strong>WHEN</strong>, how to perform the JUMP or BEND action, and when to perform that action. Let's discuss them next.</p>
+<h3>
+<a name="dancing-around" class="anchor" href="#dancing-around" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dancing Around</h3>
+<h5>
+<a name="how" class="anchor" href="#how" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>HOW?</h5>
+<p>To jump or bend our dinosaur, we need to simulate the key press event of <kbd>SPACE</kbd> (or <kbd>UP</kbd>) and <kbd>DOWN</kbd>.</p>
+<p>The X Window System must have a way to simulate key press event, and also <a href="http://www.cliki.net/CLX" rel="nofollow">CLX</a> is an implementation of the X Window System protocol to Lisp, it means we have a way to simulate key press event as well. Once we figure out how, we'll be able to control the dinosaur.</p>
+<p>After reading the <a href="https://common-lisp.net/project/cmucl/doc/clx/" rel="nofollow">CLX Manual</a>, we found a section called: <a href="https://common-lisp.net/project/cmucl/doc/clx/12_Events_and_Input.html" rel="nofollow">Event and Input</a>, it's all about events manipulating, we may use them. But after talking with some awesome fellas on IRC, I learned that there's an extension of X Window System called <a href="https://www.x.org/docs/Xext/xtest.pdf" rel="nofollow">XTEST</a>, which is "a minimal set of client and server extensions required to completely test the X11 server with no user intervention", and it has an operation called  <code>XTestFakeInput</code> which can be used to perform a fake key/mouse input as it is said by it's name.</p>
+<p>And more luckily, this extension is already <a href="https://github.com/sharplispers/clx/blob/master/extensions/xtest.lisp">implemented in CLX</a>, so we can directly call the function <code>fake-key-event</code> or <code>fake-button-event</code>, they should just work! What a good day~ Now we can call something like this in the <a href="https://en.wikipedia.org/wiki/Read%E2%80%93eval%E2%80%93print_loop" rel="nofollow">REPL</a>:</p>
+<div class="highlight highlight-source-lisp"><pre>(xtest:fake-key-event display <span class="pl-smi">*space-keycode*</span> <span class="pl-c1">t</span>) <span class="pl-c"><span class="pl-c">;</span> key down</span>
+(xtest:fake-key-event display <span class="pl-smi">*space-keycode*</span> <span class="pl-c1">nil</span>) <span class="pl-c"><span class="pl-c">;</span> key up</span></pre></div>
+<p>Then the dinosaur jumped, :-D</p>
+<h5>
+<a name="when" class="anchor" href="#when" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>WHEN?</h5>
+<p>We should start to jump when we getting close to the cactus or bird, but how close? 100px? or 200px? should we test all these values and find the best one? No, there's no one. We can't say "Hey tiny dino, you should jump when the distance between you and the cactus in front is less than 100px", because the speed is accelerating. Maybe 100px works pretty well when it is slow, but when the game speed up, the value should be far more than 100px.</p>
+<p>So, it is speed related, huh~ Since we can get the coordinates of the front cactus, calculate the speed will be done by dividing the change of x-coordinate by time passed, we can collect all the speed value each time we read the screen, then get the average value. Then we should figure out something like this:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">jump?</span> (distance speed)
+    (&lt;= (/ distance speed) <span class="pl-c1">0.15</span>))</pre></div>
+<p>This function <code>jump?</code> take two parameters: <code>distance</code>, which represent the distance between the dinosaur and the front cactus; <code>speed</code> , which represent the speed of the cactus. Then, <code>(/ distance speed)</code> will be the time left before cactus hit our dinosaur, <code>0.15</code> is the time we preserved for our dinosaur to take it's feet off the ground. So, this function means: If we the cactus will hit our dinosaur in 0.15 seconds, we jump, then at the time cactus comes, our dinosaur will be right up in the sky, cactus passed!</p>
+<p><a href="dino/jumping.png" target="_blank" rel="noopener noreferrer"><img src="dino/jumping.png" alt="Jumping Dinosaur" style="max-width:100%;"></a></p>
+<p>Then, we can read the screen 60 times per second, and call <code>jump?</code> in every screen reading action, to check if we should jump.</p>
+<h3>
+<a name="at-last" class="anchor" href="#at-last" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>At Last</h3>
+<p>After playing around with all the code snippets in SLIME-REPL, seems all systems go:</p>
+<ul>
+<li>Screen Reading, powered by <a href="https://common-lisp.net/project/cmucl/doc/clx/7_5_Direct_Image_Transfer.html" rel="nofollow">get-raw-image</a>
+<ul>
+<li>Dinosaur State Checking (stand or bend or in the sky?)</li>
+<li>Game State Checking (game over or not)</li>
+<li>Cactuses and Birds Detection</li>
+</ul>
+</li>
+<li>Keyboard/Mouse Simulation, powered by <a href="https://github.com/sharplispers/clx/blob/master/extensions/xtest.lisp#L130">fake-key-event</a> and <a href="https://github.com/sharplispers/clx/blob/master/extensions/xtest.lisp#L117">fake-button-event</a>
+<ul>
+<li>Dinosaur Controller (<kbd>SPACE</kbd> and <kbd>DOWN</kbd> key)</li>
+<li>Game Activation (click to active the game window)</li>
+</ul>
+</li>
+</ul>
+<p>Just do a little more clean up, we'll have a Common Lisp-powered Super Dinosaur~</p>
+<p>Now, we won't go through the details of the code implementation, you can find them at the end of this page.</p>
+<p>Before we go, I wanna say: Lisp is not the old fragile useless academic language, also, it's not any alien super power. It's a language, it works if you really touched it, and works great.</p>
+<p><strong>Video on YouTube:</strong></p>
+<p><a href="https://youtu.be/PkzlJcKR4TI" rel="nofollow">https://youtu.be/PkzlJcKR4TI</a></p>
+<p><a href="dino/such-dino.gif" target="_blank" rel="noopener noreferrer"><img src="dino/such-dino.gif" alt="WOW! SUCH DINO!" style="max-width:100%;"></a></p>
+<p><strong>Code on GitHub:</strong></p>
+<p><a href="https://github.com/VitoVan/cl-dino">https://github.com/VitoVan/cl-dino</a></p>
+<p>I am pretty new to Common Lisp, the code may be a little messy (although I tried not to be like that), it will be great if you can point out something inelegant for me, thanks!</p>
+<hr>
+<p>License: GNU GPL v2.0</p>
+<p>Discuss on HN: <a href="https://news.ycombinator.com/item?id=12351187" rel="nofollow">https://news.ycombinator.com/item?id=12351187</a></p>
+<p><strong>Related:</strong></p>
+<ul>
+<li><a href="http://postd.cc/dinosaur-and-lisp/" rel="nofollow">Japanese Translation</a></li>
+</ul>
+
+            </div>
+        </div>
+    </body>
+</html>

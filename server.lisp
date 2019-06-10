@@ -1,10 +1,46 @@
+;;         DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+;;                     Version 2, December 2004
+;;
+;;  Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>
+;;
+;;  Everyone is permitted to copy and distribute verbatim or modified
+;;  copies of this license document, and changing it is allowed as long
+;;  as the name is changed.
+;;
+;;             DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
+;;    TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+;;
+;;   0. You just DO WHAT THE FUCK YOU WANT TO.
+
+
+;;  Copyright © 2019 Vito Van <awesomevito@live.com>
+;;  This program is free software. It comes without any warranty, to
+;;  the extent permitted by applicable law. You can redistribute it
+;;  and/or modify it under the terms of the Do What The Fuck You Want
+;;  To Public License, Version 2, as published by Sam Hocevar. See
+;;  text above or http://www.wtfpl.net/ for more details.
+
+;; ** -- WARNING --**
+;; code below is written by a younger version of me,
+;; and I don't have any interest to improve it unless something is broken,
+;; so it is pretty messed up code. If you are going to use it, please just
+;; use it as reference, for whoever's sake.
+
 (setf sb-impl::*default-external-format* :UTF-8)
 ;;(declaim (optimize (debug 3)))
-(ql:quickload '(drakma html-template cl-ppcre cl-fad xml-emitter))
+(ql:quickload '(drakma html-template cl-ppcre cl-fad xml-emitter hunchentoot))
 
 (defpackage vitovan
   (:use :cl :drakma :html-template :cl-ppcre :cl-fad :xml-emitter))
 (in-package :vitovan)
+
+(defun concat (&rest rest)
+  (apply #'concatenate 'string rest))
+
+(defun ends-with-p (str1 str2)
+  "Determine whether `str1` ends with `str2`"
+  (let ((p (mismatch str2 str1 :from-end T)))
+    (or (not p) (= 0 p))))
 
 (defun file-to-string (path)
   (with-open-file (stream path)
@@ -14,41 +50,61 @@
 
 (defun string-to-file (name content)
   (with-open-file (stream name
-                           :direction :output
-                           :if-exists :rename-and-delete
-                           :if-does-not-exist :create )
+                          :direction :output
+                          :if-exists :rename-and-delete
+                          :if-does-not-exist :create )
     (format stream "~A" content))
   name)
 
-(defvar *md-path* "~/Source/github/vitovan.com/md/")
-(defvar *tmpl-path* "~/Source/github/vitovan.com/tmpl/")
-(defvar *target-path* "~/Source/github/vitovan.com/html/")
+(defun read-nth-line (file n &aux (line-number 0))
+  "Read the nth line from a text file. The first line has the number 1"
+  (assert (> n 0) (n))
+  (with-open-file (stream file)
+    (loop for line = (read-line stream nil nil)
+       if (and (null line) (< line-number n))
+       do (error "file ~a is too short, just ~a, not ~a lines long"
+                 file line-number n)
+       do (incf line-number)
+       if (and line (= line-number n))
+       do (return line))))
+
+(defvar *md-path* "./md/")
+(defvar *tmpl-path* "./tmpl/")
+(defvar *ori-files-path* "./ori-files/")
+(defvar *dist-path* "./doc/")
+
 
 (defun the-tmpl()
-  (file-to-string (concatenate 'string *tmpl-path* "the.tmpl")))
+  (file-to-string (concat *tmpl-path* "the.tmpl")))
 
 (defun get-title (md-file)
-  (with-open-file (stream md-file)
-    (string-trim " " (regex-replace-all "#" (read-line stream nil) ""))))
+  (string-trim " " (regex-replace-all "#" (read-nth-line md-file 2) "")))
+
+(defun get-order (md-file)
+  (parse-integer (regex-replace-all "[^0-9]" (read-nth-line md-file 1) "") :junk-allowed t))
 
 (defun the-list()
   (let* ((the-list))
     (dolist (md-file
-              (sort (list-directory *md-path*)
-                    #'(lambda(fa fb)
-                        (< (file-write-date fa) (file-write-date fb)))))
+              (sort
+               (remove-if-not
+                #'(lambda (p) (ends-with-p p "md"))
+                (mapcar #'namestring (list-directory *md-path*)))
+               #'(lambda(fa fb)
+                   (< (get-order fa) (get-order fb)))))
+      (format t "MD:~A~%" md-file)
       (push
        (cons (pathname-name md-file) (get-title md-file))
        the-list))
     the-list))
 
-(defun the-html-list()
-  (let* ((the-html-list))
-    (dolist (md-file (list-directory *target-path*))
+(defun dist-file-list()
+  (let* ((dist-file-list))
+    (dolist (md-file (list-directory *dist-path*))
       (push
        (pathname-name md-file)
-       the-html-list))
-    the-html-list))
+       dist-file-list))
+    dist-file-list))
 
 
 (defun gh-markdown (md-file)
@@ -61,29 +117,49 @@
 (defun make-post(name)
   (regex-replace-all "#THE-TITLE#"
                      (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                        (gh-markdown (truename (concatenate 'string *md-path* name ".md"))))
-                     (get-title (truename (concatenate 'string *md-path* name ".md")))))
+                                        (gh-markdown (truename (concat *md-path* name ".md"))))
+                     (get-title (truename (concat *md-path* name ".md")))))
 
 (defun write-post(name)
-  (format t "WRITING POST ~A ~A" name #\newline)
-  (string-to-file (concatenate 'string *target-path* name ".html")
-                  (make-post name)))
+  (format t "WRITING POST ~A ~%" name)
+  (string-to-file (concat *dist-path* name ".html")
+                  (make-post name))
+  (format t "COPYING POST Attachments ~A ~%" name)
+  (let ((att-dir (concat *dist-path* name "/"))
+        (att-list (list-directory (concat *md-path* name))))
+    (format t "ATT_DIR: ~A~%" att-dir)
+    (when (> (length att-list) 0)
+      (ensure-directories-exist (pathname att-dir)))
+    (dolist (post-att att-list)
+      (copy-file post-att
+                 (concat
+                  att-dir
+                  (pathname-name post-att)
+                  "."
+                  (pathname-type post-att))
+                 :overwrite t)))
+  (format t "OK POST ~A ~%" name))
+
+(defun copy-ori-file()
+  (dolist (ori-file (list-directory *ori-files-path*))
+    (copy-file ori-file (concat *dist-path* (pathname-name ori-file) "." (pathname-type ori-file))
+               :overwrite t)))
 
 (defun make-rss-item(name title)
   (rss-item title
-            :link (concatenate 'string "http://vitovan.com/" name ".html")
+            :link (concat "http://vito.sdf.org/" name ".html")
             :author "Vito Van"))
 
 
 (defun make-rss()
-    (with-output-to-string (s)
-      (with-rss2 (s :encoding "UTF-8")
-        (rss-channel-header "Vito Van" "http://vitovan.com/"
-                            :description "Be Alive with Music and Program"
-                            :image "http://vitovan.com/favicon.png"
-                            :image-title "Vito's avatar")
-        (dolist (x (the-list))
-          (make-rss-item (car x) (cdr x))))))
+  (with-output-to-string (s)
+    (with-rss2 (s :encoding "UTF-8")
+      (rss-channel-header "Vito Van" "http://vito.sdf.org/"
+                          :description "Be Alive with Music and Program"
+                          :image "http://vito.sdf.org/favicon.png"
+                          :image-title "Vito's avatar")
+      (dolist (x (the-list))
+        (make-rss-item (car x) (cdr x))))))
 
 (defun make-index()
   (regex-replace-all "#THE-TITLE#"
@@ -91,21 +167,33 @@
                                         (let* ((the-list-html))
                                           (dolist (x (the-list))
                                             (setf the-list-html
-                                                  (concatenate 'string the-list-html
-                                                               (concatenate 'string "<div><a href='" (car x) ".html'>" (cdr x) "</a></div>"))))
-                                          (concatenate 'string "<div class='index'>" the-list-html "</div>")))
+                                                  (concat the-list-html
+                                                          (concat "<div><a href='" (car x) ".html'>" (cdr x) "</a></div>"))))
+                                          (concat "<div class='index'>" the-list-html "</div>")))
                      "Vito Van"))
 
 (defun write-index()
-  (string-to-file (concatenate 'string *target-path* "index.html")
+  (format t "WRITING INDEX ~%")
+  (string-to-file (concat *dist-path* "list.html")
                   (make-index)))
 
 (defun write-rss()
-  (string-to-file (concatenate 'string *target-path* "rss.xml")
+  (format t "WRITING RSS ~%")
+  (string-to-file (concat *dist-path* "rss.xml")
                   (make-rss)))
 
 (defun write-all-posts(&optional (force-rebuild nil))
   (dolist (x (the-list))
-    (if (or force-rebuild (not (find (car x) (the-html-list) :test #'equal)))
+    (if (or force-rebuild (not (find (car x) (dist-file-list) :test #'equal)))
         (write-post (car x))))
-  (write-index))
+  (write-index)
+  (write-rss)
+  (copy-ori-file))
+
+(defparameter *ht-acceptor* (make-instance 'hunchentoot:easy-acceptor
+                                           :port 8080
+                                           :document-root *dist-path*))
+
+(hunchentoot:start *ht-acceptor*)
+
+;; (hunchentoot:stop *ht-acceptor*)

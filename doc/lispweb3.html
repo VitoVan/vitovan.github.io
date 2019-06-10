@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta name="author" content="Vito Van"/>
+        <meta name="theme-color" content="#CC0000">        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="icon" type="image/png" href="/favicon.png"/>
+        <link rel="stylesheet" type="text/css" href="app.css">
+        <link rel="stylesheet" type="text/css" href="github-markdown.css">
+        <title>Lisp for The Modern Web</title>
+        <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+         ga('create', 'UA-69347509-2', 'auto');
+         ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div class="panel">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li class="current"><a href="/list.html">List</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/rss.xml">RSS</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="head">
+                <h1><a href="/">Vito Van</a></h1>
+            </div>
+            <div class="content markdown-body">
+                
+<h1>
+<a name="lisp-for-the-modern-web" class="anchor" href="#lisp-for-the-modern-web" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp for The Modern Web</h1>
+<p>2015/08, revision: 2015/08, 2015/09, 2016/08</p>
+<blockquote>
+<p>Lisp isn't a language, it's a building material.</p>
+</blockquote>
+<p>-  Alan Kay</p>
+<h3>
+<a name="what-to-expect" class="anchor" href="#what-to-expect" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What to Expect</h3>
+<p>This piece is about how to build a modern web application with Common Lisp in the backend, from scratch.</p>
+<p>You may need to have some knowledge about <a href="https://en.wikipedia.org/wiki/Front_end_development" rel="nofollow">Front End Development</a>, cause we won't explain the steps for building the client.</p>
+<h3>
+<a name="why-lisp-again" class="anchor" href="#why-lisp-again" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why Lisp? Again</h3>
+<p><strong>It is awesome</strong>.</p>
+<p>I don't think we need another reason for using Lisp, do we? Life is short, let's be awesome!</p>
+<p>It's been more than half a century since Lisp first appeared, she's like the <a href="https://en.wikipedia.org/wiki/One_Ring" rel="nofollow">The One Ring</a> in the Middle-earth. The one who mastered the spell of Lisp, will rule the world, once again.</p>
+<p><strong>Other reasons</strong>.</p>
+<p>If you need some other reasons beside awesome, here is some <a href="http://www.paulgraham.com/quotes.html" rel="nofollow">quotes</a> and <a href="http://www.paulgraham.com/lisp.html" rel="nofollow">articles</a> about Lisp, enjoy them.</p>
+<h3>
+<a name="lets-do-it" class="anchor" href="#lets-do-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's Do It</h3>
+<p>Do what?</p>
+<p>We are going to "build a modern web application with Common Lisp in the backend", as mentioned before.</p>
+<p>In recent days, many people build web applications with a <strong><code>Server with JSON output</code></strong> and a <strong><code>Client with HTML5 + JavaScript</code></strong>. And we will do it the same way.</p>
+<p>As you have had some Front End Development skills, we'll focus on the server part, and the client part will be provide as source code for you.</p>
+<h3>
+<a name="the-steps" class="anchor" href="#the-steps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Steps</h3>
+<ul>
+<li><a href="#hello-lisp">Hello Lisp!</a></li>
+<li><a href="#hello-world">Hello World!</a></li>
+<li><a href="#lets-be-json">Let's Be JSON</a></li>
+<li><a href="#data-storage">Data Storage</a></li>
+<li><a href="#modern-client">Modern Client</a></li>
+</ul>
+<h4>
+<a name="hello-lisp" class="anchor" href="#hello-lisp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello, Lisp!</h4>
+<p>We assume that you have no knowledge about Lisp, so let's say hello:</p>
+<ul>
+<li>
+<p>Go to <a href="http://sbcl.org/" rel="nofollow">sbcl.org</a>, and open the <a href="http://sbcl.org/platform-table.html" rel="nofollow">Download</a> page, choose your platform and download your binary.</p>
+</li>
+<li>
+<p>Then follow <a href="http://sbcl.org/getting.html" rel="nofollow">this instruction</a> to install and run it.</p>
+</li>
+<li>
+<p>OK, now you have a <a href="http://www.cliki.net/REPL" rel="nofollow">REPL</a>!</p>
+</li>
+</ul>
+<blockquote>
+<p>This is SBCL 1.2.7, an implementation of ANSI Common Lisp.</p>
+</blockquote>
+<blockquote>
+<p>More information about SBCL is available at <a href="http://www.sbcl.org/" rel="nofollow">http://www.sbcl.org/</a>.</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>SBCL is free software, provided as is, with absolutely no warranty.</p>
+</blockquote>
+<blockquote>
+<p>It is mostly in the public domain; some portions are provided under</p>
+</blockquote>
+<blockquote>
+<p>BSD-style licenses.  See the CREDITS and COPYING files in the</p>
+</blockquote>
+<blockquote>
+<p>distribution for more information.</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<p>Before we start coding, let's talk about the basic grammar in Lisp. Many people say "It's weird!", but it is also the charming part.</p>
+<p>You can imagine Lisp grammar like <a href="http://www.webpacman.com/pacman.php" rel="nofollow">Pac Man</a> eating the dots: <code>ᗧ••••</code>, and there is no ghosts here. Pac Man is the function in Lisp, and the dots are arguments. After Pac Man eat up all the dots (the function is executed with all these arguments), it becames a dot: <code>•</code> . and a dot is able to be eaten by another Pac Man.</p>
+<p>So, you can imagine a Lisp program like this:</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;Day 1, we created Pac Men and dots</span>
+(ᗧ• (ᗧ••••
+ (ᗧ••
+ (ᗧ•••))))
+<span class="pl-c"><span class="pl-c">;</span>;Day 2, The innermost Pac Man eat up all the dots in front of him/her</span>
+<span class="pl-c"><span class="pl-c">;</span>;and, turns into a dot </span>
+(ᗧ• (ᗧ••••
+ (ᗧ••
+ •)))
+<span class="pl-c"><span class="pl-c">;</span>;Day 3, Eating is not stopping</span>
+(ᗧ• (ᗧ••••
+•))
+<span class="pl-c"><span class="pl-c">;</span>;Day 4, The last Pac Man</span>
+(ᗧ• •)
+<span class="pl-c"><span class="pl-c">;</span>;Day 5, Finally, Pac Man is just another dot</span>
+•</pre></div>
+<p>Yes, they are just Pac Man and dots! When there is multiple Pac Men and dots, the innermost Pac Man will eat first, then it turns into a dot, waiting to be eaten by other Pac Man. It's funny, isn't it?</p>
+<p>Now, let's get back to REPL:</p>
+<ul>
+<li>Type <code>(format t "Hello, Lisp!")</code>, then hit <kbd>Enter</kbd>
+</li>
+</ul>
+<blockquote>
+<p>* (format t "Hello, Lisp!")</p>
+</blockquote>
+<blockquote>
+<p><strong>Hello, Lisp!</strong></p>
+</blockquote>
+<blockquote>
+<p>NIL</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<ul>
+<li>Now, you have learned Lisp!</li>
+</ul>
+<p>"YOU MUST BE KIDDING!!", yes. Now let's do something more complicated:</p>
+<ul>
+<li>Open a file, paste code below, then save it as <code>say-hello.lisp</code>:</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">say-hello</span> (to)
+ (<span class="pl-c1">format</span> <span class="pl-c1">t</span> <span class="pl-s"><span class="pl-pds">"</span>Hello, ~a<span class="pl-pds">"</span></span> to))</pre></div>
+<ul>
+<li>
+<p>Open a terminal, and change to current directory</p>
+</li>
+<li>
+<p>Type <code>sbcl --load say-hello.lisp</code>, hit <kbd>Enter</kbd></p>
+</li>
+</ul>
+<blockquote>
+<p>[vito@laptop lispweb3]$ sbcl --load say-hello.lisp</p>
+</blockquote>
+<blockquote>
+<p>This is SBCL 1.2.7, an implementation of ANSI Common Lisp.</p>
+</blockquote>
+<blockquote>
+<p>More information about SBCL is available at <a href="http://www.sbcl.org/" rel="nofollow">http://www.sbcl.org/</a>.</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>SBCL is free software, provided as is, with absolutely no warranty.</p>
+</blockquote>
+<blockquote>
+<p>It is mostly in the public domain; some portions are provided under</p>
+</blockquote>
+<blockquote>
+<p>BSD-style licenses.  See the CREDITS and COPYING files in the</p>
+</blockquote>
+<blockquote>
+<p>distribution for more information.</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<ul>
+<li>Then you'll get the REPL with the file loaded. Type <code>(say-hello "Vito")</code>, hit <kbd>Enter</kbd>
+</li>
+</ul>
+<blockquote>
+<p>* (say-hello "Vito")</p>
+</blockquote>
+<blockquote>
+<p>Hello, Vito</p>
+</blockquote>
+<blockquote>
+<p>NIL</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<ul>
+<li>Now, you see, you are saying hello to me with Lisp!</li>
+</ul>
+<p><strong>Ok, what we've done?</strong></p>
+<p>First, when we type <code>(format t "Hello, Lisp!")</code>, we called a function which name is <code>format</code>, and passed with two arguments: <code>t</code> and <code>"Hello, Lisp!"</code>. Well then, what is function <code>format</code> about?</p>
+<p>Here is the document: <a href="http://www.lispworks.com/documentation/lw50/CLHS/Body/f_format.htm" rel="nofollow">CLHS: Function FORMAT</a>, and here is <a href="http://www.gigamonkeys.com/book/a-few-format-recipes.html" rel="nofollow">A Few FORMAT Recipes</a>. Typically, we can google it by these keywords: <a href="https://www.google.com/search?q=common+lisp+format" rel="nofollow"><em>common lisp format</em></a>, thank google, we'll always get the answer.</p>
+<blockquote>
+<p>......</p>
+</blockquote>
+<blockquote>
+<p>format destination control-string &amp;rest args =&gt; result</p>
+</blockquote>
+<blockquote>
+<p>Arguments and Values:</p>
+</blockquote>
+<blockquote>
+<p><strong>destination---nil, t, a stream, or a string with a fill pointer.</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>control-string---a format control.</strong></p>
+</blockquote>
+<blockquote>
+<p>args---format arguments for control-string.</p>
+</blockquote>
+<blockquote>
+<p>result---if destination is non-nil, then nil; otherwise, a string.</p>
+</blockquote>
+<blockquote>
+<p>......</p>
+</blockquote>
+<p>- <a href="http://www.lispworks.com/documentation/lw50/CLHS/Body/f_format.htm" rel="nofollow">CLHS: Function FORMAT</a></p>
+<blockquote>
+<p>...... the destination for the output, can be T, NIL, a stream, or a string with a fill pointer. <strong>T is shorthand for the stream <em>STANDARD-OUTPUT</em></strong>, while NIL causes  ......</p>
+</blockquote>
+<blockquote>
+<p>...... The second argument, the control string, is, in essence, a program in the FORMAT language. ...... Most of FORMAT's directives ......</p>
+</blockquote>
+<blockquote>
+<p>FORMAT Directives</p>
+</blockquote>
+<blockquote>
+<p>......</p>
+</blockquote>
+<p>- <a href="http://www.gigamonkeys.com/book/a-few-format-recipes.html" rel="nofollow">A Few FORMAT Recipes</a></p>
+<p>Now we know that the first argument of <code>(format t "Hello, Lisp!")</code> is destination, when we pass it <code>t</code>, it means <code>*STANDARD-OUTPUT*</code>. We also know that the second argument of <code>(format t "Hello, Lisp!")</code> is control-string, which just like a template, without directives, it is just a string.</p>
+<p>So, <code>(format t "Hello, Lisp!")</code> means print string <code>"Hello, Lisp!"</code> to the standard output, then return <code>nil</code> (you can assume that <code>t</code> means <code>true</code> and <code>nil</code> means <code>false</code> in Lisp, for now).</p>
+<p>Second, we wrote a file with:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">say-hello</span> (to)
+ (<span class="pl-c1">format</span> <span class="pl-c1">t</span> <span class="pl-s"><span class="pl-pds">"</span>Hello, ~a<span class="pl-pds">"</span></span> to))</pre></div>
+<p>Well, we know that <code>(format t "Hello, ~a" to)</code> means replace directive <code>~a</code> with the value of variable <code>to</code>, and then print them out to the standard output. But, what does <code>(defun say-hello (to)</code> mean?</p>
+<p>Let's try google: <a href="https://www.google.com/search?q=common+lisp+defun" rel="nofollow"><em>common lisp defun</em></a>.</p>
+<p>Well, we got this: <a href="http://www.lispworks.com/documentation/lw50/CLHS/Body/m_defun.htm" rel="nofollow">CLHS: Macro DEFUN</a> and this: <a href="http://www.gigamonkeys.com/book/functions.html" rel="nofollow">Functions</a>.</p>
+<p>After read them, we know that <code>defun</code> is a Macro which is used to create funcion. The first argument of <code>defun</code> is the function name, and the second argument of <code>defun</code> is the arguments of the function, and typically, the rest will be the body of the function.</p>
+<p>So, it means we just created a function named by <code>say-hello</code> and takes one argument <code>to</code>. When the function is called, it concatenate the value of variable <code>to</code> with string <code>"Hello, "</code>, then print them to the standard output. This could be the JavaScript version:</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-c"><span class="pl-c">//</span>It seems there is no string format function in JavaScript, so...</span>
+<span class="pl-k">function</span> <span class="pl-en">sayHello</span>(<span class="pl-smi">to</span>){
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">"</span>Hello, ~a<span class="pl-pds">"</span></span>.<span class="pl-c1">replace</span>(<span class="pl-s"><span class="pl-pds">"</span>~a<span class="pl-pds">"</span></span>,to));
+}</pre></div>
+<h4>
+<a name="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello World!</h4>
+<p>Now, you have learned how to program in Common Lisp, but nobody knows except you and me, it's not good.</p>
+<p>So, let's say hello to the world.</p>
+<blockquote>
+<p>If I have seen further, it is by standing on the shoulders of giants.</p>
+</blockquote>
+<p>- Isaac Newton</p>
+<p>Let's meet the giants:</p>
+<ul>
+<li>
+<p>Go to <a href="http://quicklisp.org" rel="nofollow">quicklisp.org</a>, follow the <a href="https://www.quicklisp.org/beta/#installation" rel="nofollow">installation guide</a> (yes, the paragraph with the dark background, copy and paste and execute all the bold lines in your terminal), install it.</p>
+</li>
+<li>
+<p>Open a file, paste code below, then save it as <code>server.lisp</code>:</p>
+</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload :hunchentoot)
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
+<ul>
+<li>
+<p>Open a terminal, and change to current directory</p>
+</li>
+<li>
+<p>Type <code>sbcl --load server.lisp</code>, hit <kbd>Enter</kbd></p>
+</li>
+<li>
+<p>After loading, use your favourite browser to open this link: <a href="http://localhost:4242/" rel="nofollow">http://localhost:4242/</a></p>
+</li>
+<li>
+<p>YOU JUST CREATED A WEBSITE WITH LISP!</p>
+</li>
+<li>
+<p>YOU ARE AWESOME!!!</p>
+</li>
+</ul>
+<p>Ok, calm down, let's do something to make people know that it's <em>YOU</em> who created a website with Lisp. Add the code below to your <code>server.lisp</code> file:</p>
+<div class="highlight highlight-source-lisp"><pre> <span class="pl-c"><span class="pl-c">;</span>;remeber to change Vito to your name.</span>
+(hunchentoot:define-easy-handler (say-hello :uri <span class="pl-s"><span class="pl-pds">"</span>/hello<span class="pl-pds">"</span></span>) (name)
+ (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>text/plain<span class="pl-pds">"</span></span>)
+ (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>Hello, ~a! I am Vito! ~%I build a website with Lisp!!!<span class="pl-pds">"</span></span> name))</pre></div>
+<ul>
+<li>
+<p>then click <kbd>Ctrl</kbd> + <kbd>d</kbd> or type <code>(quit)</code> then hit <kbd>Enter</kbd> to quit current REPL.</p>
+</li>
+<li>
+<p>In the terminal, Type <code>sbcl --load server.lisp</code>, hit <kbd>Enter</kbd> , again.</p>
+</li>
+<li>
+<p>After loading, check here: <a href="http://localhost:4242/hello?name=World" rel="nofollow">http://localhost:4242/hello?name=World</a></p>
+</li>
+<li>
+<p>YES, <strong><em>YOU</em></strong> just said hello to the world! WITH <strong><em>LISP</em></strong> !</p>
+</li>
+</ul>
+<p><strong>What we've done?</strong></p>
+<p>It's not so hard to understand, isn't it?</p>
+<p>First, we should thank Quicklisp, it is a library manager for Common Lisp, and it has <a href="https://www.quicklisp.org/beta/releases.html" rel="nofollow">over 1,200 libraries</a>, after install it, you can ride a bike with NO HANDS!</p>
+<p>Second, we should thank <a href="http://weitz.de/" rel="nofollow">Edi Weitz</a>, he/she is an extremely awesome and fascinating Lisper on this planet. You will meet so many Lisp projects under Edi Weitz's magic hands after surfing a while in the Lisp world, and then you will be subdued by the charm of the code. Ok, after the words of praise, we just used <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a> <a href="#fn1">[1]</a> as the server, it's well documented, you will love it.</p>
+<p>We just load <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a> with Quicklisp, like this: <code>(ql:quickload :hunchentoot)</code>, and then start the Hunchentoot Server on port 4242: <code>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))</code>. At last, we defined a HTTP handler with Hunchentoot's <a href="http://weitz.de/hunchentoot/#define-easy-handler" rel="nofollow">define-easy-handler</a>.</p>
+<p>For further usage about Hunchentoot, you'll find them in the <a href="http://weitz.de/hunchentoot" rel="nofollow">document</a>.</p>
+<h4>
+<a name="lets-be-json" class="anchor" href="#lets-be-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's Be JSON</h4>
+<p>Yes yes, I know I know. The Front Team won't be happy if we give them plain text response, they all like <a href="http://json.org/" rel="nofollow">JSON</a>.</p>
+<p>So, how to do it in Common Lisp?</p>
+<ul>
+<li>Open a file, paste code below, then save it as <code>json-server.lisp</code>:</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
+<span class="pl-c"><span class="pl-c">;</span>;Create a class called people.</span>
+<span class="pl-c"><span class="pl-c">;</span>;What? CLASS!!??</span>
+<span class="pl-c"><span class="pl-c">;</span>;Yes, it is a class. Lisp is not just a Functional Programming Language.</span>
+<span class="pl-c"><span class="pl-c">;</span>;Remember? it's a building material!!</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+<span class="pl-c"><span class="pl-c">;</span>;Make a people.</span>
+(<span class="pl-k">defvar</span> <span class="pl-en">me</span>
+  (make-instance 'people
+                 :name <span class="pl-s"><span class="pl-pds">"</span>Vito Van<span class="pl-pds">"</span></span>
+                 :language <span class="pl-s"><span class="pl-pds">"</span>Lisp<span class="pl-pds">"</span></span>
+                 :bio <span class="pl-s"><span class="pl-pds">"</span>I have no job, I'm dying. Someone hire me, I can eat.<span class="pl-pds">"</span></span>))
+<span class="pl-c"><span class="pl-c">;</span>;Send me to the world, in JSON.</span>
+(hunchentoot:define-easy-handler (say-me :uri <span class="pl-s"><span class="pl-pds">"</span>/me<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string me))
+<span class="pl-c"><span class="pl-c">;</span>;Dynamic build a people, and response back in JSON.</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-instance
+    'people
+    :name name
+    :language <span class="pl-s"><span class="pl-pds">"</span>English<span class="pl-pds">"</span></span>
+    :bio (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>I am ~a's colon. I get cancer, I kill ~a. <span class="pl-pds">"</span></span> name name))))</pre></div>
+<ul>
+<li>
+<p>Quit all the other REPLs, then load the file <code>sbcl --load json-server.lisp</code>!</p>
+</li>
+<li>
+<p>Check here: <a href="http://localhost:4242/me" rel="nofollow">http://localhost:4242/me</a>, and here: <a href="http://localhost:4242/you?name=Jack" rel="nofollow">http://localhost:4242/you?name=Jack</a></p>
+</li>
+</ul>
+<p>Yes, you have done it! Look ma, it's JSON!</p>
+<p>For now, I don't think you need explains in detail anymore. We just created a class, made some instance of it, and encoded it to JSON, then send back to the browser. Here are documents about <code>defclass</code> and <code>cl-json</code>:</p>
+<ul>
+<li>
+<p><a href="http://clhs.lisp.se/Body/m_defcla.htm" rel="nofollow">CLHS: Macro DEFCLASS</a> and <a href="http://www.gigamonkeys.com/book/object-reorientation-classes.html" rel="nofollow">Object Reorientation: Classes</a></p>
+</li>
+<li>
+<p><a href="https://common-lisp.net/project/cl-json/" rel="nofollow">CL-JSON</a></p>
+</li>
+</ul>
+<h4>
+<a name="data-storage" class="anchor" href="#data-storage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Storage</h4>
+<p>Where we are now?</p>
+<p>We've made a <strong><code>Server with JSON output</code></strong>, it's a big deal. But, we never store any data yet. So, let's give him/her a shot who ever visit <a href="http://localhost:4242/you?name=Jack" rel="nofollow">http://localhost:4242/you?name=Jack</a>.</p>
+<p>Here is the original code for that request:</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;Dynamic build a people, and response back in JSON.</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-instance
+    'people
+    :name name
+    :language <span class="pl-s"><span class="pl-pds">"</span>English<span class="pl-pds">"</span></span>
+    :bio (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>I am ~a's colon. I get cancer, I kill ~a. <span class="pl-pds">"</span></span> name name))))</pre></div>
+<p>We could let's make it better:</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;Store the people instance</span>
+(<span class="pl-k">defun</span> <span class="pl-en">store-people</span> (people)
+  (ᗧ• people •)
+  people)
+<span class="pl-c"><span class="pl-c">;</span>;Make a people instance by name</span>
+(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (make-instance
+   'people
+   :name name
+   :language <span class="pl-s"><span class="pl-pds">"</span>English<span class="pl-pds">"</span></span>
+   :bio (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>I am ~a's colon. I get cancer, I kill ~a. <span class="pl-pds">"</span></span> name name)))
+<span class="pl-c"><span class="pl-c">;</span>;Dynamic build a people, and response back in JSON.</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (store-people
+    (make-people name))))</pre></div>
+<p>We just added a function <code>make-people</code>, it makes the code concise. And we know that Pac Man in the code won't really work, let's fix it.</p>
+<p>What's the common sence for storing data? Database Products, yes. But we won't use database today, because:</p>
+<ul>
+<li>
+<p>It's not cool, everybody is using it.</p>
+</li>
+<li>
+<p>It's complicated, we have to learn how to use a Database Product.</p>
+</li>
+<li>
+<p>I have the data in the memory, why not just make it AS IS?</p>
+</li>
+</ul>
+<p>So, we could do it like this:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defvar</span> <span class="pl-smi">*people-list*</span> <span class="pl-c1">nil</span>)
+<span class="pl-c"><span class="pl-c">;</span>;Store the people instance</span>
+(<span class="pl-k">defun</span> <span class="pl-en">store-people</span> (people)
+  (push people <span class="pl-smi">*people-list*</span>)
+  people)</pre></div>
+<p>Yes! We just store the people in the variable <code>*people-list*</code>! How to send the people list to browser?</p>
+<div class="highlight highlight-source-lisp"><pre>(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   <span class="pl-smi">*people-list*</span>))</pre></div>
+<p>Here is the minimal part to test out memory storage:</p>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
+<span class="pl-c"><span class="pl-c">;</span>;Create a class called people.</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+<span class="pl-c"><span class="pl-c">;</span>;Define a list</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*people-list*</span> <span class="pl-c1">nil</span>)
+<span class="pl-c"><span class="pl-c">;</span>;Store the people instance</span>
+(<span class="pl-k">defun</span> <span class="pl-en">store-people</span> (people)
+  (push people <span class="pl-smi">*people-list*</span>)
+  people)
+<span class="pl-c"><span class="pl-c">;</span>;Make a people instance by name</span>
+(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (make-instance
+   'people
+   :name name
+   :language <span class="pl-s"><span class="pl-pds">"</span>English<span class="pl-pds">"</span></span>
+   :bio (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>I am ~a's colon. I get cancer, I kill ~a. <span class="pl-pds">"</span></span> name name)))
+<span class="pl-c"><span class="pl-c">;</span>;Dynamic build a people, and response back in JSON.</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (store-people
+    (make-people name))))
+(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   <span class="pl-smi">*people-list*</span>))</pre></div>
+<p>You can save the code above to file <code>storage-server.lisp</code>, and then loaded with <code>sbcl --load storage-server.lisp</code> (remember to quit all the other REPLs to avoid port number conflicts).</p>
+<p>Then click these links first: <a href="http://localhost:4242/you?name=Jack" rel="nofollow">Jack</a>, <a href="http://localhost:4242/you?name=Tyler" rel="nofollow">Tyler</a>, <a href="http://localhost:4242/you?name=Marla" rel="nofollow">Marla</a>.</p>
+<p>And then check here to see if they are stored: <a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>.</p>
+<p>What happend? It just works.</p>
+<p><strong>What? You wanna store them into the disk?</strong></p>
+<p>Since we decide not to use a Database Product, then how to store the data to the disk and restore them easily? Let's try <a href="http://hillside.net/sugarloafplop/papers/5.pdf" rel="nofollow">OBJECT PREVALENCE</a>, it means we are going to take a snapshot on current memory and save it as a file, then restore them anytime.</p>
+<p>Of course we can build our own implementation, but thank to [Sven Van Caekenberghe](<a href="http://www.cliki.net/Sven" rel="nofollow">http://www.cliki.net/Sven</a> Van Caekenberghe), we can use <a href="https://common-lisp.net/project/cl-prevalence/" rel="nofollow">CL-PREVALENCE</a>. It's not very well documented as <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a>, but we have the <a href="https://common-lisp.net/project/cl-prevalence/CL-PREVALENCE.html" rel="nofollow">API</a> and the source code, do we?</p>
+<ul>
+<li>First, add <code>cl-prevalence</code> to your quicklisp load list:</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json cl-prevalence))</pre></div>
+<ul>
+<li>Then initialize your prevalence system (we should define the class first for prevalence system to use):</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;We add "id" to the people class, the prevalence system will need it.</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((id :reader id
+       :initarg :id)
+   (name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+<span class="pl-c"><span class="pl-c">;</span>;Init the system</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
+<span class="pl-c"><span class="pl-c">;</span>;Create counter if not exists</span>
+(<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
+	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
+<ul>
+<li>Modify the original function <code>make-people</code>
+</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (cl-prevalence:tx-create-object
+   <span class="pl-smi">*p-system*</span>
+   'people
+   `((name ,name)
+     (language ,<span class="pl-s"><span class="pl-pds">"</span>English<span class="pl-pds">"</span></span>)
+     (bio ,(<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>I am ~a's colon. I get cancer, I kill ~a. <span class="pl-pds">"</span></span> name name)))))</pre></div>
+<ul>
+<li>
+<p>Delete function <code>store-people</code> and varible <code>*people-list*</code>, because the data is automatically stored into the prevalence system when we call <code>make-people</code>.</p>
+</li>
+<li>
+<p>Modify our controllers</p>
+</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;Dynamic build a people, and response back in JSON.</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-people name)))
+<span class="pl-c"><span class="pl-c">;</span>;Get all the people in our prevalence system</span>
+(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)))</pre></div>
+<ul>
+<li>And finally, we got this</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json cl-prevalence))
+<span class="pl-c"><span class="pl-c">;</span>;Create a class called people.</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((id :reader id
+       :initarg :id)
+   (name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (bio :accessor bio
+        :initarg :bio)))
+<span class="pl-c"><span class="pl-c">;</span>;Init the system</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
+<span class="pl-c"><span class="pl-c">;</span>;Create counter if not exists</span>
+(<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
+    (cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
+<span class="pl-c"><span class="pl-c">;</span>;Make and sotre a people instance by name</span>
+(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (cl-prevalence:tx-create-object
+   <span class="pl-smi">*p-system*</span>
+   'people
+   `((name ,name)
+     (language ,<span class="pl-s"><span class="pl-pds">"</span>English<span class="pl-pds">"</span></span>)
+     (bio ,(<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>I am ~a's colon. I get cancer, I kill ~a. <span class="pl-pds">"</span></span> name name)))))
+<span class="pl-c"><span class="pl-c">;</span>;Dynamic build a people, and response back in JSON.</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-people name)))
+<span class="pl-c"><span class="pl-c">;</span>;Get all the people in our prevalence system</span>
+(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)))</pre></div>
+<ul>
+<li>Save the code above to file <code>p-storage-server.lisp</code>, and then loaded with <code>sbcl --load p-storage-server.lisp</code> (remember to quit all the other REPLs to avoid port number conflicts).</li>
+</ul>
+<p>Then click these links first: [Robert Paulson](<a href="http://localhost:4242/you?name=Robert" rel="nofollow">http://localhost:4242/you?name=Robert</a> Paulson), <a href="http://localhost:4242/you?name=Tyler" rel="nofollow">Tyler</a>, <a href="http://localhost:4242/you?name=Jack" rel="nofollow">Jack</a>, <a href="http://localhost:4242/you?name=Lou" rel="nofollow">Lou</a>.</p>
+<p>And then check here to see if they are stored: <a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>.</p>
+<p>What happend? It just works as the <code>*people-list*</code>.</p>
+<p><strong>To witness the miracle</strong></p>
+<p>Now, type <code>(cl-prevalence:snapshot *p-system*)</code> in your REPL, hit <kbd>Enter</kbd>.</p>
+<p>Then, quit all your REPLs and close all the tabs in your browser (except this one).</p>
+<p>Reload your code: <code>sbcl --load p-storage-server.lisp</code>, then review the page: <a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>.</p>
+<p>Do you see Tyler? The CL-PREVALENCE automatically loaded the snapshot for us, we don't even noticed.</p>
+<h4>
+<a name="modern-client" class="anchor" href="#modern-client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modern Client</h4>
+<p>I've create a single file as client, you can <a href="https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-client.htm">download</a> and modify it, it's just the mix of HTML / JavaScript and CSS.</p>
+<p><strong>Then what's left?</strong></p>
+<p>We need to serve this file, let's check the <a href="http://weitz.de/hunchentoot/#start" rel="nofollow">document of Hunchentoot</a>. Here we can see:</p>
+<blockquote>
+<p>...... The location of the document root directory can be specified when creating a new ACCEPTOR instance by the way of the ACCEPTOR-DOCUMENT-ROOT. . ......</p>
+</blockquote>
+<p>- <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a></p>
+<p>So what we should do is just create a directory called <code>www</code> in the same level of <code>p-storage-server.lisp</code>, and then get the HTM file into it:</p>
+<div class="highlight highlight-source-lisp"><pre>wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-client.htm</pre></div>
+<p>Then change:</p>
+<div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
+<p>To this:</p>
+<div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>
+                                  :document-root <span class="pl-s"><span class="pl-pds">"</span>www/<span class="pl-pds">"</span></span>))</pre></div>
+<p>Then Hunchentoot will use the "www/" in current folder as root directory, now try to reload our code.</p>
+<p>Then visit: <a href="http://localhost:4242/lispweb3-client.htm" rel="nofollow">http://localhost:4242/lispweb3-client.htm</a>, you got what you want.</p>
+<p>Suggestion: You do not really wanna use Hunchentoot to serve your static files, do you? You should try <a href="https://www.nginx.com/" rel="nofollow">Nginx</a> as a <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/" rel="nofollow">PROXY</a>, and make your Hunchentoot as an application server only.</p>
+<h3>
+<a name="before-the-end" class="anchor" href="#before-the-end" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Before the End</h3>
+<p>I have to say that I lied to you about the way we do when coding in Common Lisp for convenience of explanation.</p>
+<ul>
+<li>
+<p>We do not usually load file like this <code>sbcl --load xxx.lisp</code>. We directly type and eval in the REPL, that's the charming part of Lisp.</p>
+</li>
+<li>
+<p>We do not usually directly type and eval in the REPL created by <code>sbcl</code>, it hurts. You should try <a href="https://www.common-lisp.net/project/slime/" rel="nofollow">SLIME</a>, it makes life much more easier.</p>
+</li>
+</ul>
+<p>And, one more thing:</p>
+<p>If you wanna surfing in the Lisp world in Lisp-way, <a href="https://www.gnu.org/software/emacs/" rel="nofollow">Emacs</a> is your laser sword, my young Jedi.</p>
+<h3>
+<a name="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
+<p>Thanks to:</p>
+<ul>
+<li>
+<p><a href="http://www.adamtornhill.com/articles/lispweb.htm" rel="nofollow">Lisp for the Web</a> by Adam Tornhill, April 2008</p>
+</li>
+<li>
+<p><a href="http://msnyder.info/posts/2011/07/lisp-for-the-web-part-ii/" rel="nofollow">Lisp for the Web, Part II</a> by Matthew Snyder, July 2011</p>
+</li>
+</ul>
+<p>I wish this piece of work could be:</p>
+<ul>
+<li>
+<a href="http://vitovan.com/lispweb3.html" rel="nofollow">Lisp for the Web, Part III</a> by Vito Van, August 2015</li>
+</ul>
+<p>That would be a great honor to me.</p>
+<p>Thanks for reading.</p>
+<p><strong>Footnotes:</strong></p>
+<p><a name="fn1">[1]</a> Hunchentoot is <strong>NOT</strong> a good choice for now:</p>
+<blockquote>
+<p><strong>Stop using Hunchentoot directly.</strong> Use Clack, or even better, one of the frameworks built on it.</p>
+</blockquote>
+<p>- <a href="http://eudoxia.me/article/common-lisp-sotu-2015/" rel="nofollow">State of the Common Lisp Ecosystem, 2015 </a></p>
+<p><del>( 2015/09 revision: After playing around Clack, I do not like it, check this <a href="https://gist.github.com/c41e1940ab0a3135dc6c">https://gist.github.com/c41e1940ab0a3135dc6c</a>)</del></p>
+<p>(2016/08 revision: Clack is not so bad, I was just being stupid last year, and this article is... kind of stupid)</p>
+<hr>
+<p>License: GNU GPL v2.0</p>
+<p>Discuss on HN: <a href="https://news.ycombinator.com/item?id=10102549" rel="nofollow">https://news.ycombinator.com/item?id=10102549</a></p>
+<p>This piece of work has been updated as the book <a href="https://www.gitbook.com/book/vitovan/lispweb3" rel="nofollow">Lisp for the Modern Web</a>, you can buy it from <a href="https://www.gitbook.com/book/vitovan/lispweb3/details" rel="nofollow">GitBook</a>.</p>
+
+            </div>
+        </div>
+    </body>
+</html>

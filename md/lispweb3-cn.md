@@ -1,6 +1,7 @@
+<!--1-->
 # Lisp 与现代Web开发
 
-2015年 八月，修订：2015年 八月
+2015/08，修订：2015/08, 2015/11, 2016/08
 
 _For those who have read [Lisp for The Modern Web](http://vitovan.com/lispweb3.html): SKIP, please. This is just another language version._
 
@@ -644,11 +645,13 @@ wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/li
 
 \- [2015年 Common Lisp 生态现状](http://eudoxia.me/article/common-lisp-sotu-2015/)
 
+~~(2015/11 修订：在试用了一段时间 Clack 之后，我并不喜欢它，详细查看这里 https://gist.github.com/c41e1940ab0a3135dc6c)~~
+
+(2016/08 修订：Clack 并没有那么差劲，我去年有些傻，这篇文章也有些傻)
+
 ---
 版权：**禁止转载，禁止演绎，作者保留一切权利**  (已授权转载单位：杭州又拍云科技有限公司)
 
 V2EX 讨论：[http://v2ex.com/t/215726](http://v2ex.com/t/215726)
 
 本文已集结成书：[Lisp 与现代Web开发](https://selfstore.io/products/446)，你可以从 [SelfStore](https://selfstore.io/products/446) 上购买。
-
-

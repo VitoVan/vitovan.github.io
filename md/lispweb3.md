@@ -1,6 +1,7 @@
+<!--0-->
 # Lisp for The Modern Web
 
-August 2015, rev. August 2015
+2015/08, revision: 2015/08, 2015/09, 2016/08
 
 > Lisp isn't a language, it's a building material.
 
@@ -639,6 +640,10 @@ Thanks for reading.
 > **Stop using Hunchentoot directly.** Use Clack, or even better, one of the frameworks built on it.
 
 \- [State of the Common Lisp Ecosystem, 2015 ](http://eudoxia.me/article/common-lisp-sotu-2015/)
+
+~~( 2015/09 revision: After playing around Clack, I do not like it, check this https://gist.github.com/c41e1940ab0a3135dc6c)~~
+
+(2016/08 revision: Clack is not so bad, I was just being stupid last year, and this article is... kind of stupid)
 
 ---
 

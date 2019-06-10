@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta name="author" content="Vito Van"/>
+        <meta name="theme-color" content="#CC0000">        
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="icon" type="image/png" href="/favicon.png"/>
+        <link rel="stylesheet" type="text/css" href="app.css">
+        <link rel="stylesheet" type="text/css" href="github-markdown.css">
+        <title>Lisp 与现代Web开发</title>
+        <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+         ga('create', 'UA-69347509-2', 'auto');
+         ga('send', 'pageview');
+
+        </script>
+    </head>
+    <body>
+        <div class="panel">
+            <ul>
+                <li><a href="/index.html">Home</a></li>
+                <li class="current"><a href="/list.html">List</a></li>
+                <li><a href="/about.html">About</a></li>
+                <li><a href="/rss.xml">RSS</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="head">
+                <h1><a href="/">Vito Van</a></h1>
+            </div>
+            <div class="content markdown-body">
+                
+<h1>
+<a name="lisp-与现代web开发" class="anchor" href="#lisp-%E4%B8%8E%E7%8E%B0%E4%BB%A3web%E5%BC%80%E5%8F%91" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp 与现代Web开发</h1>
+<p>2015/08，修订：2015/08, 2015/11, 2016/08</p>
+<p><em>For those who have read <a href="http://vitovan.com/lispweb3.html" rel="nofollow">Lisp for The Modern Web</a>: SKIP, please. This is just another language version.</em></p>
+<blockquote>
+<p>Lisp 不是一门语言，它是一种构建素材。</p>
+</blockquote>
+<p>-  艾伦·凯</p>
+<h3>
+<a name="我们要讲什么" class="anchor" href="#%E6%88%91%E4%BB%AC%E8%A6%81%E8%AE%B2%E4%BB%80%E4%B9%88" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>我们要讲什么？</h3>
+<p>本文将介绍如何从零开始使用 Lisp 作为后端构建一个现代的 Web 应用程序。</p>
+<p>你可能需要一些前端开发的知识（如 Ajax 通信等），因为关于客户端这一方面我们将不再赘述。</p>
+<h3>
+<a name="为什么要用-lisp" class="anchor" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8-lisp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>为什么要用 Lisp？</h3>
+<p><strong>因为它很酷</strong>。</p>
+<p>我是脑残我自豪，是不是神器又怎么样？光名字就看起来很牛的样子（好多人都不会喔 &lt;(￣ˇ￣)/ ）。</p>
+<p>从 Lisp 诞生至今已有 57 年，半个多世纪。什么概念呢？除了 Fortran 没有谁比 Lisp 更古老了，而很少有人说 Fortran 很酷。</p>
+<p>你可以在几乎所有的语言当中看到 Lisp 的影子，因为真的：Lisp 不是一门语言，她是人机对话的基本元素。</p>
+<p><strong>其它原因</strong>.</p>
+<p>其它关于 Lisp 的赞美，你可以参考一下阮一峰翻译的<a href="http://www.ruanyifeng.com/blog/2010/10/why_lisp_is_superior.html" rel="nofollow">《为什么Lisp语言如此先进？》</a>，以及我非常建议你看完这本书：<a href="http://book.douban.com/subject/6021440/" rel="nofollow">《黑客与画家》</a>。</p>
+<h3>
+<a name="让我们开始吧" class="anchor" href="#%E8%AE%A9%E6%88%91%E4%BB%AC%E5%BC%80%E5%A7%8B%E5%90%A7" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>让我们开始吧</h3>
+<p>开始做什么？</p>
+<p>从 0 开始使用 Lisp 作为后端构建一个现代的 Web 应用程序。</p>
+<p>怎么做？</p>
+<p>最近大多数的 Web App 都是用 <strong><code>输出 JSON 的服务器</code></strong> 加上 <strong><code>解析 JSON 并展示的 HTML5 客户端</code></strong> 构成的，我们就也照着这个模式来吧。</p>
+<p>因为大家对如何构建一个 Web App 客户端都比较熟悉，所以关于客户端构建部分，就不再赘述，直接提供源码了。</p>
+<h3>
+<a name="步骤" class="anchor" href="#%E6%AD%A5%E9%AA%A4" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>步骤</h3>
+<ul>
+<li><a href="#%E4%BD%A0%E5%A5%BDlisp">你好， Lisp！</a></li>
+<li><a href="#%E9%9D%A2%E5%90%91%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E7%A8%8B">面向世界的编程</a></li>
+<li><a href="#%E4%BB%96%E4%BB%AC%E9%83%BD%E5%96%9C%E6%AC%A2-json">他们都喜欢 JSON</a></li>
+<li><a href="#%E6%8A%8A%E6%95%B0%E6%8D%AE%E5%AD%98%E8%B5%B7%E6%9D%A5">把数据存起来</a></li>
+<li><a href="#%E6%88%91%E4%BB%AC%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF">我们的客户端</a></li>
+</ul>
+<h4>
+<a name="你好lisp" class="anchor" href="#%E4%BD%A0%E5%A5%BDlisp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>你好，Lisp！</h4>
+<p>这里我们假设你对 Lisp 一无所知，所以，我们先跟 Lisp 打声招呼：</p>
+<ul>
+<li>
+<p>打开 <a href="http://sbcl.org/" rel="nofollow">sbcl.org</a>, 然后点击 <a href="http://sbcl.org/platform-table.html" rel="nofollow">Download</a> 页面, 选择适合你电脑的二进制包。</p>
+</li>
+<li>
+<p>然后跟着 <a href="http://sbcl.org/getting.html" rel="nofollow">Getting Started</a> 把它安装一下。</p>
+</li>
+<li>
+<p>然后运行 <code>sbcl</code> ，你就得到了一个 <a href="http://www.cliki.net/REPL" rel="nofollow">REPL</a> (Read Eval Print Loop)！</p>
+</li>
+</ul>
+<blockquote>
+<p>This is SBCL 1.2.7, an implementation of ANSI Common Lisp.</p>
+</blockquote>
+<blockquote>
+<p>More information about SBCL is available at <a href="http://www.sbcl.org/" rel="nofollow">http://www.sbcl.org/</a>.</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>SBCL is free software, provided as is, with absolutely no warranty.</p>
+</blockquote>
+<blockquote>
+<p>It is mostly in the public domain; some portions are provided under</p>
+</blockquote>
+<blockquote>
+<p>BSD-style licenses.  See the CREDITS and COPYING files in the</p>
+</blockquote>
+<blockquote>
+<p>distribution for more information.</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<p>在我们开始编码之前，先了解一下 Lisp 的基本语法。很多人说它很怪，实际上这正是 Lisp 的魅力所在。</p>
+<p>我想你肯定玩儿过一款游戏，叫做：吃豆人。如果没有玩儿过的同学可以先去<a href="http://www.webpacman.com/pacman.php" rel="nofollow">玩一下</a>，再接着回来上课，那玩儿过的同学我们就继续了。</p>
+<p>你可以把 Lisp 程序执行的过程想象成为吃豆人吃豆子： <code>ᗧ••••</code> ，是没有小鬼怪的版本。吃豆人就是 Lisp 里面的函数，而豆子是函数的参数。当一个吃豆人把它面前的所有的豆子吃光时，它自己也就变成了一颗豆子： <code>•</code> 。然后豆子呢，又可以被其他的吃豆人吃掉。</p>
+<p>因此，你可以把一个 Lisp 程序想像成下面这个样子：</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;第一天，我们创造了吃豆人和豆子，他们在各自的括号里，相安无事。</span>
+(ᗧ• (ᗧ••••
+ (ᗧ••
+ (ᗧ•••))))
+<span class="pl-c"><span class="pl-c">;</span>;第二天，最里边的吃豆人开始了疯狂的杀戮，吃掉了自己面前所有的豆子，</span>
+<span class="pl-c"><span class="pl-c">;</span>;然后自个儿也变成了豆子</span>
+(ᗧ• (ᗧ••••
+ (ᗧ••
+ •)))
+<span class="pl-c"><span class="pl-c">;</span>;第三天，杀戮仍在继续</span>
+(ᗧ• (ᗧ••••
+•))
+<span class="pl-c"><span class="pl-c">;</span>;第四天，只剩最后一个吃豆人了</span>
+(ᗧ• •)
+<span class="pl-c"><span class="pl-c">;</span>;第五天，原来一切都只是豆子</span>
+•</pre></div>
+<p>哈！有没有很有趣的样子？ =￣ω￣=</p>
+<p>一切都只是吃豆人和豆子！靠在括号最里面的吃豆人先吃，然后变成豆子，接着被更外一层的吃豆人吃掉。听起来好残忍的样子，o((⊙﹏⊙))o.</p>
+<p>好了，让我们回到正经事上：</p>
+<ul>
+<li>在你打开的 REPL 里输入 <code>(format t "你好，Lisp！")</code> ，没错就是中文，然后按 <kbd>回车</kbd>
+</li>
+</ul>
+<blockquote>
+<p>* (format t "你好，Lisp！")</p>
+</blockquote>
+<blockquote>
+<p><strong>你好，Lisp！</strong></p>
+</blockquote>
+<blockquote>
+<p>NIL</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<ul>
+<li>好了，你已经学会 Lisp 啦！下课！</li>
+</ul>
+<p>「 Σ(っ °Д °;)っ 老湿！不是吧老湿！退不退学费呀哎～～ 」</p>
+<p>那好吧，我们来说一些复杂一点的：</p>
+<ul>
+<li>打开一个文件，把下面的代码粘进去, 然后保存一下，命名： <code>say-hello.lisp</code> ：</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">say-hello</span> (to)
+ (<span class="pl-c1">format</span> <span class="pl-c1">t</span> <span class="pl-s"><span class="pl-pds">"</span>你好， ~a<span class="pl-pds">"</span></span> to))</pre></div>
+<ul>
+<li>
+<p>打开一个终端，切换到当前目录，然后</p>
+</li>
+<li>
+<p>输入 <code>sbcl --load say-hello.lisp</code> ，按 <kbd>回车</kbd></p>
+</li>
+</ul>
+<blockquote>
+<p>[vito@laptop lispweb3-cn]$ sbcl --load say-hello.lisp</p>
+</blockquote>
+<blockquote>
+<p>This is SBCL 1.2.7, an implementation of ANSI Common Lisp.</p>
+</blockquote>
+<blockquote>
+<p>More information about SBCL is available at <a href="http://www.sbcl.org/" rel="nofollow">http://www.sbcl.org/</a>.</p>
+</blockquote>
+<blockquote>
+</blockquote>
+<blockquote>
+<p>SBCL is free software, provided as is, with absolutely no warranty.</p>
+</blockquote>
+<blockquote>
+<p>It is mostly in the public domain; some portions are provided under</p>
+</blockquote>
+<blockquote>
+<p>BSD-style licenses.  See the CREDITS and COPYING files in the</p>
+</blockquote>
+<blockquote>
+<p>distribution for more information.</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<ul>
+<li>然后你就得到了一个加载了那个文件的 REPL，接下来输入 <code>(say-hello "Vito")</code> ，按 <kbd>回车</kbd>
+</li>
+</ul>
+<blockquote>
+<p>* (say-hello "Vito")</p>
+</blockquote>
+<blockquote>
+<p><strong>你好, Vito</strong></p>
+</blockquote>
+<blockquote>
+<p>NIL</p>
+</blockquote>
+<blockquote>
+<p>*</p>
+</blockquote>
+<ul>
+<li>「天呐！我的上帝，你刚刚用 Lisp 对我说了 “你好”！」，「哦，是么！这没什么大惊小怪的，镇定点伙计！」(翻译腔)</li>
+</ul>
+<p><strong>嗯...... 刚才发生了什么？</strong></p>
+<p>首先， 当我们输入 <code>(format t "你好，Lisp！")</code> 时，我们调用了一个函数叫做： <code>format</code> ，然后传递了两个参数： <code>t</code> 和 <code>"你好，Lisp！"</code> 。那么， <code>format</code> 是什么？</p>
+<p>如果是英文读者，可以直接去 Google 搜索：<a href="https://www.google.com/search?q=common+lisp+format" rel="nofollow"><em>common lisp format</em></a>，基本上都能找到自己想要找的答案，如：<a href="http://www.lispworks.com/documentation/lw50/CLHS/Body/f_format.htm" rel="nofollow">CLHS: Function FORMAT</a> 和 <a href="http://www.gigamonkeys.com/book/a-few-format-recipes.html" rel="nofollow">A Few FORMAT Recipes</a>。</p>
+<p>而对于中文读者的话，资料就稍微少一些，可以参考一下：<a href="http://acl.readthedocs.org/en/latest/zhCN/index.html" rel="nofollow">《ANSI Common Lisp 中文版》</a> 的 <a href="http://acl.readthedocs.org/en/latest/zhCN/ch2-cn.html#input-and-output" rel="nofollow">2.9 输入输出 (Input and Output)</a> 这一章，里边有关于 <code>format</code> 函数的简单解释（实际上我建议大家可以没事儿的时候就翻一翻<a href="http://acl.readthedocs.org/en/latest/zhCN/index.html" rel="nofollow">《ANSI Common Lisp 中文版》</a>，译得很好）。</p>
+<p>当然百度也是可以用来搜索的，只是结果中的干扰信息太多。</p>
+<blockquote>
+<p>......</p>
+</blockquote>
+<blockquote>
+<p>最普遍的 Common Lisp 输出函数是 format 。接受两个或两个以上的实参，第一个实参决定输出要打印到哪里，第二个实参是字符串模版，而剩余的实参，通常是要插入到字符串模版，用打印表示法（printed representation）所表示的对象。</p>
+</blockquote>
+<blockquote>
+<p>......</p>
+</blockquote>
+<blockquote>
+<p>format 的第一个实参 t ，表示输出被送到缺省的地方去。通常是顶层。第二个实参是一个用作输出模版的字符串。在这字符串里，每一个 ~A 表示了被填入的位置，而 ~% 表示一个换行。这些被填入的位置依序由后面的实参填入。</p>
+</blockquote>
+<blockquote>
+<p>......</p>
+</blockquote>
+<p>- <a href="http://acl.readthedocs.org/en/latest/zhCN/ch2-cn.html#input-and-output" rel="nofollow">《ANSI Common Lisp 中文版》：2.9 输入输出 (Input and Output)</a></p>
+<p>好了，那么现在我们知道了： <code>(format t "你好，Lisp！")</code> 的第一个参数是打印目的地，当我们赋值为 <code>t</code> 时，意思就是打印到标准控制台了。然后第二个参数就是模板字符串，当里边没有像 <code>~A</code> 之类的打印指令时，就仅仅是普通的字符串啦。</p>
+<p>所以呢， <code>(format t "你好，Lisp！")</code> 意思就是說把字符串： <code>"你好，Lisp！"</code> 打印到标准控制台。</p>
+<p>接着，我们往一个文件里写了如下代码：</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">say-hello</span> (to)
+ (<span class="pl-c1">format</span> <span class="pl-c1">t</span> <span class="pl-s"><span class="pl-pds">"</span>你好， ~a<span class="pl-pds">"</span></span> to))</pre></div>
+<p>根据前边的介绍，我们知道 <code>(format t "你好，~a")</code> 意思是把 <code>~a</code> 替换成变量 <code>to</code> 的值，然后把它们打印到控制台上，那 <code>defun</code> 是干什么用的？</p>
+<p>同学们看这里：<a href="http://acl.readthedocs.org/en/latest/zhCN/ch2-cn.html#functions" rel="nofollow">《ANSI Common Lisp 中文版》：2.6 函数 (Functions)</a> (多看文档总是没有坏处的啦，我大景德也有足够的料喔~)</p>
+<p>看过之后呢，我们知道 <code>defun</code> 实际上就是用来定义函数的，就像 JavaScript 里面的 <code>function</code> 。 <code>defun</code> 紧跟着的第一个参数是函数的名字，第二个是函数的参数列表（用括号括起来的），然后剩下来的通常就是函数体了。</p>
+<p>所以，那段代码的意思就是说：我们创建了一个叫做 <code>say-hello</code> 的函数，这个函数接受一个叫做 <code>to</code> 的参数，当函数被调用时，它把变量 <code>to</code> 的值和字符串 <code>"你好， "</code> 连到了一块儿，然后打印到控制台上。下面这个是类似的 JavaScript 版本：</p>
+<div class="highlight highlight-source-js"><pre><span class="pl-c"><span class="pl-c">//</span>好像 JavaScript 里没有字符串格式化的函数，所以......</span>
+<span class="pl-k">function</span> <span class="pl-en">sayHello</span>(<span class="pl-smi">to</span>){
+    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">"</span>你好， ~a<span class="pl-pds">"</span></span>.<span class="pl-c1">replace</span>(<span class="pl-s"><span class="pl-pds">"</span>~a<span class="pl-pds">"</span></span>,to));
+}</pre></div>
+<h4>
+<a name="面向世界的编程" class="anchor" href="#%E9%9D%A2%E5%90%91%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E7%A8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>面向世界的编程</h4>
+<p>现在我们已经知道了如何用 Lisp 编程（<a href="http://acl.readthedocs.org/en/latest/zhCN/index.html" rel="nofollow">手册</a>在手，就敢说大话）。但是除了你我，没人知道啊～让我们用 Lisp 建个服务器来告诉全世界吧！</p>
+<blockquote>
+<p>如果说我比别人看得更远些,那是因为我站在了巨人的肩上.</p>
+</blockquote>
+<p>- 艾萨克·牛顿</p>
+<p>让我们一起来见一见巨人们：</p>
+<ul>
+<li>
+<p>打开 <a href="http://quicklisp.org" rel="nofollow">quicklisp.org</a>，然后根据 <a href="https://www.quicklisp.org/beta/#installation" rel="nofollow">安装步骤</a> （如果你有些不知道怎么办的话，可以直接把深灰色背景段落内的所有粗体 复制 -&gt; 粘贴 -&gt; 并在你的终端里执行就好了)，安装一下。</p>
+</li>
+<li>
+<p>打开一个文件，复制粘贴下面的代码，然后保存为：<code>server.lisp</code></p>
+</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload :hunchentoot)
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
+<ul>
+<li>
+<p>打开终端，切换到文件所在目录</p>
+</li>
+<li>
+<p>输入 <code>sbcl --load server.lisp</code>， 按 <kbd>回车</kbd></p>
+</li>
+<li>
+<p>等待加载完毕，然后用你最喜欢的浏览器打开：<a href="http://localhost:4242/" rel="nofollow">http://localhost:4242/</a></p>
+</li>
+<li>
+<p>「 w(ﾟДﾟ)w 天呐，这不是真的！」</p>
+</li>
+<li>
+<p>「妈，我用 Lisp 建了个网站！」</p>
+</li>
+</ul>
+<p>让我们先镇定一下，这么一个默认页面是不足以让人觉得是_你_用 Lisp 建了个网站的。把下面的代码加到 <code>server.lisp</code> 里：</p>
+<div class="highlight highlight-source-lisp"><pre> <span class="pl-c"><span class="pl-c">;</span>;记得 Vito 换成你的名字</span>
+(hunchentoot:define-easy-handler (say-hello :uri <span class="pl-s"><span class="pl-pds">"</span>/hello<span class="pl-pds">"</span></span>) (name)
+ (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>text/plain<span class="pl-pds">"</span></span>)
+ (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>嘿, ~a! 我是 Vito! ~%我刚刚用 Lisp 建了个网站！<span class="pl-pds">"</span></span> name))</pre></div>
+<ul>
+<li>
+<p>然后按 <kbd>Ctrl</kbd> + <kbd>d</kbd> 或者输入 <code>(quit)</code> 按 <kbd>回车</kbd> 来退出当前 REPL 。</p>
+</li>
+<li>
+<p>在终端里打： <code>sbcl --load server.lisp</code> ，再按 <kbd>回车</kbd>。</p>
+</li>
+<li>
+<p>等待加载完毕，点击这里： <a href="http://localhost:4242/hello?name=%E4%B8%96%E7%95%8C" rel="nofollow">http://localhost:4242/hello?name=世界</a></p>
+</li>
+<li>
+<p>嗯，这样看起来才像话么～</p>
+</li>
+</ul>
+<p><strong>我们刚才做了什么？</strong></p>
+<p>实际上也并没有很难理解，对吧。</p>
+<p>首先，多亏了 Quicklisp，它就相当于 Lisp 世界的包管理器。有了 Quicklisp ，我们才站在了巨人的肩膀上。在 Quicklisp 里，有<a href="https://www.quicklisp.org/beta/releases.html" rel="nofollow">将近 1,200 个包</a>，虽然不多吧，但足够用了。有了它，就像是站在了风口，后果可想而知。</p>
+<p>其次，感谢巨人 <a href="http://weitz.de/" rel="nofollow">Edi Weitz</a>，我们用了他（她）写的 <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a> <a href="#fn1">[1]</a> 作为我们的服务端实现。</p>
+<p>我们刚才用 Quicklisp 加载了 Hunchentoot，像这样： <code>(ql:quickload :hunchentoot)</code>，然后在 4242 端口启动了 Hunchentoot 服务： <code>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))</code>，最后，我们用 Hunchentoot 的 <a href="http://weitz.de/hunchentoot/#define-easy-handler" rel="nofollow">define-easy-handler</a> 定义了一个名字叫做 <code>say-hello</code> 的 Handler。</p>
+<p>关于 Hunchentoot 的使用，没有找到相关的中文资料，大家可以直接去读原版文档：<a href="http://weitz.de/hunchentoot" rel="nofollow">Hunchentoot - The Common Lisp web server formerly known as TBNL</a>。关于 Quicklisp ，学会 <code>(ql:quickload ...</code> 这一招基本就通吃天下了，其他的可以参考这里：<a href="https://www.quicklisp.org/beta/#basic-commands" rel="nofollow">Quicklisp: Basic Commands</a>。</p>
+<h4>
+<a name="他们都喜欢-json" class="anchor" href="#%E4%BB%96%E4%BB%AC%E9%83%BD%E5%96%9C%E6%AC%A2-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>他们都喜欢 JSON</h4>
+<blockquote>
+<p>不行，绝对不行。是的，只要 JSON。嗯，好了好了别跟我扯别的，只要 JSON 格式的，其他的不考虑。是的，一人一个 MBP 也不行。</p>
+</blockquote>
+<p>- 刚才前端团队打来电话说</p>
+<p>他们都喜欢 <a href="http://json.org/" rel="nofollow">JSON</a>。</p>
+<p>那，让我们来实现他们的愿望：</p>
+<ul>
+<li>打开一个文件，复制粘贴以下代码，保存为 <code>json-server.lisp</code>：</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
+<span class="pl-c"><span class="pl-c">;</span>;定义一个 people 类</span>
+<span class="pl-c"><span class="pl-c">;</span>;类？</span>
+<span class="pl-c"><span class="pl-c">;</span>;嗯，没错伙计，这是一个类。Lisp 可不只是一个函数式编程语言。</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (words :accessor words
+        :initarg :words)))
+<span class="pl-c"><span class="pl-c">;</span>;Make a people.</span>
+(<span class="pl-k">defvar</span> <span class="pl-en">me</span>
+  (make-instance 'people
+                 :name <span class="pl-s"><span class="pl-pds">"</span>Vito Van<span class="pl-pds">"</span></span>
+                 :language <span class="pl-s"><span class="pl-pds">"</span>Lisp<span class="pl-pds">"</span></span>
+                 :words <span class="pl-s"><span class="pl-pds">"</span>所以说做妖就象做人一样，要有仁慈的心，有了仁慈的心呢，后果可想而知。<span class="pl-pds">"</span></span>))
+<span class="pl-c"><span class="pl-c">;</span>;用 JSON 给前端盆友打个招呼</span>
+(hunchentoot:define-easy-handler (say-me :uri <span class="pl-s"><span class="pl-pds">"</span>/me<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string me))
+<span class="pl-c"><span class="pl-c">;</span>;根据参数构建一个 people 对象，转换成 JSON 然后返回</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-instance
+    'people
+    :name name
+    :language <span class="pl-s"><span class="pl-pds">"</span>中文<span class="pl-pds">"</span></span>
+    :words (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>~a，你尽管捅死我吧，生又何哀，死又何苦，等你明白了舍生取义，后果可想而知。 <span class="pl-pds">"</span></span> name))))</pre></div>
+<ul>
+<li>
+<p>退出所有打开的 REPL ，然后加载这个文件：<code>sbcl --load json-server.lisp</code>。</p>
+</li>
+<li>
+<p>点击这里： <a href="http://localhost:4242/me" rel="nofollow">http://localhost:4242/me</a>， 和这里： <a href="http://localhost:4242/you?name=%E6%82%9F%E7%A9%BA" rel="nofollow">http://localhost:4242/you?name=悟空</a> (如果你看到了类似 <code>\u4E2D\u6587</code> 这样的结果，请打开浏览器的开发者工具，然后点击 Network 那一览进行监视)</p>
+</li>
+</ul>
+<p>嗯～干的不错！</p>
+<p>到现在不用再过多解释了吧～</p>
+<p>首先，我们定义了一个类，然后创建了一些实例，然后把那些实例转换成了 JSON 格式，然后返回给了我们的前端团队。这里是关于 <code>defclass</code> 相关的介绍：<a href="http://acl.readthedocs.org/en/latest/zhCN/ch11-cn.html" rel="nofollow">《ANSI Common Lisp 中文版 》：第十一章：Common Lisp 对象系统</a>，然后这个是 <code>cl-json</code> ： <a href="https://common-lisp.net/project/cl-json/" rel="nofollow">CL-JSON</a>（一个 JSON 解析/生成器）</p>
+<h4>
+<a name="把数据存起来" class="anchor" href="#%E6%8A%8A%E6%95%B0%E6%8D%AE%E5%AD%98%E8%B5%B7%E6%9D%A5" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>把数据存起来</h4>
+<p>现在到哪一步了？</p>
+<p>我们刚刚建了一个 <strong><code>输出 JSON 的服务器</code></strong>，很牛的样子，但是我们还没有存储过任何数据。接下来，让我们把每个访问 <a href="http://localhost:4242/you?name=%E6%82%9F%E7%A9%BA" rel="nofollow">http://localhost:4242/you?name=悟空</a> 的人都记下来。</p>
+<p>下面是处理这个请求的代码：</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;根据参数构建一个 people 对象，转换成 JSON 然后返回</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-instance
+    'people
+    :name name
+    :language <span class="pl-s"><span class="pl-pds">"</span>中文<span class="pl-pds">"</span></span>
+    :words (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>~a，你尽管捅死我吧，生又何哀，死又何苦，等你明白了舍生取义，后果可想而知。 <span class="pl-pds">"</span></span> name))))</pre></div>
+<p>让我们调整一下：</p>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;保存 people 对象</span>
+(<span class="pl-k">defun</span> <span class="pl-en">store-people</span> (people)
+  (ᗧ• people •)
+  people)
+<span class="pl-c"><span class="pl-c">;</span>;创建 people 对象</span>
+(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (make-instance
+   'people
+   :name name
+   :language <span class="pl-s"><span class="pl-pds">"</span>中文<span class="pl-pds">"</span></span>
+   :words (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>~a，你尽管捅死我吧，生又何哀，死又何苦，等你明白了舍生取义，后果可想而知。<span class="pl-pds">"</span></span> name)))
+<span class="pl-c"><span class="pl-c">;</span>;根据参数构建一个 people 对象，转换成 JSON 然后返回</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (store-people
+    (make-people name))))</pre></div>
+<p>我们添加了一个叫 <code>make-people</code> 的函数，使代码更整洁一些。然后...... 你肯定知道 <code>store-people</code> 这个函数还不能用，对吧，&lt;(<em>￣▽￣</em>)/。</p>
+<p>我们平时都是怎么存储数据的？数据库：Oracle / MySQL / MongoDB ...... 好多好多等等等等。今儿咱不用数据库，因为：</p>
+<ul>
+<li>
+<p>一点儿都不酷啊！一点都不酷！(* ￣︿￣)</p>
+</li>
+<li>
+<p>很复杂！！很复杂！！有些还要学 SQL！！到现在都不知道 GROUP BY 怎么用啊大姐！！</p>
+</li>
+<li>
+<p>为什么不能放到内存里？现在内存条都白菜价了，速度还快～</p>
+</li>
+</ul>
+<p>所以呢，我们决定这样做：</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defvar</span> <span class="pl-smi">*people-list*</span> <span class="pl-c1">nil</span>)
+<span class="pl-c"><span class="pl-c">;</span>;保存 people 对象</span>
+(<span class="pl-k">defun</span> <span class="pl-en">store-people</span> (people)
+  (push people <span class="pl-smi">*people-list*</span>)
+  people)</pre></div>
+<p>ヾ(≧▽≦*)o o o 哈哈哈哈！哈哈哈哈！没错！就这么简单！是的就这么简单！为什么不能这样做！？哈哈哈哈！！</p>
+<p>我们仅仅是创建了一个变量，叫做 <code>*people-list*</code>，然后把生成的 <code>people</code> 对象存储了进去。哈哈哈哈！（让我再笑一会儿）</p>
+<p>然后我们把 <code>*people-list*</code> 列表返回给浏览器：</p>
+<div class="highlight highlight-source-lisp"><pre>(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   <span class="pl-smi">*people-list*</span>))</pre></div>
+<p>下面是这个内存存储的相关代码（剔除了其他的）：</p>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
+<span class="pl-c"><span class="pl-c">;</span>;定义 people 类</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (words :accessor words
+        :initarg :words)))
+<span class="pl-c"><span class="pl-c">;</span>;定义一个列表</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*people-list*</span> <span class="pl-c1">nil</span>)
+<span class="pl-c"><span class="pl-c">;</span>;保存 people 对象</span>
+(<span class="pl-k">defun</span> <span class="pl-en">store-people</span> (people)
+  (push people <span class="pl-smi">*people-list*</span>)
+  people)
+<span class="pl-c"><span class="pl-c">;</span>;创建 people 对象</span>
+(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (make-instance
+   'people
+   :name name
+   :language <span class="pl-s"><span class="pl-pds">"</span>中文<span class="pl-pds">"</span></span>
+   :words (<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>~a，你尽管捅死我吧，生又何哀，死又何苦，等你明白了舍生取义，后果可想而知。<span class="pl-pds">"</span></span> name)))
+<span class="pl-c"><span class="pl-c">;</span>;根据参数构建一个 people 对象，转换成 JSON 然后返回</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (store-people
+   (make-people name))))
+<span class="pl-c"><span class="pl-c">;</span>;返回 people 列表</span>
+(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   <span class="pl-smi">*people-list*</span>))</pre></div>
+<p>你可以把这段代码保存为 <code>storage-server.lisp</code> ，然后加载：<code>sbcl --load storage-server.lisp</code> （为避免端口冲突，先退出所有其他的 REPLs）。</p>
+<p>加载这后，先点击这里： <a href="http://localhost:4242/you?name=%E6%82%9F%E7%A9%BA" rel="nofollow">悟空</a>, 这里：<a href="http://localhost:4242/you?name=%E6%99%B6%E6%99%B6" rel="nofollow">晶晶</a>,和这里： <a href="http://localhost:4242/you?name=%E7%B4%AB%E9%9C%9E" rel="nofollow">紫霞</a>。</p>
+<p>然后看看是否已经保存：<a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>.</p>
+<p>怎么样？没问题吧～</p>
+<p><strong>这要是断电了，老板不得掐死我？</strong></p>
+<p>你说的有道理。</p>
+<p>虽然我们决定不用数据库产品了，不代表我们解决不了这个问题。我们可以用一种更酷的方式，叫做：<a href="http://www.advogato.org/article/398.html" rel="nofollow">OBJECT PREVALENCE</a>，还没有找到合适的中文翻译，暂且叫它：对象流行持久化。而流行持久化系统是一种使用内存存储对象，并提供快速查找以及事务处理等功能的系统。</p>
+<p>通常情况下，一个流行持久化系统都具有快照的功能，来将数据从内存直接映射到硬盘上，来解决断电问题。在下次启动或任何需要的时候，从硬盘加载进来。</p>
+<p>我们当然可以自己实现一套么，可是造轮子太辛苦了，我们可以看看巨人们在这一方面都走到哪里了。</p>
+<p>经过搜索我们找到一个 Common Lisp 的实现：<a href="https://common-lisp.net/project/cl-prevalence/" rel="nofollow">CL-PREVALENCE</a>，是由 [Sven Van Caekenberghe](<a href="http://www.cliki.net/Sven" rel="nofollow">http://www.cliki.net/Sven</a> Van Caekenberghe) 开发的。虽然文档和功能都不是很全，但也基本能用了。更何况我们有 <a href="https://common-lisp.net/project/cl-prevalence/CL-PREVALENCE.html" rel="nofollow">API</a> 和<a href="https://bitbucket.org/skypher/cl-prevalence/" rel="nofollow">源码</a>呢，不怕。</p>
+<ul>
+<li>首先，我们使用 Quicklisp 加载 <code>cl-prevalence</code> ：</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json cl-prevalence))</pre></div>
+<ul>
+<li>然后初始化流行持久化系统 （我们将类定义在初始化之前是因为系统在初始化时，需要用到类定义来进行数据加载）：</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;我们为 people 新增了一个 id 字段，为方便流行持久化系统使用</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((id :reader id
+       :initarg :id)
+   (name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (words :accessor words
+        :initarg :words)))
+<span class="pl-c"><span class="pl-c">;</span>;初始化系统</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
+<span class="pl-c"><span class="pl-c">;</span>;创建计数器</span>
+(<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
+	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
+<ul>
+<li>然后修改我们的 <code>make-people</code> 函数，使其直接将对象创建于流行持久化系统内：</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (cl-prevalence:tx-create-object
+   <span class="pl-smi">*p-system*</span>
+   'people
+   `((name ,name)
+     (language ,<span class="pl-s"><span class="pl-pds">"</span>中文<span class="pl-pds">"</span></span>)
+     (words ,(<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>~a，你尽管捅死我吧，生又何哀，死又何苦，等你明白了舍生取义，后果可想而知。<span class="pl-pds">"</span></span> name)))))</pre></div>
+<ul>
+<li>
+<p>然后删除 <code>store-people</code> 和 <code>*people-list*</code>，因为我们的 <code>people</code> 对象已经在创建的时候自动存储于流行持久化系统内了。</p>
+</li>
+<li>
+<p>调整控制器，使其从流行持久化系统内获取数据：</p>
+</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre><span class="pl-c"><span class="pl-c">;</span>;根据参数构建一个 people 对象，转换成 JSON 然后返回</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-people name)))
+<span class="pl-c"><span class="pl-c">;</span>;获取流行持久化系统内所有的 people 实例</span>
+(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)))</pre></div>
+<ul>
+<li>最后我们得到了以下代码：</li>
+</ul>
+<div class="highlight highlight-source-lisp"><pre>(ql:quickload '(hunchentoot cl-json cl-prevalence))
+<span class="pl-c"><span class="pl-c">;</span>;我们为 people 新增了一个 id 字段，为方便流行持久化系统使用</span>
+(<span class="pl-k">defclass</span> <span class="pl-en">people</span>()
+  ((id :reader id
+       :initarg :id)
+   (name :accessor name
+         :initarg :name)
+   (language :accessor language
+             :initarg :language)
+   (words :accessor words
+        :initarg :words)))
+<span class="pl-c"><span class="pl-c">;</span>;初始化系统</span>
+(<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
+<span class="pl-c"><span class="pl-c">;</span>;创建计数器</span>
+(<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
+	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))
+(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
+<span class="pl-c"><span class="pl-c">;</span>;创建 people 对象至流行持久化系统</span>
+(<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
+  (cl-prevalence:tx-create-object
+   <span class="pl-smi">*p-system*</span>
+   'people
+   `((name ,name)
+     (language ,<span class="pl-s"><span class="pl-pds">"</span>中文<span class="pl-pds">"</span></span>)
+     (words ,(<span class="pl-c1">format</span> <span class="pl-c1">nil</span> <span class="pl-s"><span class="pl-pds">"</span>~a，你尽管捅死我吧，生又何哀，死又何苦，等你明白了舍生取义，后果可想而知。<span class="pl-pds">"</span></span> name)))))
+<span class="pl-c"><span class="pl-c">;</span>;根据参数构建一个 people 对象，转换成 JSON 然后返回</span>
+(hunchentoot:define-easy-handler (say-you :uri <span class="pl-s"><span class="pl-pds">"</span>/you<span class="pl-pds">"</span></span>) (name)
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (make-people name)))
+<span class="pl-c"><span class="pl-c">;</span>;获取流行持久化系统内所有的 people 实例</span>
+(hunchentoot:define-easy-handler (people :uri <span class="pl-s"><span class="pl-pds">"</span>/people<span class="pl-pds">"</span></span>) ()
+  (<span class="pl-c1">setf</span> (hunchentoot:content-type*) <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>)
+  (json:encode-json-to-string
+   (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)))</pre></div>
+<ul>
+<li>把上面的代码保存到 <code>p-storage-server.lisp</code>，然后加载： <code>sbcl --load p-storage-server.lisp</code> （同样，记得退出所有其他的 REPL，避免端口冲突）。</li>
+</ul>
+<p>然后点击这里： <a href="http://localhost:4242/you?name=%E8%87%B3%E5%B0%8A%E5%AE%9D" rel="nofollow">至尊宝</a>，这里： <a href="http://localhost:4242/you?name=%E6%99%B6%E6%99%B6" rel="nofollow">晶晶</a>，这里： <a href="http://localhost:4242/you?name=%E7%B4%AB%E9%9C%9E%E4%BB%99%E5%AD%90" rel="nofollow">紫霞仙子</a>，以及这里 <a href="http://localhost:4242/you?name=%E7%89%9B%E9%AD%94%E7%8E%8B" rel="nofollow">牛魔王</a>。</p>
+<p>然后再点击这里：<a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>.</p>
+<p>怎么样？是不是和使用 <code>*people-list*</code> 时效果一样？</p>
+<p><strong>见证奇迹的时刻</strong></p>
+<p>现在，在你的 REPL 里输入： <code>(cl-prevalence:snapshot *p-system*)</code> ，然后按 <kbd>回车</kbd>.</p>
+<p>接下来，退出所有的 REPL，关闭所有的浏览器标签页（除了这个）。</p>
+<p>重新载入代码：<code>sbcl --load p-storage-server.lisp</code>，然后再打开这里：<a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>。</p>
+<p>紫霞仙子还在不在？我们的流行持久化系统自动把数据加载了回来！</p>
+<h4>
+<a name="我们的客户端" class="anchor" href="#%E6%88%91%E4%BB%AC%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>我们的客户端</h4>
+<p>我创建了一个单文件的客户端，你可以<a href="https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-cn-client.htm">下载</a> 修改它，里边是 HTML / JavaScript 和 CSS 代码。</p>
+<p><strong>接下来还剩什么？</strong></p>
+<p>我们需要托管这个静态文件，来一起看看 <a href="http://weitz.de/hunchentoot/#start" rel="nofollow">Hunchentoot 文档</a>：</p>
+<blockquote>
+<p>...... The location of the document root directory can be specified when creating a new ACCEPTOR instance by the way of the ACCEPTOR-DOCUMENT-ROOT. . ......</p>
+</blockquote>
+<p>- <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot 文档</a></p>
+<p>那接下来要做的就是在 <code>p-storage-server.lisp</code> 同级目录创建一个文件夹 <code>www</code>，然后把静态文件放进去：</p>
+<div class="highlight highlight-source-lisp"><pre>wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-cn-client.htm</pre></div>
+<p>然后，把：</p>
+<div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
+<p>改为：</p>
+<div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>
+                                  :document-root <span class="pl-s"><span class="pl-pds">"</span>www/<span class="pl-pds">"</span></span>))</pre></div>
+<p>这样 Hunchentoot 就会使用当前目录下的 "www/" 文件夹作为根目录了。</p>
+<p>重新加载代码，然后访问：<a href="http://localhost:4242/lispweb3-cn-client.htm" rel="nofollow">http://localhost:4242/lispweb3-cn-client.htm</a>，客户端便出来啦～</p>
+<p>建议：出于性能考虑，不建议使用 Hunchentoot 托管静态文件。你可以试试用 <a href="https://www.nginx.com/" rel="nofollow">Nginx</a> 做个 <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/" rel="nofollow">代理</a>，然后把 Hunchentoot 仅仅作为一个应用服务器使用。</p>
+<h3>
+<a name="结束之前" class="anchor" href="#%E7%BB%93%E6%9D%9F%E4%B9%8B%E5%89%8D" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>结束之前</h3>
+<p>必须要坦白几件事情啊。为了方便讲解，在一些使用方法和操作习惯上我骗了同学们，这里一一忏悔：</p>
+<ul>
+<li>
+<p>日常开发中，很少出现 <code>sbcl --load xxx.lisp</code> 这种情况，大多是直接在 REPL 里敲代码，这样可以直接触摸到所有的数据和状态。</p>
+</li>
+<li>
+<p>日常开发中，几乎没有人用 <code>sbcl</code> 作为 REPL，它太难用了，上下左右不行，还没有历史记录。你应该试试 <a href="https://www.common-lisp.net/project/slime/" rel="nofollow">SLIME</a>，相比之下，就是神器。</p>
+</li>
+</ul>
+<p>对了，还有：</p>
+<p>如果你想用 Lisp 的方式去畅游 Lisp 之海，墙裂建议你使用 <a href="https://www.gnu.org/software/emacs/" rel="nofollow">Emacs</a>，那就是您的尚方宝剑啊包龙星大人！</p>
+<h3>
+<a name="引用" class="anchor" href="#%E5%BC%95%E7%94%A8" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>引用</h3>
+<p>感谢这两篇文章：</p>
+<ul>
+<li>
+<p><a href="http://www.adamtornhill.com/articles/lispweb.htm" rel="nofollow">Lisp for the Web</a> by Adam Tornhill, April 2008</p>
+</li>
+<li>
+<p><a href="http://msnyder.info/posts/2011/07/lisp-for-the-web-part-ii/" rel="nofollow">Lisp for the Web, Part II</a> by Matthew Snyder, July 2011</p>
+</li>
+</ul>
+<p>给了我很大启发。</p>
+<p>谢谢观看。</p>
+<p><strong>脚注：</strong></p>
+<p><a name="fn1">[1]</a> Hunchentoot <strong>不是</strong>当下最好的选择：</p>
+<blockquote>
+<p><strong>不要再直接使用 Hunchentoot 。</strong> 选择 <a href="http://clacklisp.org/" rel="nofollow">Clack</a>，或者更好的一个基于 Clack 的框架。</p>
+</blockquote>
+<p>- <a href="http://eudoxia.me/article/common-lisp-sotu-2015/" rel="nofollow">2015年 Common Lisp 生态现状</a></p>
+<p><del>(2015/11 修订：在试用了一段时间 Clack 之后，我并不喜欢它，详细查看这里 <a href="https://gist.github.com/c41e1940ab0a3135dc6c">https://gist.github.com/c41e1940ab0a3135dc6c</a>)</del></p>
+<p>(2016/08 修订：Clack 并没有那么差劲，我去年有些傻，这篇文章也有些傻)</p>
+<hr>
+<p>版权：<strong>禁止转载，禁止演绎，作者保留一切权利</strong>  (已授权转载单位：杭州又拍云科技有限公司)</p>
+<p>V2EX 讨论：<a href="http://v2ex.com/t/215726" rel="nofollow">http://v2ex.com/t/215726</a></p>
+<p>本文已集结成书：<a href="https://selfstore.io/products/446" rel="nofollow">Lisp 与现代Web开发</a>，你可以从 <a href="https://selfstore.io/products/446" rel="nofollow">SelfStore</a> 上购买。</p>
+
+            </div>
+        </div>
+    </body>
+</html>
