@@ -156,7 +156,7 @@
   (with-output-to-string (s)
     (with-rss2 (s :encoding "UTF-8")
       (rss-channel-header "Vito Van" "http://vito.sdf.org/"
-                          :description "Be Alive with Music and Program"
+                          :description "The chips will fall where they may."
                           :image "http://vito.sdf.org/favicon.png"
                           :image-title "Vito's avatar")
       (dolist (x (the-list))
