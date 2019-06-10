@@ -1,4 +1,4 @@
-### Mirror of [vito.sdf.org](http://vito.sdf.org)
+### Source of [vito.sdf.org](http://vito.sdf.org)
 
-https://vitovan.github.io/vito.sdf.org/
+Mirror on Github Pages: https://vitovan.github.io/vito.sdf.org/
 
