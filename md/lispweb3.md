@@ -571,7 +571,7 @@ Do you see Tyler? The CL-PREVALENCE automatically loaded the snapshot for us, we
 
 #### Modern Client
 
-I've create a single file as client, you can [download](https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-client.htm) and modify it, it's just the mix of HTML / JavaScript and CSS.
+I've create a single file as client, you can [download](lispweb3/lispweb3-client.htm) and modify it, it's just the mix of HTML / JavaScript and CSS.
 
 **Then what's left?**
 
@@ -584,7 +584,7 @@ We need to serve this file, let's check the [document of Hunchentoot](http://wei
 So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTM file into it:
 
 ```Lisp
-wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-client.htm
+wget -P www http://vito.sdf.org/lispweb3/lispweb3-client.htm
 ```
 
 Then change:
@@ -627,7 +627,7 @@ Thanks to:
 
 I wish this piece of work could be:
 
-* [Lisp for the Web, Part III](http://vitovan.com/lispweb3.html) by Vito Van, August 2015
+* [Lisp for the Web, Part III](http://vito.sdf.org/lispweb3.html) by Vito Van, August 2015
 
 That would be a great honor to me.
 

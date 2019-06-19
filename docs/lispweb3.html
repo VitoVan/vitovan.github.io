@@ -568,7 +568,7 @@
 <p>Do you see Tyler? The CL-PREVALENCE automatically loaded the snapshot for us, we don't even noticed.</p>
 <h4>
 <a name="modern-client" class="anchor" href="#modern-client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modern Client</h4>
-<p>I've create a single file as client, you can <a href="https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-client.htm">download</a> and modify it, it's just the mix of HTML / JavaScript and CSS.</p>
+<p>I've create a single file as client, you can <a href="lispweb3/lispweb3-client.htm">download</a> and modify it, it's just the mix of HTML / JavaScript and CSS.</p>
 <p><strong>Then what's left?</strong></p>
 <p>We need to serve this file, let's check the <a href="http://weitz.de/hunchentoot/#start" rel="nofollow">document of Hunchentoot</a>. Here we can see:</p>
 <blockquote>
@@ -576,7 +576,7 @@
 </blockquote>
 <p>- <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a></p>
 <p>So what we should do is just create a directory called <code>www</code> in the same level of <code>p-storage-server.lisp</code>, and then get the HTM file into it:</p>
-<div class="highlight highlight-source-lisp"><pre>wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-client.htm</pre></div>
+<div class="highlight highlight-source-lisp"><pre>wget -P www http://vito.sdf.org/lispweb3/lispweb3-client.htm</pre></div>
 <p>Then change:</p>
 <div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
 <p>To this:</p>
@@ -612,7 +612,7 @@
 <p>I wish this piece of work could be:</p>
 <ul>
 <li>
-<a href="http://vitovan.com/lispweb3.html" rel="nofollow">Lisp for the Web, Part III</a> by Vito Van, August 2015</li>
+<a href="http://vito.sdf.org/lispweb3.html" rel="nofollow">Lisp for the Web, Part III</a> by Vito Van, August 2015</li>
 </ul>
 <p>That would be a great honor to me.</p>
 <p>Thanks for reading.</p>

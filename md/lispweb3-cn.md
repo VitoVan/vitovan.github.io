@@ -3,7 +3,7 @@
 
 2015/08，修订：2015/08, 2015/11, 2016/08
 
-_For those who have read [Lisp for The Modern Web](http://vitovan.com/lispweb3.html): SKIP, please. This is just another language version._
+_For those who have read [Lisp for The Modern Web](lispweb3.html): SKIP, please. This is just another language version._
 
 > Lisp 不是一门语言，它是一种构建素材。
 
@@ -579,7 +579,7 @@ function sayHello(to){
 
 #### 我们的客户端
 
-我创建了一个单文件的客户端，你可以[下载](https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-cn-client.htm) 修改它，里边是 HTML / JavaScript 和 CSS 代码。
+我创建了一个单文件的客户端，你可以[下载](lispweb3-cn/lispweb3-cn-client.htm) 修改它，里边是 HTML / JavaScript 和 CSS 代码。
 
 **接下来还剩什么？**
 
@@ -592,7 +592,7 @@ function sayHello(to){
 那接下来要做的就是在 `p-storage-server.lisp` 同级目录创建一个文件夹 `www`，然后把静态文件放进去：
 
 ```Lisp
-wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-cn-client.htm
+wget -P www http://vito.sdf.org/lispweb3-cn/lispweb3-cn-client.htm
 ```
 
 然后，把：

@@ -30,7 +30,7 @@
 <h1>
 <a name="lisp-与现代web开发" class="anchor" href="#lisp-%E4%B8%8E%E7%8E%B0%E4%BB%A3web%E5%BC%80%E5%8F%91" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp 与现代Web开发</h1>
 <p>2015/08，修订：2015/08, 2015/11, 2016/08</p>
-<p><em>For those who have read <a href="http://vitovan.com/lispweb3.html" rel="nofollow">Lisp for The Modern Web</a>: SKIP, please. This is just another language version.</em></p>
+<p><em>For those who have read <a href="lispweb3.html">Lisp for The Modern Web</a>: SKIP, please. This is just another language version.</em></p>
 <blockquote>
 <p>Lisp 不是一门语言，它是一种构建素材。</p>
 </blockquote>
@@ -553,7 +553,7 @@
 <p>紫霞仙子还在不在？我们的流行持久化系统自动把数据加载了回来！</p>
 <h4>
 <a name="我们的客户端" class="anchor" href="#%E6%88%91%E4%BB%AC%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>我们的客户端</h4>
-<p>我创建了一个单文件的客户端，你可以<a href="https://github.com/VitoVan/vitovan.com/blob/master/code/lispweb3-cn-client.htm">下载</a> 修改它，里边是 HTML / JavaScript 和 CSS 代码。</p>
+<p>我创建了一个单文件的客户端，你可以<a href="lispweb3-cn/lispweb3-cn-client.htm">下载</a> 修改它，里边是 HTML / JavaScript 和 CSS 代码。</p>
 <p><strong>接下来还剩什么？</strong></p>
 <p>我们需要托管这个静态文件，来一起看看 <a href="http://weitz.de/hunchentoot/#start" rel="nofollow">Hunchentoot 文档</a>：</p>
 <blockquote>
@@ -561,7 +561,7 @@
 </blockquote>
 <p>- <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot 文档</a></p>
 <p>那接下来要做的就是在 <code>p-storage-server.lisp</code> 同级目录创建一个文件夹 <code>www</code>，然后把静态文件放进去：</p>
-<div class="highlight highlight-source-lisp"><pre>wget -P www https://raw.githubusercontent.com/VitoVan/vitovan.com/master/code/lispweb3-cn-client.htm</pre></div>
+<div class="highlight highlight-source-lisp"><pre>wget -P www http://vito.sdf.org/lispweb3-cn/lispweb3-cn-client.htm</pre></div>
 <p>然后，把：</p>
 <div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
 <p>改为：</p>
