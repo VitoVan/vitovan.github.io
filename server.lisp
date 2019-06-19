@@ -171,16 +171,18 @@
                                             (setf the-list-html
                                                   (concat the-list-html
                                                           (concat
-                                                           "<div"
+                                                           "
+                  <li"
                                                            (when
                                                                (member (car x) *shit-list* :test #'string=)
-                                                             " style='display:none;'")
+                                                             " class='shit' title='Caution: this link contains shit!'")
                                                            "><a href='"
                                                            (car x)
                                                            ".html'>"
                                                            (cdr x)
-                                                           "</a></div>"))))
-                                          (concat "<div class='index'>" the-list-html "</div>")))
+                                                           "</a></li>"))))
+                                          (concat "<ul class='index'>" the-list-html "
+                </ul>")))
                      "Vito Van"))
 
 (defun write-index()

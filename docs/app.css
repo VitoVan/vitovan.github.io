@@ -51,7 +51,7 @@ body{
         border-right: none;
         border-bottom-color: blue;
         border-bottom-style: dashed;
-        border-bottom-width: 0.1em;      
+        border-bottom-width: 0.1em;
     }
     .panel>ul>li{
         float: left;
@@ -62,7 +62,7 @@ body{
     }
     .markdown-body{
         min-width: inherit !important;
-    }    
+    }
 }
 .head{
     padding: 1em;
@@ -81,11 +81,12 @@ body{
     display: block;
     line-height: 2em;
 }
-.index>div{
-    margin: 0.5em 0;    
+.index>li{
+    margin: 0.5em 0;
+    list-style-type: circle;
 }
-.index>div>a:before{
-    content: "· ";
+.index>li.shit{
+  opacity: .1;
 }
 .markdown-body{
     background-color: #F0F1EE;
