@@ -11,6 +11,11 @@
             <link>http://vito.sdf.org/</link>
         </image>
         <item>
+            <title>Meditations on Color Picker</title>
+            <link>http://vito.sdf.org/picker.html</link>
+            <author>Vito Van</author>
+        </item>
+        <item>
             <title>Dinosaur and Lisp</title>
             <link>http://vito.sdf.org/dino.html</link>
             <author>Vito Van</author>

@@ -93,7 +93,6 @@
                 (mapcar #'namestring (list-directory *md-path*)))
                #'(lambda(fa fb)
                    (< (get-order fa) (get-order fb)))))
-      (format t "MD:~A~%" md-file)
       (push
        (cons (pathname-name md-file) (get-title md-file))
        the-list))
