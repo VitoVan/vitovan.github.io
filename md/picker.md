@@ -110,3 +110,7 @@ You can download the color picker from [here](https://github.com/VitoVan/cl-pkr#
 If you experienced the color picker above and interested in writing applications with the same technology, I wrapped something as [cl-icebox](https://github.com/VitoVan/cl-icebox) to help you to achieve that.
 
 Have fun and prosper 🖖 !
+
+---
+
+Discuss on reddit: https://redd.it/c8g36d
