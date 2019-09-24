@@ -11,6 +11,13 @@
         <link rel="stylesheet" type="text/css" href="app.css">
         <link rel="stylesheet" type="text/css" href="github-markdown.css">
         <title>Lisp 与现代Web开发</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-69347509-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'UA-69347509-2');
+        </script>
     </head>
     <body>
         <div class="panel">
@@ -26,7 +33,7 @@
                 <h1><a href="index.html">Vito Van</a></h1>
             </div>
             <div class="content markdown-body">
-                
+
 <h1>
 <a name="lisp-与现代web开发" class="anchor" href="#lisp-%E4%B8%8E%E7%8E%B0%E4%BB%A3web%E5%BC%80%E5%8F%91" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp 与现代Web开发</h1>
 <p>2015/08，修订：2015/08, 2015/11, 2016/08</p>
@@ -473,7 +480,7 @@
 (<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
 <span class="pl-c"><span class="pl-c">;</span>;创建计数器</span>
 (<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
-	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
+        (cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
 <ul>
 <li>然后修改我们的 <code>make-people</code> 函数，使其直接将对象创建于流行持久化系统内：</li>
 </ul>
@@ -520,7 +527,7 @@
 (<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
 <span class="pl-c"><span class="pl-c">;</span>;创建计数器</span>
 (<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
-	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))
+        (cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))
 (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
 <span class="pl-c"><span class="pl-c">;</span>;创建 people 对象至流行持久化系统</span>
 (<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)
