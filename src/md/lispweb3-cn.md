@@ -592,7 +592,7 @@ function sayHello(to){
 那接下来要做的就是在 `p-storage-server.lisp` 同级目录创建一个文件夹 `www`，然后把静态文件放进去：
 
 ```Lisp
-wget -P www http://vito.sdf.org/lispweb3-cn/lispweb3-cn-client.htm
+wget -P www https://vitovan.com/lispweb3-cn/lispweb3-cn-client.htm
 ```
 
 然后，把：

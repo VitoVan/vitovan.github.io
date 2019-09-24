@@ -2,37 +2,37 @@
 <rss version="2.0">
     <channel>
         <title>Vito Van</title>
-        <link>http://vito.sdf.org/</link>
+        <link>https://vitovan.com/</link>
         <description>The chips will fall where they may.</description>
         <language>en-us</language>
         <image>
             <title>Vito&apos;s avatar</title>
-            <url>http://vito.sdf.org/favicon.png</url>
-            <link>http://vito.sdf.org/</link>
+            <url>https://vitovan.com/favicon.png</url>
+            <link>https://vitovan.com/</link>
         </image>
         <item>
             <title>Meditations on Color Picker</title>
-            <link>http://vito.sdf.org/picker.html</link>
+            <link>https://vitovan.com/picker.html</link>
             <author>Vito Van</author>
         </item>
         <item>
             <title>Dinosaur and Lisp</title>
-            <link>http://vito.sdf.org/dino.html</link>
+            <link>https://vitovan.com/dino.html</link>
             <author>Vito Van</author>
         </item>
         <item>
             <title>New Blog Address</title>
-            <link>http://vito.sdf.org/new.html</link>
+            <link>https://vitovan.com/new.html</link>
             <author>Vito Van</author>
         </item>
         <item>
             <title>Lisp 与现代Web开发</title>
-            <link>http://vito.sdf.org/lispweb3-cn.html</link>
+            <link>https://vitovan.com/lispweb3-cn.html</link>
             <author>Vito Van</author>
         </item>
         <item>
             <title>Lisp for The Modern Web</title>
-            <link>http://vito.sdf.org/lispweb3.html</link>
+            <link>https://vitovan.com/lispweb3.html</link>
             <author>Vito Van</author>
         </item>
     </channel>

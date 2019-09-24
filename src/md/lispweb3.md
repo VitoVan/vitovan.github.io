@@ -584,7 +584,7 @@ We need to serve this file, let's check the [document of Hunchentoot](http://wei
 So what we should do is just create a directory called `www` in the same level of `p-storage-server.lisp`, and then get the HTM file into it:
 
 ```Lisp
-wget -P www http://vito.sdf.org/lispweb3/lispweb3-client.htm
+wget -P www https://vitovan.com/lispweb3/lispweb3-client.htm
 ```
 
 Then change:
@@ -627,7 +627,7 @@ Thanks to:
 
 I wish this piece of work could be:
 
-* [Lisp for the Web, Part III](http://vito.sdf.org/lispweb3.html) by Vito Van, August 2015
+* [Lisp for the Web, Part III](https://vitovan.com/lispweb3.html) by Vito Van, August 2015
 
 That would be a great honor to me.
 

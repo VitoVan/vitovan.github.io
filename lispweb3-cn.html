@@ -568,7 +568,7 @@
 </blockquote>
 <p>- <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot 文档</a></p>
 <p>那接下来要做的就是在 <code>p-storage-server.lisp</code> 同级目录创建一个文件夹 <code>www</code>，然后把静态文件放进去：</p>
-<div class="highlight highlight-source-lisp"><pre>wget -P www http://vito.sdf.org/lispweb3-cn/lispweb3-cn-client.htm</pre></div>
+<div class="highlight highlight-source-lisp"><pre>wget -P www https://vitovan.com/lispweb3-cn/lispweb3-cn-client.htm</pre></div>
 <p>然后，把：</p>
 <div class="highlight highlight-source-lisp"><pre>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))</pre></div>
 <p>改为：</p>
