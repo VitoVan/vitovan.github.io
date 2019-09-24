@@ -72,7 +72,7 @@
 (defvar *tmpl-path* "./tmpl/")
 (defvar *ori-files-path* "./ori-files/")
 (defvar *dist-path* "../")
-(defvar *shit-list* '("lispweb3" "lispweb3-cn" "new"))
+(defvar *shit-list* '("lispweb3" "lispweb3-cn"))
 
 
 (defun the-tmpl()
@@ -174,7 +174,7 @@
                   <li"
                                                            (when
                                                                (member (car x) *shit-list* :test #'string=)
-                                                             " class='shit' title='Caution: this link contains shit!'")
+                                                             " class='shit' title='Caution: this link contains raw shit!'")
                                                            "><a href='"
                                                            (car x)
                                                            ".html'>"
