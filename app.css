@@ -13,7 +13,7 @@ body{
 }
 .container{
     float: left;
-    max-width: 50em;
+    max-width: 50%;
     padding-bottom: 50px;
 }
 .panel{
@@ -85,8 +85,12 @@ body{
     margin: 0.5em 0;
     list-style-type: circle;
 }
-.index>li.shit{
-  opacity: .1;
+.index>li.shit>a{
+  opacity: .4;
+  color: black;
+}
+.index>li.shit>a:visited{
+  color: gray;
 }
 .markdown-body{
     background-color: #F0F1EE;

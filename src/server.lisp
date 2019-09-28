@@ -174,7 +174,7 @@
                   <li"
                                                            (when
                                                                (member (car x) *shit-list* :test #'string=)
-                                                             " class='shit' title='Caution: this link contains raw shit!'")
+                                                             " class='shit' title='💩 CAUTION: OLD SHIT INSIDE!'")
                                                            "><a href='"
                                                            (car x)
                                                            ".html'>"
