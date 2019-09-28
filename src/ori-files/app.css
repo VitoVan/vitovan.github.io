@@ -16,6 +16,10 @@ body{
     max-width: 50%;
     padding-bottom: 50px;
 }
+.container img{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+}
 .panel{
     float: left;
     padding: 2em 0.9em;

@@ -7,6 +7,8 @@ Version: **ख़िं 0.4** , PDF: [xinlermorna-V0.4.pdf](xinlermorna/xinlermo
 
 Devanagari Orthography for Lojban based on Hindi pronunciation
 
+![xinlermorna](xinlermorna/xinlermorna.png)
+
 ### Tables
 
 **Consonats**
