@@ -1,7 +1,7 @@
 body{
     font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB","Microsoft Yahei","微软雅黑",sans-serif;
     color: #000;
-    background: #FFF none repeat scroll 0% 0%;
+    background: #F0F1EE none repeat scroll 0% 0%;
     font-size: 10pt;
     clear: both;
     padding: 0;
@@ -73,7 +73,7 @@ body{
     text-transform: uppercase;
 }
 .head>h1>a{
-    color: #D0D0D0;
+    color: #888;
     text-decoration: none;
 }
 .content{
@@ -97,7 +97,7 @@ body{
   color: gray;
 }
 .markdown-body{
-    background-color: #F0F1EE;
+    background-color: white;
     padding: 1em;
     border-radius: 0.3em;
     min-width: 44em;
