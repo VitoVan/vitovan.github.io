@@ -1,9 +1,9 @@
 <!--4-->
 # ख़िंलेर्मोर्ना - xinlermorna
 
-2019/09
+2019/09, revision: 2019/10
 
-Version: **ख़िं 0.4** , PDF: [xinlermorna-V0.4.pdf](xinlermorna/xinlermorna-V0.4.pdf)
+By: la vitno, Version: **ख़िं 0.5** , PDF: [xinlermorna-V0.5.pdf](xinlermorna/xinlermorna-V0.5.pdf)
 
 Devanagari Orthography for Lojban based on Hindi pronunciation
 
@@ -55,9 +55,9 @@ Since all the inherent vowels of consonats are dropped, when Vowels are written 
 | i     | इ                             | ि                           | कइ                                       | कि                                     |
 | o     | ओ                             | ो                           | कओ                                       | को                                     |
 | u     | उ                             | ु                            | कउ                                       | कु                                      |
-| y     | य *                           | (none)                      | कय                                       | कय                                     |
+| y     | अँ                         | ँ | कअँ                                  | कँ *                             |
 
-\* Since **य** is used as Vowel in Lojban, so it should never be used as conjuncts. This means **ky** will always be written as **कय** instead of **क्य**.
+\* letter **अँ** /ə̃/ is assigned the value **/ə/**, and the diacritic form **ँ**
 
 **Diphthongs**
 
@@ -76,13 +76,13 @@ When **i (इ)** is written as first letter in diphthongs, it should always be w
 | ii    | इइ                                  | ई                                       | ी                           | कइइ                                            | कई                                                 | की                                     |
 | io    | इओ                                  | इो                                      | (none)                      | कइओ                                            | कइो                                                | कइो                                    |
 | iu    | इउ                                  | इु                                       | (none)                      | कइउ                                            | कइु                                                 | कइु                                     |
-| iy    | इय                                  | इय                                      | (none)                      | कइय                                            | कइय                                                | कइय                                    |
 | ua    | उअ                                  | उा                                      | ुा                           | कउअ                                            | कउा                                                | कुा                                     |
 | ue    | उए                                  | उे                                       | ुे                            | कउए                                            | कउे                                                 | कुे                                      |
 | ui    | उइ                                  | उि                                      | ुि                           | कउइ                                            | कउि                                                | कुि                                     |
 | uo    | उओ                                  | उो                                      | ुो                           | कउओ                                            | कउो                                                | कुो                                     |
 | uu    | उउ                                  | ऊ                                       | ू                            | कउउ                                            | कऊ                                                 | कू                                      |
-| uy    | उय                                  | उय                                      | ुय                           | कउय                                            | कउय                                                | कुय                                     |
+| iy | इअँ | इँ | (none) | कइँ | कइँ | कइँ |
+| uy | उअँ | उँ | ुँ | कउअँ | कउँ | कुँ |
 
 \* When **kei** is written in Diacritic Form as **केि**, it may not be rendered properly by every font. Hence, Devanagari Vowel **ai (ऐ / ै)** is also acceptable to be used as **ei.** And **kei** can also be written as **कऐ** or **कै**, respectively.
 
