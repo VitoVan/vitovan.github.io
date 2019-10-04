@@ -5,7 +5,7 @@
 
 By: la vitno, Version: **ख़िं 0.5** , PDF: [xinlermorna-V0.5.pdf](xinlermorna/xinlermorna-V0.5.pdf)
 
-Devanagari Orthography for Lojban based on Hindi pronunciation
+Devanagari Orthography for [Lojban](https://mw.lojban.org/papri/Lojban) based on Hindi pronunciation
 
 ![xinlermorna](xinlermorna/xinlermorna.png)
 
@@ -139,5 +139,7 @@ Only VD/DD/AV/CC version is illustrated
 \* Martel https://fonts.google.com/specimen/Martel
 
 ![Martel](xinlermorna/Martel.png)
+
+---
 
 You can try it with the [xinlermorna transliteration tool](https://vitovan.com/xinlermorna-transliteration/).
