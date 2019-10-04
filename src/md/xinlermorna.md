@@ -139,3 +139,5 @@ Only VD/DD/AV/CC version is illustrated
 \* Martel https://fonts.google.com/specimen/Martel
 
 ![Martel](xinlermorna/Martel.png)
+
+You can try it with the [xinlermorna transliteration tool](https://vitovan.com/xinlermorna-transliteration/).
