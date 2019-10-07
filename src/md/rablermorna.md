@@ -75,7 +75,7 @@ Diphthongs will always be vocalised, and the second vowel of diphthong is carrie
 ### Text Examples
 
 | Name                      | Text Sample                                                  |
-| ------------------------- | ------------------------------------------------------------ |
+| ------------------------- | -----------------------------------------------------------: |
 | Standard Orthography      | ni'o la .dorotis. cu xabju lo midju be lo ganra sastu'a pe la .kanzas. fi'o kansa la nakfamti .xenris. ku noi te cange ku'o .e la fetfamti .em. ku noi speni lo te cange .i lo zdani cu cmalu ki'u lo nu lo mudri poi zy ke'a zilzba cu jai sarcu fai lo ka lo carce cu bevri ce'u ve'a lo minli be li so'i |
 | rablermorna (vocalised)          |ئ لَ ءضٍرٍتِسء شُ خَبژُ لٍ مِضژُ بً لٍ گَنرَ سَستُهَ پً لَ ءكَنزَسء فِهٍ كَنسَ لَ نَكفَمتِ ءخًنرِسء كُ نٍاِ تً شَنگً كُهٍ ءاً لَ فًتفَمتِ ءاًمء كُ نٍاِ سپًنِ لٍ تً شَنگً إ لٍ زضَنِ شُ شمَلُ كِهُ لٍ نُ لٍ مُضرِ پٍاِ زٌ كًهَ زِلزبَ شُ ژَاِ سَرشُ فَاِ لٍ كَ لٍ شَرشً شُ بًورِ شًهُ وًهَ لٍ مِنلِ بً لِ سٍهِ |
 | rablermorna (unvocalised)          | ئ لَ ءضٍرٍتِسء شُ خبژ لٍ مضژ بً لٍ گنر سسته پً لَ ءكَنزَسء فِهٍ كنس لَ نكفمت ءخًنرِسء كُ نٍاِ تً شنگ كُهٍ ءاً لَ فتفمت ءاًمء كُ نٍاِ سپن لٍ تً شنگ إ لٍ زضن شُ شمل كِهُ لٍ نُ لٍ مضر پٍاِ زٌ كًهَ زلزب شُ ژَاِ سرش فَاِ لٍ كَ لٍ شرش شُ بور شًهُ وًهَ لٍ منل بً لِ سٍهِ  |
@@ -93,9 +93,9 @@ Diphthongs will always be vocalised, and the second vowel of diphthong is carrie
 
 ![Almarai](rablermorna/Almarai.png)
 
-\* Reem Kufi https://fonts.google.com/specimen/Reem+Kufi
+\* El Messiri https://fonts.google.com/specimen/El+Messiri
 
-![Reem Kufi](rablermorna/ReemKufi.png)
+![El Messiri](rablermorna/ElMessiri.png)
 
 ---
 
