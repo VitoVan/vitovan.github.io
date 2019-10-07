@@ -11,7 +11,7 @@ Devanagari Orthography for [Lojban](https://mw.lojban.org/papri/Lojban) based on
 
 ### Tables
 
-**Consonats**
+**Consonants**
 
 Note: all the inherent vowels (a) are dropped.
 
@@ -46,7 +46,7 @@ Note: all the inherent vowels (a) are dropped.
 
 **Vowels**
 
-Since all the inherent vowels of consonats are dropped, when Vowels are written together with consonats, Diacritic Form or Independent Form are **Both Accepted**
+Since all the inherent vowels of consonants are dropped, when Vowels are written together with consonants, Diacritic Form or Independent Form are **Both Accepted**
 
 | Latin | देवनागरी (Indepdt. Form) | देवनागरी (Diacritic Form) | देवनागरी (Indepdt. Form with 'k/क') | देवनागरी (Diacritic Form with 'k/क') |
 | ----- | ----------------------------- | --------------------------- | ---------------------------------------- | -------------------------------------- |
@@ -88,7 +88,7 @@ When **i (इ)** is written as first letter in diphthongs, it should always be w
 
 ### Anusvara
 
-When consonat **n** is supposed to be pronounced as **/ŋ/** (e.g. ka**n**la), you can use a diacritic dot (which is called Anusvara: ं) to mark it instead of the independent form **n** (न), write with Anusvara or Independent Form are **Both Accepted**
+When consonant **n** is supposed to be pronounced as **/ŋ/** (e.g. ka**n**la), you can use a diacritic dot (which is called Anusvara: ं) to mark it instead of the independent form **n** (न), write with Anusvara or Independent Form are **Both Accepted**
 
 | latin | देवनागरी (Indepdt. Form) | देवनागरी (Anusvara) |
 | ----- | ----------------------------- | --------------------- |
@@ -96,11 +96,11 @@ When consonat **n** is supposed to be pronounced as **/ŋ/** (e.g. ka**n**la), y
 | condi | शोनदि                         | शोंदि                  |
 | panci | पानशि                         | पांशि                  |
 
-### Conjunct Consonats
+### Conjunct Consonants
 
-Consonants lacking a vowel in between them may physically join together as a conjunct consonant. Since all the inherent vowels of consonats are dropped, write with Independent Consonats or Conjunct Consonats are **Both Accepted**.
+Consonants lacking a vowel in between them may physically join together as a conjunct consonant. Since all the inherent vowels of consonants are dropped, write with Independent Consonants or Conjunct Consonants are **Both Accepted**.
 
-| Latin  | देवनागरी (Indepdt. Consonats) | देवनागरी (Conjunct Consonats) |
+| Latin  | देवनागरी (Indepdt. Consonants) | देवनागरी (Conjunct Consonants) |
 | ------ | ---------------------------------- | ------------------------------- |
 | lojban | लोझ़बान / लोझ़बां                     | लोझ़्बान / लोझ़्बां                  |
 | kanla  | कानला / कांला                       | कान्ला                           |
@@ -110,7 +110,7 @@ Consonants lacking a vowel in between them may physically join together as a con
 
 ### Text Examples
 
-AI = All Independed / VD = Vowels DIacritic / DD = Diphthongs DIacritic / AV = Anusvara / CC = Conjunct Consonats
+AI = All Independed / VD = Vowels DIacritic / DD = Diphthongs DIacritic / AV = Anusvara / CC = Conjunct Consonants
 
 | Name                      | Text Sample                                                  |
 | ------------------------- | ------------------------------------------------------------ |
