@@ -27,7 +27,14 @@
 ;; use it as reference, for whoever's sake.
 
 (setf sb-impl::*default-external-format* :UTF-8)
-;;(declaim (optimize (debug 3)))
+;; (declaim (optimize (debug 3)))
+
+;; xml-emitter 1.0.5 seems broken
+;; https://github.com/VitoVan/xml-emitter/issues/6
+;; https://github.com/VitoVan/vitovan.github.io/issues/1
+;; so let's go back to 2019/10/08 for a while
+(ql-dist:install-dist "http://beta.quicklisp.org/dist/quicklisp/2019-10-08/distinfo.txt" :replace t)
+
 (ql:quickload '(drakma html-template cl-ppcre cl-fad xml-emitter hunchentoot))
 
 (defpackage vitovan
