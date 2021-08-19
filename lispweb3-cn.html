@@ -24,7 +24,7 @@
         <div class="panel">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="current"><a href="list.html">Shits</a></li>
+                <li class="current"><a href="list.html">List</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="rss.xml">RSS</a></li>
             </ul>
@@ -34,7 +34,7 @@
                 <h1><a href="index.html">Vito Van</a></h1>
             </div>
             <div class="content markdown-body">
-
+                
 <h1>
 <a name="lisp-与现代web开发" class="anchor" href="#lisp-%E4%B8%8E%E7%8E%B0%E4%BB%A3web%E5%BC%80%E5%8F%91" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp 与现代Web开发</h1>
 <p>2015/08，修订：2015/08, 2015/11, 2016/08</p>
@@ -240,10 +240,10 @@
 <p>同学们看这里：<a href="http://acl.readthedocs.org/en/latest/zhCN/ch2-cn.html#functions" rel="nofollow">《ANSI Common Lisp 中文版》：2.6 函数 (Functions)</a> (多看文档总是没有坏处的啦，我大景德也有足够的料喔~)</p>
 <p>看过之后呢，我们知道 <code>defun</code> 实际上就是用来定义函数的，就像 JavaScript 里面的 <code>function</code> 。 <code>defun</code> 紧跟着的第一个参数是函数的名字，第二个是函数的参数列表（用括号括起来的），然后剩下来的通常就是函数体了。</p>
 <p>所以，那段代码的意思就是说：我们创建了一个叫做 <code>say-hello</code> 的函数，这个函数接受一个叫做 <code>to</code> 的参数，当函数被调用时，它把变量 <code>to</code> 的值和字符串 <code>"你好， "</code> 连到了一块儿，然后打印到控制台上。下面这个是类似的 JavaScript 版本：</p>
-<div class="highlight highlight-source-js"><pre><span class="pl-c"><span class="pl-c">//</span>好像 JavaScript 里没有字符串格式化的函数，所以......</span>
-<span class="pl-k">function</span> <span class="pl-en">sayHello</span>(<span class="pl-smi">to</span>){
-    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">"</span>你好， ~a<span class="pl-pds">"</span></span>.<span class="pl-c1">replace</span>(<span class="pl-s"><span class="pl-pds">"</span>~a<span class="pl-pds">"</span></span>,to));
-}</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//好像 JavaScript 里没有字符串格式化的函数，所以......</span>
+<span class="pl-k">function</span> <span class="pl-en">sayHello</span><span class="pl-kos">(</span><span class="pl-s1">to</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"你好， ~a"</span><span class="pl-kos">.</span><span class="pl-en">replace</span><span class="pl-kos">(</span><span class="pl-s">"~a"</span><span class="pl-kos">,</span><span class="pl-s1">to</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
 <h4>
 <a name="面向世界的编程" class="anchor" href="#%E9%9D%A2%E5%90%91%E4%B8%96%E7%95%8C%E7%9A%84%E7%BC%96%E7%A8%8B" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>面向世界的编程</h4>
 <p>现在我们已经知道了如何用 Lisp 编程（<a href="http://acl.readthedocs.org/en/latest/zhCN/index.html" rel="nofollow">手册</a>在手，就敢说大话）。但是除了你我，没人知道啊～让我们用 Lisp 建个服务器来告诉全世界吧！</p>
@@ -481,7 +481,7 @@
 (<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
 <span class="pl-c"><span class="pl-c">;</span>;创建计数器</span>
 (<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
-        (cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
+	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
 <ul>
 <li>然后修改我们的 <code>make-people</code> 函数，使其直接将对象创建于流行持久化系统内：</li>
 </ul>
@@ -528,7 +528,7 @@
 (<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
 <span class="pl-c"><span class="pl-c">;</span>;创建计数器</span>
 (<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
-        (cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))
+	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))
 (hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port <span class="pl-c1">4242</span>))
 <span class="pl-c"><span class="pl-c">;</span>;创建 people 对象至流行持久化系统</span>
 (<span class="pl-k">defun</span> <span class="pl-en">make-people</span> (name)

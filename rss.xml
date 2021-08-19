@@ -4,6 +4,7 @@
         <title>Vito Van</title>
         <link>https://vitovan.com/</link>
         <description>The chips will fall where they may.</description>
+        <generator>xml-emitter</generator>
         <language>en-us</language>
         <image>
             <title>Vito&apos;s avatar</title>

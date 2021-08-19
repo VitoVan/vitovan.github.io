@@ -89,6 +89,9 @@ body{
     margin: 0.5em 0;
     list-style-type: circle;
 }
+.index>li.shit{
+  display: none;
+}
 .index>li.shit>a{
   opacity: .4;
   color: black;

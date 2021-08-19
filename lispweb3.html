@@ -24,7 +24,7 @@
         <div class="panel">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="current"><a href="list.html">Shits</a></li>
+                <li class="current"><a href="list.html">List</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="rss.xml">RSS</a></li>
             </ul>
@@ -34,7 +34,7 @@
                 <h1><a href="index.html">Vito Van</a></h1>
             </div>
             <div class="content markdown-body">
-
+                
 <h1>
 <a name="lisp-for-the-modern-web" class="anchor" href="#lisp-for-the-modern-web" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp for The Modern Web</h1>
 <p>2015/08, revision: 2015/08, 2015/09, 2016/08</p>
@@ -255,10 +255,10 @@
 <p>Well, we got this: <a href="http://www.lispworks.com/documentation/lw50/CLHS/Body/m_defun.htm" rel="nofollow">CLHS: Macro DEFUN</a> and this: <a href="http://www.gigamonkeys.com/book/functions.html" rel="nofollow">Functions</a>.</p>
 <p>After read them, we know that <code>defun</code> is a Macro which is used to create funcion. The first argument of <code>defun</code> is the function name, and the second argument of <code>defun</code> is the arguments of the function, and typically, the rest will be the body of the function.</p>
 <p>So, it means we just created a function named by <code>say-hello</code> and takes one argument <code>to</code>. When the function is called, it concatenate the value of variable <code>to</code> with string <code>"Hello, "</code>, then print them to the standard output. This could be the JavaScript version:</p>
-<div class="highlight highlight-source-js"><pre><span class="pl-c"><span class="pl-c">//</span>It seems there is no string format function in JavaScript, so...</span>
-<span class="pl-k">function</span> <span class="pl-en">sayHello</span>(<span class="pl-smi">to</span>){
-    <span class="pl-en">console</span>.<span class="pl-c1">log</span>(<span class="pl-s"><span class="pl-pds">"</span>Hello, ~a<span class="pl-pds">"</span></span>.<span class="pl-c1">replace</span>(<span class="pl-s"><span class="pl-pds">"</span>~a<span class="pl-pds">"</span></span>,to));
-}</pre></div>
+<div class="highlight highlight-source-js"><pre><span class="pl-c">//It seems there is no string format function in JavaScript, so...</span>
+<span class="pl-k">function</span> <span class="pl-en">sayHello</span><span class="pl-kos">(</span><span class="pl-s1">to</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"Hello, ~a"</span><span class="pl-kos">.</span><span class="pl-en">replace</span><span class="pl-kos">(</span><span class="pl-s">"~a"</span><span class="pl-kos">,</span><span class="pl-s1">to</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
 <h4>
 <a name="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello World!</h4>
 <p>Now, you have learned how to program in Common Lisp, but nobody knows except you and me, it's not good.</p>
@@ -495,7 +495,7 @@
 (<span class="pl-k">defvar</span> <span class="pl-smi">*p-system*</span> (cl-prevalence:make-prevalence-system <span class="pl-c1">#p"./p-system/"</span>))
 <span class="pl-c"><span class="pl-c">;</span>;Create counter if not exists</span>
 (<span class="pl-k">or</span> (&gt; (length (cl-prevalence:find-all-objects <span class="pl-smi">*p-system*</span> 'people)) <span class="pl-c1">0</span>)
-        (cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
+	(cl-prevalence:tx-create-id-counter <span class="pl-smi">*p-system*</span>))</pre></div>
 <ul>
 <li>Modify the original function <code>make-people</code>
 </li>
