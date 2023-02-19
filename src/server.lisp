@@ -13,7 +13,7 @@
 ;;   0. You just DO WHAT THE FUCK YOU WANT TO.
 
 
-;;  Copyright © 2019 Vito Van <awesomevito@live.com>
+;;  Copyright © 2023 Vito Van <awesomevito@live.com>
 ;;  This program is free software. It comes without any warranty, to
 ;;  the extent permitted by applicable law. You can redistribute it
 ;;  and/or modify it under the terms of the Do What The Fuck You Want
@@ -73,7 +73,7 @@
 (defvar *tmpl-path* "./tmpl/")
 (defvar *ori-files-path* "./ori-files/")
 (defvar *dist-path* "../")
-(defvar *shit-list* '("lispweb3" "lispweb3-cn"))
+(defvar *shit-list* '("lispweb3" "lispweb3-cn" "picker" "rablermorna"))
 
 
 (defun the-tmpl()
@@ -175,7 +175,7 @@
                   <li"
                                                            (when
                                                                (member (car x) *shit-list* :test #'string=)
-                                                             " class='shit' title='💩 CAUTION: OLD SHIT INSIDE!'")
+                                                             " class='shit' title='old depreciated post'")
                                                            "><a href='"
                                                            (car x)
                                                            ".html'>"
@@ -204,7 +204,7 @@
   (copy-ori-file))
 
 (defparameter *ht-acceptor* (make-instance 'hunchentoot:easy-acceptor
-                                           :port 8080
+                                           :port 4242
                                            :document-root *dist-path*))
 
 (hunchentoot:start *ht-acceptor*)
