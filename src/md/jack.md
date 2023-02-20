@@ -69,3 +69,5 @@ Suddenly, a huge pain came from my ass.
 If you have any interest, here is the ass-curing software: [Focolizzare](https://vitovan.com/focalizzare/).
 
 And here is the framework used to build it: [CALM](https://github.com/VitoVan/calm/).
+
+In case you have a word: https://news.ycombinator.com/item?id=34868979
