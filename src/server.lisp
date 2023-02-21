@@ -116,10 +116,18 @@
     (regex-replace-all "id=\"user-content-" result "name=\"")))
 
 (defun make-post(name)
-  (regex-replace-all "#THE-TITLE#"
-                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                        (gh-markdown (truename (concat *md-path* name ".md"))))
-                     (get-title (truename (concat *md-path* name ".md")))))
+  (regex-replace-all "#COMMENT-SCRIPT#"
+                     (regex-replace-all "#THE-TITLE#"
+                                        (regex-replace-all "#THE-CONTENT#" (the-tmpl)
+                                                           (gh-markdown (truename (concat *md-path* name ".md"))))
+                                        (get-title (truename (concat *md-path* name ".md"))))
+                     "<script src=\"https://utteranc.es/client.js\"
+        repo=\"VitoVan/vitovan.github.io\"
+        issue-term=\"url\"
+        theme=\"github-light\"
+        crossorigin=\"anonymous\"
+        async>
+        </script>"))
 
 (defun write-post(name)
   (format t "WRITING POST ~A ~%" name)
@@ -163,27 +171,29 @@
         (make-rss-item (car x) (cdr x))))))
 
 (defun make-index()
-  (regex-replace-all "#THE-TITLE#"
-                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                        (let* ((the-list-html))
-                                          (dolist (x (the-list))
-                                            (format t "~A~%" x)
-                                            (setf the-list-html
-                                                  (concat the-list-html
-                                                          (concat
-                                                           "
+  (regex-replace-all "#COMMENT-SCRIPT#"
+                     (regex-replace-all "#THE-TITLE#"
+                                        (regex-replace-all "#THE-CONTENT#" (the-tmpl)
+                                                           (let* ((the-list-html))
+                                                             (dolist (x (the-list))
+                                                               (format t "~A~%" x)
+                                                               (setf the-list-html
+                                                                     (concat the-list-html
+                                                                             (concat
+                                                                              "
                   <li"
-                                                           (when
-                                                               (member (car x) *shit-list* :test #'string=)
-                                                             " class='shit' title='old depreciated post'")
-                                                           "><a href='"
-                                                           (car x)
-                                                           ".html'>"
-                                                           (cdr x)
-                                                           "</a></li>"))))
-                                          (concat "<ul class='index'>" the-list-html "
+                                                                              (when
+                                                                                  (member (car x) *shit-list* :test #'string=)
+                                                                                " class='shit' title='old depreciated post'")
+                                                                              "><a href='"
+                                                                              (car x)
+                                                                              ".html'>"
+                                                                              (cdr x)
+                                                                              "</a></li>"))))
+                                                             (concat "<ul class='index'>" the-list-html "
                 </ul>")))
-                     "Vito Van"))
+                                        "Vito Van")
+                     ""))
 
 (defun write-index()
   (format t "WRITING INDEX ~%")
