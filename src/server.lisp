@@ -123,7 +123,8 @@
                                         (get-title (truename (concat *md-path* name ".md"))))
                      "<script src=\"https://utteranc.es/client.js\"
         repo=\"VitoVan/vitovan.github.io\"
-        issue-term=\"url\"
+        issue-term=\"title\"
+        label=\"Comment\"
         theme=\"github-light\"
         crossorigin=\"anonymous\"
         async>
