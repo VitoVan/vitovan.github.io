@@ -121,11 +121,19 @@
                                         (regex-replace-all "#THE-CONTENT#" (the-tmpl)
                                                            (gh-markdown (truename (concat *md-path* name ".md"))))
                                         (get-title (truename (concat *md-path* name ".md"))))
-                     "<script src=\"https://utteranc.es/client.js\"
-        repo=\"VitoVan/vitovan.github.io\"
-        issue-term=\"title\"
-        label=\"Comment\"
-        theme=\"github-light\"
+                     "<script src=\"https://giscus.app/client.js\"
+        data-repo=\"VitoVan/vitovan.github.io\"
+        data-repo-id=\"MDEwOlJlcG9zaXRvcnk0MDk1OTU3MQ==\"
+        data-category=\"Announcements\"
+        data-category-id=\"DIC_kwDOAnD-U84CUWbP\"
+        data-mapping=\"title\"
+        data-strict=\"1\"
+        data-reactions-enabled=\"1\"
+        data-emit-metadata=\"0\"
+        data-input-position=\"top\"
+        data-theme=\"light\"
+        data-lang=\"en\"
+        data-loading=\"lazy\"
         crossorigin=\"anonymous\"
         async>
         </script>"))

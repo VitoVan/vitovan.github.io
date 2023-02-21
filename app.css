@@ -25,6 +25,9 @@ body{
     margin: 0;
     padding: 0;
 }
+.giscus {
+    margin-top: 40px;
+}
 .container{
     float: left;
     width: 600px;
