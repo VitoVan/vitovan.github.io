@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ5CP8DCH9"></script>
+        <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-SJ5CP8DCH9');
+        </script>
         <!-- Standard Meta -->
         <meta charset="utf-8" />
         <meta name="author" content="Vito Van"/>
@@ -26,16 +35,14 @@
             </div>
             <div class="content markdown-body">
                 
-<h1>
-<a name="meditations-on-color-picker" class="anchor" href="#meditations-on-color-picker" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Meditations on Color Picker</h1>
+<h1><a name="meditations-on-color-picker" class="anchor" aria-hidden="true" href="#meditations-on-color-picker"><span aria-hidden="true" class="octicon octicon-link"></span></a>Meditations on Color Picker</h1>
 <p>2019/06</p>
 <blockquote>
 <p>Caution: the text below contains coarse language.</p>
 </blockquote>
 <p>A few months ago, there's a person who wrote a cross-platform color picker with Electron Technology, it got the huge file size and consumes a lot of resources when run.</p>
 <p>It's more than 140 MB after unpacked on macOS (more than 230 MB on Linux), and yes you need to unpack it before use. When running, it consumes more than 100 MB RAM and nearly 20% CPU on my laptop.</p>
-<h3>
-<a name="whats-the-matter" class="anchor" href="#whats-the-matter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's the Matter?</h3>
+<h3><a name="whats-the-matter" class="anchor" aria-hidden="true" href="#whats-the-matter"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's the Matter?</h3>
 <p>It's like you're buying one lemon from the online fruit market, ten minutes after you paid, there's a delivery person with a big fridge knocking at your door.</p>
 <p>You opened the door, and the delivery person said: "Hi dear customer, here's your lemon, hope you enjoy!"</p>
 <p>You looked around, then said: "So, where's the lemon?"</p>
@@ -53,8 +60,7 @@
 <p>Start with a short beep, a sweet and pleasant human voice said: "Hi, my name is Refi, your smart fridge. I'm sorry I can't open the door for you because of the lack of free space. Please move me to another place which has at least 2 x 2 meters free, and then press the red button again. Thank you for your understanding."</p>
 <p>...</p>
 <p>"My dear customer, with all my respect, I have to say, what a small kitchen you have!"</p>
-<h3>
-<a name="what-the-fuck" class="anchor" href="#what-the-fuck" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What the Fuck?</h3>
+<h3><a name="what-the-fuck" class="anchor" aria-hidden="true" href="#what-the-fuck"><span aria-hidden="true" class="octicon octicon-link"></span></a>What the Fuck?</h3>
 <p>So, what the fuck is going on?</p>
 <p>Are we really going to ship a fucking single lemon with a whole fucking giant fridge?</p>
 <p>I felt pissed off.</p>
@@ -65,8 +71,7 @@
 <p>So, What the fuck exactly is going on here?</p>
 <p>After long deep sorrow for a few months, one thought came up to me:</p>
 <p>Maybe, it's just me, I am getting old.</p>
-<h3>
-<a name="why-the-fuck" class="anchor" href="#why-the-fuck" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why the Fuck?</h3>
+<h3><a name="why-the-fuck" class="anchor" aria-hidden="true" href="#why-the-fuck"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why the Fuck?</h3>
 <p>As time goes by, I found myself speaking more and more "What the fuck!" instead of "This is awesome!", it feels like I am growing to a whining arrogant old human, who knows nothing and stick on the fragile worthless experience, and sees everything as a piece of shit when they do not fit the good old experience.</p>
 <p>I've learned too much.</p>
 <p>I admired the KISS principle which UNIX taught me, and one day someone came out with systemd and tell me it's the feature, and they even use binary log files over raw text streams. How can I accept that?</p>
@@ -77,17 +82,15 @@
 <p>The world is changing, so does the truth. If I was born to this world recently, there's no way for Electron to piss me off, maybe I'll be fascinated by it and do a lot of things to improve it. It's not right or wrong, they're all reasonable, as Hegel <a href="https://en.wikiquote.org/wiki/Georg_Wilhelm_Friedrich_Hegel#Elements_of_the_Philosophy_of_Right_(1820/1821)" rel="nofollow">once said</a>.</p>
 <p>After realized that, I stopped blame systemd or flat design, upgraded my OS with the most recent Linux distro and bought myself an iPad. They're not that bad.</p>
 <p>And, I felt peace and calm.</p>
-<h3>
-<a name="whats-next" class="anchor" href="#whats-next" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's Next?</h3>
+<h3><a name="whats-next" class="anchor" aria-hidden="true" href="#whats-next"><span aria-hidden="true" class="octicon octicon-link"></span></a>What's Next?</h3>
 <p>Since I stopped complaining, there left a lot of free time for me to think and do things.</p>
 <p>So, why not build a cross-platform color picker which consumes less resource? Something not Electron but also can get the job done? It must be fun!</p>
 <p>Then I went through some cross-platform solutions in the good old days, Lisp and Tk seem like a good combination. And after a while of digging down and piling up, voilà! here's the awesome <strong>Cross-Platform Color Picker Written in Common Lisp</strong>!</p>
-<p><a href="picker/osx.png" target="_blank" rel="noopener noreferrer"><img src="picker/osx.png" alt="Color Picker Running on macOS" style="max-width:100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="picker/osx.png"><img src="picker/osx.png" alt="Color Picker Running on macOS" style="max-width: 100%;"></a></p>
 <p>It runs on Linux / macOS / Windows, and less than 20 MB on all platform, consumes more than 100 MB RAM and nearly 30% CPU on my laptop.</p>
 <p>If using Electron means shipping one lemon with a whole fridge, then what I've done here means shipping one lemon with a smaller box filled with ice. So, it's <strong>NOT THAT GOOD</strong> when competing with Electron. But we're not competing, it's fun to do something different, right?</p>
 <p>You can download the color picker from <a href="https://github.com/VitoVan/cl-pkr#downloads">here</a>, and the source code is also <a href="https://github.com/VitoVan/cl-pkr">available</a>, if you're interested.</p>
-<h3>
-<a name="further-more" class="anchor" href="#further-more" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Further More</h3>
+<h3><a name="further-more" class="anchor" aria-hidden="true" href="#further-more"><span aria-hidden="true" class="octicon octicon-link"></span></a>Further More</h3>
 <p>If you experienced the color picker above and interested in writing applications with the same technology, I wrapped something as <a href="https://github.com/VitoVan/cl-icebox">cl-icebox</a> to help you to achieve that.</p>
 <p>Have fun and prosper <g-emoji class="g-emoji" alias="vulcan_salute" fallback-src="https://github.githubassets.com/images/icons/emoji/unicode/1f596.png">🖖</g-emoji> !</p>
 <hr>

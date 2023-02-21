@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ5CP8DCH9"></script>
+        <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-SJ5CP8DCH9');
+        </script>
         <!-- Standard Meta -->
         <meta charset="utf-8" />
         <meta name="author" content="Vito Van"/>
@@ -26,32 +35,27 @@
             </div>
             <div class="content markdown-body">
                 
-<h1>
-<a name="lisp-for-the-modern-web" class="anchor" href="#lisp-for-the-modern-web" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp for The Modern Web</h1>
+<h1><a name="lisp-for-the-modern-web" class="anchor" aria-hidden="true" href="#lisp-for-the-modern-web"><span aria-hidden="true" class="octicon octicon-link"></span></a>Lisp for The Modern Web</h1>
 <p>2015/08, revision: 2015/08, 2015/09, 2016/08</p>
 <blockquote>
 <p>Lisp isn't a language, it's a building material.</p>
 </blockquote>
 <p>-  Alan Kay</p>
-<h3>
-<a name="what-to-expect" class="anchor" href="#what-to-expect" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>What to Expect</h3>
+<h3><a name="what-to-expect" class="anchor" aria-hidden="true" href="#what-to-expect"><span aria-hidden="true" class="octicon octicon-link"></span></a>What to Expect</h3>
 <p>This piece is about how to build a modern web application with Common Lisp in the backend, from scratch.</p>
 <p>You may need to have some knowledge about <a href="https://en.wikipedia.org/wiki/Front_end_development" rel="nofollow">Front End Development</a>, cause we won't explain the steps for building the client.</p>
-<h3>
-<a name="why-lisp-again" class="anchor" href="#why-lisp-again" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why Lisp? Again</h3>
+<h3><a name="why-lisp-again" class="anchor" aria-hidden="true" href="#why-lisp-again"><span aria-hidden="true" class="octicon octicon-link"></span></a>Why Lisp? Again</h3>
 <p><strong>It is awesome</strong>.</p>
 <p>I don't think we need another reason for using Lisp, do we? Life is short, let's be awesome!</p>
 <p>It's been more than half a century since Lisp first appeared, she's like the <a href="https://en.wikipedia.org/wiki/One_Ring" rel="nofollow">The One Ring</a> in the Middle-earth. The one who mastered the spell of Lisp, will rule the world, once again.</p>
 <p><strong>Other reasons</strong>.</p>
 <p>If you need some other reasons beside awesome, here is some <a href="http://www.paulgraham.com/quotes.html" rel="nofollow">quotes</a> and <a href="http://www.paulgraham.com/lisp.html" rel="nofollow">articles</a> about Lisp, enjoy them.</p>
-<h3>
-<a name="lets-do-it" class="anchor" href="#lets-do-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's Do It</h3>
+<h3><a name="lets-do-it" class="anchor" aria-hidden="true" href="#lets-do-it"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's Do It</h3>
 <p>Do what?</p>
 <p>We are going to "build a modern web application with Common Lisp in the backend", as mentioned before.</p>
 <p>In recent days, many people build web applications with a <strong><code>Server with JSON output</code></strong> and a <strong><code>Client with HTML5 + JavaScript</code></strong>. And we will do it the same way.</p>
 <p>As you have had some Front End Development skills, we'll focus on the server part, and the client part will be provide as source code for you.</p>
-<h3>
-<a name="the-steps" class="anchor" href="#the-steps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Steps</h3>
+<h3><a name="the-steps" class="anchor" aria-hidden="true" href="#the-steps"><span aria-hidden="true" class="octicon octicon-link"></span></a>The Steps</h3>
 <ul>
 <li><a href="#hello-lisp">Hello Lisp!</a></li>
 <li><a href="#hello-world">Hello World!</a></li>
@@ -59,8 +63,7 @@
 <li><a href="#data-storage">Data Storage</a></li>
 <li><a href="#modern-client">Modern Client</a></li>
 </ul>
-<h4>
-<a name="hello-lisp" class="anchor" href="#hello-lisp" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello, Lisp!</h4>
+<h4><a name="hello-lisp" class="anchor" aria-hidden="true" href="#hello-lisp"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello, Lisp!</h4>
 <p>We assume that you have no knowledge about Lisp, so let's say hello:</p>
 <ul>
 <li>
@@ -250,8 +253,7 @@
 <span class="pl-k">function</span> <span class="pl-en">sayHello</span><span class="pl-kos">(</span><span class="pl-s1">to</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
     <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"Hello, ~a"</span><span class="pl-kos">.</span><span class="pl-en">replace</span><span class="pl-kos">(</span><span class="pl-s">"~a"</span><span class="pl-kos">,</span><span class="pl-s1">to</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
 <span class="pl-kos">}</span></pre></div>
-<h4>
-<a name="hello-world" class="anchor" href="#hello-world" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello World!</h4>
+<h4><a name="hello-world" class="anchor" aria-hidden="true" href="#hello-world"><span aria-hidden="true" class="octicon octicon-link"></span></a>Hello World!</h4>
 <p>Now, you have learned how to program in Common Lisp, but nobody knows except you and me, it's not good.</p>
 <p>So, let's say hello to the world.</p>
 <blockquote>
@@ -311,8 +313,7 @@
 <p>Second, we should thank <a href="http://weitz.de/" rel="nofollow">Edi Weitz</a>, he/she is an extremely awesome and fascinating Lisper on this planet. You will meet so many Lisp projects under Edi Weitz's magic hands after surfing a while in the Lisp world, and then you will be subdued by the charm of the code. Ok, after the words of praise, we just used <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a> <a href="#fn1">[1]</a> as the server, it's well documented, you will love it.</p>
 <p>We just load <a href="http://weitz.de/hunchentoot/" rel="nofollow">Hunchentoot</a> with Quicklisp, like this: <code>(ql:quickload :hunchentoot)</code>, and then start the Hunchentoot Server on port 4242: <code>(hunchentoot:start (make-instance 'hunchentoot:easy-acceptor :port 4242))</code>. At last, we defined a HTTP handler with Hunchentoot's <a href="http://weitz.de/hunchentoot/#define-easy-handler" rel="nofollow">define-easy-handler</a>.</p>
 <p>For further usage about Hunchentoot, you'll find them in the <a href="http://weitz.de/hunchentoot" rel="nofollow">document</a>.</p>
-<h4>
-<a name="lets-be-json" class="anchor" href="#lets-be-json" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's Be JSON</h4>
+<h4><a name="lets-be-json" class="anchor" aria-hidden="true" href="#lets-be-json"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let's Be JSON</h4>
 <p>Yes yes, I know I know. The Front Team won't be happy if we give them plain text response, they all like <a href="http://json.org/" rel="nofollow">JSON</a>.</p>
 <p>So, how to do it in Common Lisp?</p>
 <ul>
@@ -368,8 +369,7 @@
 <p><a href="https://common-lisp.net/project/cl-json/" rel="nofollow">CL-JSON</a></p>
 </li>
 </ul>
-<h4>
-<a name="data-storage" class="anchor" href="#data-storage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Storage</h4>
+<h4><a name="data-storage" class="anchor" aria-hidden="true" href="#data-storage"><span aria-hidden="true" class="octicon octicon-link"></span></a>Data Storage</h4>
 <p>Where we are now?</p>
 <p>We've made a <strong><code>Server with JSON output</code></strong>, it's a big deal. But, we never store any data yet. So, let's give him/her a shot who ever visit <a href="http://localhost:4242/you?name=Jack" rel="nofollow">http://localhost:4242/you?name=Jack</a>.</p>
 <p>Here is the original code for that request:</p>
@@ -565,8 +565,7 @@
 <p>Then, quit all your REPLs and close all the tabs in your browser (except this one).</p>
 <p>Reload your code: <code>sbcl --load p-storage-server.lisp</code>, then review the page: <a href="http://localhost:4242/people" rel="nofollow">http://localhost:4242/people</a>.</p>
 <p>Do you see Tyler? The CL-PREVALENCE automatically loaded the snapshot for us, we don't even noticed.</p>
-<h4>
-<a name="modern-client" class="anchor" href="#modern-client" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modern Client</h4>
+<h4><a name="modern-client" class="anchor" aria-hidden="true" href="#modern-client"><span aria-hidden="true" class="octicon octicon-link"></span></a>Modern Client</h4>
 <p>I've create a single file as client, you can <a href="lispweb3/lispweb3-client.htm">download</a> and modify it, it's just the mix of HTML / JavaScript and CSS.</p>
 <p><strong>Then what's left?</strong></p>
 <p>We need to serve this file, let's check the <a href="http://weitz.de/hunchentoot/#start" rel="nofollow">document of Hunchentoot</a>. Here we can see:</p>
@@ -584,8 +583,7 @@
 <p>Then Hunchentoot will use the "www/" in current folder as root directory, now try to reload our code.</p>
 <p>Then visit: <a href="http://localhost:4242/lispweb3-client.htm" rel="nofollow">http://localhost:4242/lispweb3-client.htm</a>, you got what you want.</p>
 <p>Suggestion: You do not really wanna use Hunchentoot to serve your static files, do you? You should try <a href="https://www.nginx.com/" rel="nofollow">Nginx</a> as a <a href="https://www.nginx.com/resources/admin-guide/reverse-proxy/" rel="nofollow">PROXY</a>, and make your Hunchentoot as an application server only.</p>
-<h3>
-<a name="before-the-end" class="anchor" href="#before-the-end" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Before the End</h3>
+<h3><a name="before-the-end" class="anchor" aria-hidden="true" href="#before-the-end"><span aria-hidden="true" class="octicon octicon-link"></span></a>Before the End</h3>
 <p>I have to say that I lied to you about the way we do when coding in Common Lisp for convenience of explanation.</p>
 <ul>
 <li>
@@ -597,8 +595,7 @@
 </ul>
 <p>And, one more thing:</p>
 <p>If you wanna surfing in the Lisp world in Lisp-way, <a href="https://www.gnu.org/software/emacs/" rel="nofollow">Emacs</a> is your laser sword, my young Jedi.</p>
-<h3>
-<a name="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
+<h3><a name="references" class="anchor" aria-hidden="true" href="#references"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
 <p>Thanks to:</p>
 <ul>
 <li>
