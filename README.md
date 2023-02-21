@@ -1,4 +1,8 @@
-### Source of [vitovan.com](https://vitovan.com)
+### Source of [https://sdf.org/~vito/](https://sdf.org/~vito/)
 
-Mirror on Github Pages: https://vitovan.github.io/
+Mirrors:
+
+- https://vitovan.github.io
+- https://vitovan.com
+- http://vito.sdf.org
 
