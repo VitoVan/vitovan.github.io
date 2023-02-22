@@ -119,7 +119,10 @@
   (regex-replace-all "#COMMENT-SCRIPT#"
                      (regex-replace-all "#THE-TITLE#"
                                         (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                                           (gh-markdown (truename (concat *md-path* name ".md"))))
+                                                           (concat
+                                                            (if (member name *shit-list* :test #'string=)
+                                                                "<div style=\"text-align: center;background: yellow;color: black;font-weight: bold;padding: 10px 0;\">depreciated content, please close your eyes, DO NOT READ!</div>" "")
+                                                            (gh-markdown (truename (concat *md-path* name ".md")))))
                                         (get-title (truename (concat *md-path* name ".md"))))
                      "<script src=\"https://giscus.app/client.js\"
         data-repo=\"VitoVan/vitovan.github.io\"
@@ -193,7 +196,7 @@
                   <li"
                                                                               (when
                                                                                   (member (car x) *shit-list* :test #'string=)
-                                                                                " class='shit' title='old depreciated post'")
+                                                                                " class='shit' title='depreciated content'")
                                                                               "><a href='"
                                                                               (car x)
                                                                               ".html'>"
