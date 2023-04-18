@@ -166,10 +166,20 @@
     (copy-file ori-file (concat *dist-path* (pathname-name ori-file) "." (pathname-type ori-file))
                :overwrite t)))
 
+(defun get-item-rss-pubdate (name)
+  (uiop:run-program
+   (concat
+    "TZ=UTC0 git log --follow --format=%ad --date=format-local:'%a, %d %b %Y %H:%M:%S %z' ./md/"
+    name
+    ".md | tail -1")
+   :output '(:string :stripped t)))
+
 (defun make-rss-item(name title)
   (rss-item title
             :link (concat "https://vitovan.com/" name ".html")
-            :author "Vito Van"))
+            :author "Vito Van"
+            :description (gh-markdown (truename (concat "md/" name ".md")))
+            :pubdate (get-item-rss-pubdate name)))
 
 
 (defun make-rss()
@@ -180,7 +190,8 @@
                           :image "https://vitovan.com/favicon.png"
                           :image-title "Vito's avatar")
       (dolist (x (the-list))
-        (make-rss-item (car x) (cdr x))))))
+        (unless (member (car x) *shit-list* :test #'string=)
+          (make-rss-item (car x) (cdr x)))))))
 
 (defun make-index()
   (regex-replace-all "#COMMENT-SCRIPT#"
