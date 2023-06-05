@@ -62,12 +62,12 @@
   (assert (> n 0) (n))
   (with-open-file (stream file)
     (loop for line = (read-line stream nil nil)
-       if (and (null line) (< line-number n))
-       do (error "file ~a is too short, just ~a, not ~a lines long"
-                 file line-number n)
-       do (incf line-number)
-       if (and line (= line-number n))
-       do (return line))))
+          if (and (null line) (< line-number n))
+            do (error "file ~a is too short, just ~a, not ~a lines long"
+                      file line-number n)
+          do (incf line-number)
+          if (and line (= line-number n))
+            do (return line))))
 
 (defvar *md-path* "./md/")
 (defvar *tmpl-path* "./tmpl/")
@@ -88,12 +88,12 @@
 (defun the-list()
   (let* ((the-list))
     (dolist (md-file
-              (sort
-               (remove-if-not
-                #'(lambda (p) (ends-with-p p "md"))
-                (mapcar #'namestring (list-directory *md-path*)))
-               #'(lambda(fa fb)
-                   (< (get-order fa) (get-order fb)))))
+             (sort
+              (remove-if-not
+               #'(lambda (p) (ends-with-p p "md"))
+               (mapcar #'namestring (list-directory *md-path*)))
+              #'(lambda(fa fb)
+                  (< (get-order fa) (get-order fb)))))
       (push
        (cons (pathname-name md-file) (get-title md-file))
        the-list))
@@ -141,13 +141,13 @@
         async>
         </script>"))
 
-(defun write-post(name)
+(defun write-post (name)
   (format t "WRITING POST ~A ~%" name)
   (string-to-file (concat *dist-path* name ".html")
                   (make-post name))
   (format t "COPYING POST Attachments ~A ~%" name)
-  (let ((att-dir (concat *dist-path* name "/"))
-        (att-list (list-directory (concat *md-path* name))))
+  (let ((att-dir (concat *dist-path* name ".assets/"))
+        (att-list (list-directory (concat *md-path* name ".assets"))))
     (format t "ATT_DIR: ~A~%" att-dir)
     (when (> (length att-list) 0)
       (ensure-directories-exist (pathname att-dir)))

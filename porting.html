@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-SJ5CP8DCH9"></script>
+        <script>
+         window.dataLayer = window.dataLayer || [];
+         function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+
+         gtag('config', 'G-SJ5CP8DCH9');
+        </script>
+        <!-- Standard Meta -->
+        <meta charset="utf-8" />
+        <meta name="author" content="Vito Van"/>
+        <meta name="theme-color" content="#005797">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="icon" type="image/png" href="favicon.png"/>
+        <link rel="stylesheet" type="text/css" href="app.css">
+        <title>Porting Lisp Game to the Web</title>
+    </head>
+    <body>
+        <div class="panel">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="current"><a href="list.html">List</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="rss.xml">RSS</a></li>
+            </ul>
+        </div>
+        <div class="container">
+            <div class="head">
+                <h1><a href="index.html">Vito Van</a></h1>
+            </div>
+            <div class="content markdown-body">
+                
+<h1><a name="porting-lisp-game-to-the-web" class="anchor" aria-hidden="true" href="#porting-lisp-game-to-the-web"><span aria-hidden="true" class="octicon octicon-link"></span></a>Porting Lisp Game to the Web</h1>
+<p>2023/06</p>
+<h2><a name="tldr" class="anchor" aria-hidden="true" href="#tldr"><span aria-hidden="true" class="octicon octicon-link"></span></a>TL;DR</h2>
+<p>Here is a game written in Common Lisp and ported to the web:</p>
+<p><a href="https://github.com/VitoVan/pelusica/#readme">Pelúsica: Survive and make melodies</a></p>
+<p><a href="https://github.com/VitoVan/pelusica/#readme"><img src="porting.assets/pelusica.png" alt="pelusica" style="max-width: 100%;"></a></p>
+<p>It's an action game in which you can control the blue dot with your keyboard to create music and avoid colliding with other dots.</p>
+<p>You can play it in your browser:</p>
+<p><a href="https://vitovan.com/pelusica/0.0.5/calm.html" rel="nofollow"><img src="https://camo.githubusercontent.com/31e3a7e8e1d3bc65a63c82ce83a0fb7e1db381b57be3917a220baa46ccaa4e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6f70656e2d696e25323074686525323062726f777365722d627269676874677265656e3f6c6f676f3d776562617373656d626c79266c6f676f436f6c6f723d7768697465" alt="open in the browser" data-canonical-src="https://img.shields.io/badge/open-in%20the%20browser-brightgreen?logo=webassembly&amp;logoColor=white" style="max-width: 100%;"></a></p>
+<p>or download it for <a href="https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.AppImage">Linux</a>, <a href="https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.macos-13.dmg">macOS</a>, and <a href="https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.exe">Windows</a>.</p>
+<h2><a name="motivation" class="anchor" aria-hidden="true" href="#motivation"><span aria-hidden="true" class="octicon octicon-link"></span></a>Motivation</h2>
+<p>I made a game, and I sent it to <a href="https://vitovan.com/jack.html" rel="nofollow">Jack</a>.</p>
+<p>Jack asked: "How to run it?"</p>
+<p>I thought Jack was stupid, so I ignored him and sent it to Emma.</p>
+<p>Emma said: "It cannot be opened."</p>
+<p>I was like: "Really?"</p>
+<p>It turns out Microsoft and Apple were sitting between me and my friends, saying:</p>
+<p>"No, you are not opening this, because Vito didn't pay."</p>
+<p>Like this:</p>
+<p><a target="_blank" rel="noopener noreferrer" href="porting.assets/windows-smart-screen.png"><img src="porting.assets/windows-smart-screen.png" alt="Windows protected your PC" style="max-width: 100%;"></a></p>
+<p>or this:</p>
+<p><a target="_blank" rel="noopener noreferrer" href="porting.assets/macos-cannot-open.png"><img src="porting.assets/macos-cannot-open.png" alt="&quot;Pelusica.app&quot; cannot be opened because the developer cannot be verified." style="max-width: 100%;"></a></p>
+<p>I hate this.</p>
+<p>"Who watches the watchmen?" I don't know.</p>
+<p>I just want to share my game without making deal with the OS police. Since I don't have the resources to fight them, I have to find a workaround. So I tried porting this game to the web.</p>
+<p>Hopefully, we won't encounter the web police too soon.</p>
+<h2><a name="exploration" class="anchor" aria-hidden="true" href="#exploration"><span aria-hidden="true" class="octicon octicon-link"></span></a>Exploration</h2>
+<h3><a name="to-lisp" class="anchor" aria-hidden="true" href="#to-lisp"><span aria-hidden="true" class="octicon octicon-link"></span></a>to Lisp</h3>
+<p>The first step should be running Lisp in the browser.</p>
+<p>Today we can run <a href="https://bellard.org/jslinux/" rel="nofollow">Linux</a> and <a href="https://copy.sh/v86/" rel="nofollow">Windows</a> inside a browser, running a Lisp system is just a piece of cake, compared to an operating system.</p>
+<p>I found the following two approaches:</p>
+<ul>
+<li>via WebAssembly
+<ul>
+<li><a href="https://news.ycombinator.com/item?id=31590819" rel="nofollow">Common Lisp running over WebAssembly for the first time</a></li>
+<li><a href="https://gitlab.com/embeddable-common-lisp/ecl/-/merge_requests/277/commits" rel="nofollow">ECL targetting WASM via Emscripten - preliminary support</a></li>
+<li><a href="http://weitz.de/chaitin/" rel="nofollow">A WebAssembly Version of Chaitin's Lisp</a></li>
+<li><a href="https://www.fermyon.com/wasm-languages/lisp" rel="nofollow">Wisp - Lisp in WebAssembly</a></li>
+</ul>
+</li>
+<li>via JavaScript
+<ul>
+<li><a href="https://lisperator.net/slip/" rel="nofollow">SLip — a Lisp system in JavaScript</a></li>
+<li><a href="https://tailrecursion.com/JACL/" rel="nofollow">JACL: JavaScript Assisted Common Lisp</a></li>
+<li><a href="https://github.com/cxxxr/valtan">Valtan: Common Lisp to JavaScript Compiler</a></li>
+<li><a href="https://github.com/jscl-project/jscl/">JSCL - A Lisp-to-JavaScript compiler</a></li>
+</ul>
+</li>
+</ul>
+<p>I didn't list everything here, you could find more. I also didn't list the approach of (Lisp (inside an emulated x86 (inside a browser))), because it sounds too aggressive.</p>
+<p>The point is the work could be done or has already been done.</p>
+<p>So, what now?</p>
+<h3><a name="to-game" class="anchor" aria-hidden="true" href="#to-game"><span aria-hidden="true" class="octicon octicon-link"></span></a>to Game</h3>
+<p>We need to be able to provide an interactive multimedia experience to the players, that is:</p>
+<ul>
+<li>to respond to the user inputs</li>
+<li>to present dynamic graphics</li>
+<li>to play music and sounds</li>
+</ul>
+<p>Lisp the great and powerful itself won't do any good to that, unless you cut the graphic and sound parts, and decide to make a text-based game.</p>
+<h4><a name="compiling-sdl2-and-cairo" class="anchor" aria-hidden="true" href="#compiling-sdl2-and-cairo"><span aria-hidden="true" class="octicon octicon-link"></span></a>Compiling SDL2 and Cairo</h4>
+<p>I was using <a href="https://libsdl.org/" rel="nofollow">SDL2</a> and <a href="https://www.cairographics.org/" rel="nofollow">Cairo</a> to provide the interactive multimedia experience on the desktop, with the assistance of <a href="https://github.com/lispgames/cl-sdl2">cl-sdl2</a> and <a href="https://github.com/rpav/cl-cairo2">cl-cairo2</a>.</p>
+<p>How do I use them in the browser?</p>
+<p>Maybe we could try WebAssembly.</p>
+<p>SDL2 is WebAssembly-ready since <a href="https://github.com/emscripten-core/emscripten/pull/15452">the last year</a>.</p>
+<p>And I spent some time on Cairo and <a href="https://github.com/VitoVan/pango-cairo-wasm/">compiled Cairo into WebAssembly</a>.</p>
+<h4><a name="try-to-use-sdl2-and-cairo-with-lisp" class="anchor" aria-hidden="true" href="#try-to-use-sdl2-and-cairo-with-lisp"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try to Use SDL2 and Cairo With Lisp</h4>
+<p>Now we know that we can use SDL2 and Cairo in the browser, but how?</p>
+<p>On the desktop, we use <a href="https://github.com/lispgames/cl-sdl2">cl-sdl2</a> and <a href="https://github.com/rpav/cl-cairo2">cl-cairo2</a>, which is <a href="https://cffi.common-lisp.dev/" rel="nofollow">CFFI</a> → <code>load-shared-object</code> →  <code>dlopen</code> under the hood.</p>
+<p>How do we do it in WebAssembly?  Or, is it possible?</p>
+<p>It is possible.</p>
+<p><a href="https://emscripten.org/docs/compiling/Dynamic-Linking.html" rel="nofollow">Dynamic Linking</a> and <a href="https://emscripten.org/docs/compiling/Dynamic-Linking.html#practical-details" rel="nofollow">dlopen</a> in WebAssembly is <a href="https://github.com/emscripten-core/emscripten/blob/9eff02bc816c50ab0e3b70a3bd5b72a8dc2893a2/test/other/test_dlopen_blocking.c#LL7C18-L7C24">not</a> a <a href="https://github.com/emscripten-core/emscripten/blob/9eff02bc816c50ab0e3b70a3bd5b72a8dc2893a2/test/other/test_dlopen_async.c#L25">problem</a>, the problem is to make CFFI work with it.</p>
+<p>No, not with <em>it</em>, with the Lisp implementation we chose.</p>
+<p>CFFI depends on <a href="https://asdf.common-lisp.dev/" rel="nofollow">ASDF</a> and <a href="https://sourceware.org/libffi/" rel="nofollow">libffi</a>. libffi had its WebAssembly support <a href="https://github.com/libffi/libffi/pull/763">earlier this year</a>, so we only need to focus on ASDF.</p>
+<p>Only one of the above Lisps was officially supported by ASDF, which is <a href="https://ecl.common-lisp.dev/" rel="nofollow">ECL</a>. So, to save time, we should stick to ECL and see if we can make any progress.</p>
+<br>
+<p>I paused.</p>
+<br>
+<p>I was intimidated by ECL when I was young and fragile.</p>
+<p>It was a long long time ago, one day morning, I loaded my project into ECL and tried to generate a standalone application. It took a thousand years to compile and end up with some <a href="https://stackoverflow.com/questions/46520876/building-an-executable-with-ecl-missing-dependency-or-can-not-find-make-build-i" rel="nofollow">weird</a> ASDF-related <a href="https://old.reddit.com/r/Common_Lisp/comments/hicmyt/error_with_uiop_running_ecl_application_built_by/" rel="nofollow">error</a> that I still can't solve today. I also failed to upgrade <a href="https://gitlab.common-lisp.net/ecl/ecl/-/blob/develop/contrib/asdf/README.ECL" rel="nofollow">ASDF for ECL</a> after many hours of scrambling. I must say this was solely because of my stupidity, ECL is great, I am just too dumb.</p>
+<br>
+<p>And I paused.</p>
+<br>
+<p>I was so frightened by this task, so I asked Daniel, whose name will be printed out along with the word "Copyright" when you were starting ECL, like this:</p>
+<div class="highlight highlight-source-lisp"><pre>ECL (Embeddable Common-Lisp) <span class="pl-c1">21.2.1</span> (git:6af4b3e51f80d569d88f0e8a4782b21c8b04970e)
+Copyright (C) <span class="pl-c1">1984</span> Taiichi Yuasa <span class="pl-k">and</span> Masami Hagiya
+Copyright (C) <span class="pl-c1">1993</span> Giuseppe Attardi
+Copyright (C) <span class="pl-c1">2013</span> Juan J. Garcia-Ripoll
+Copyright (C) <span class="pl-c1">2018</span> Daniel Kochmanski <span class="pl-c"><span class="pl-c">;</span>; &lt;---- this Daniel</span>
+Copyright (C) <span class="pl-c1">2021</span> Daniel Kochmanski <span class="pl-k">and</span> Marius Gerbershagen
+ECL is free software, <span class="pl-k">and</span> you are welcome to redistribute it
+under certain conditions<span class="pl-c"><span class="pl-c">;</span> see file 'Copyright' for details.</span>
+Type :h for Help.
+Top level.
+&gt;</pre></div>
+<p>And Daniel <a href="https://www.reddit.com/r/lisp/comments/ys7jpl/ecl_targetting_wasm_via_emscripten_preliminary/jjz39oh/" rel="nofollow">said</a>: "go for it!"</p>
+<p>Then I went for it.</p>
+<p>That's when the nightmare began. It turns out that making ASDF work with ECL in the browser is way more difficult than on the desktop.</p>
+<p>I was drowned in the sea of ECL source code; suffocated on the mountain of Emscripten reference; and lost in the forest of 13987 lines of asdf.lisp.</p>
+<p>Although <a href="https://gitlab.com/spaghettisalat" rel="nofollow">Marius Gerbershagen</a> (another ECL maintainer, also listed in the ECL copyright notice) pointed out <a href="https://gitlab.com/embeddable-common-lisp/ecl/-/merge_requests/277#note_1398797537" rel="nofollow">another path</a> (static linking) for me to achieve the goal, I still haven't made it.</p>
+<p>My intelligence was heavily questioned.</p>
+<br>
+<p>I felt sad and paused again.</p>
+<p>Until one day.</p>
+<br>
+<p>I was talking with Jack on the phone:</p>
+<p>"Now, press the <kbd>return</kbd> key."</p>
+<p>"Where is the <kbd>return</kbd> key?"</p>
+<p>"It's on your keyboard, damn! The one above <kbd>shift</kbd>!"</p>
+<p>"Oh, you mean <kbd>Enter</kbd>?"</p>
+<p>"......"</p>
+<p>Jack was using a Windows PC, and the letter on his keycap is "Enter".</p>
+<p>I was using a MacBook, it is "return".</p>
+<p>So: If my game were running in the browser one day, how do I know the player's operating system?</p>
+<p>Did you just say <code>navigator.userAgent</code>? <code>navigator.platform</code>?</p>
+<p>Yeah, that's it!</p>
+<p>Wait, what language is that? JavaScript?</p>
+<p>No, shit.</p>
+<h4><a name="if-using-javascript-were-inevitable" class="anchor" aria-hidden="true" href="#if-using-javascript-were-inevitable"><span aria-hidden="true" class="octicon octicon-link"></span></a>If Using JavaScript Were Inevitable</h4>
+<p>It seems to be it.</p>
+<p>Running in the browser, you have to deal with the browser.</p>
+<p>Not only to detect the operating system but also:</p>
+<ul>
+<li>to <a href="https://github.com/emscripten-core/emscripten/issues/3985">detect</a> the browser's preferred sampleRate of <a href="https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext" rel="nofollow">AudioContext</a>
+</li>
+<li>to get the parameter of the URL, like: <code>?name=Jack</code>
+</li>
+<li>to get the current window size</li>
+<li>to redirect the page to my cool web blog</li>
+<li>to show an evil alert</li>
+<li>...</li>
+</ul>
+<p>With C, we can <a href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-from-c-c" rel="nofollow">call JavaScript</a> like this:</p>
+<div class="highlight highlight-source-c"><pre>#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>emscripten.h<span class="pl-pds">&gt;</span></span>
+
+<span class="pl-en">EM_JS</span>(<span class="pl-k">void</span>, call_alert, (), {
+  <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">'</span>hello world!<span class="pl-pds">'</span></span>);
+  throw <span class="pl-s"><span class="pl-pds">'</span>all done<span class="pl-pds">'</span></span>;
+});
+
+<span class="pl-k">int</span> <span class="pl-en">main</span>() {
+  <span class="pl-c1">call_alert</span>();
+  <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<p>With Lisp, how?</p>
+<p>We can:</p>
+<ol>
+<li>write JavaScript in a C function</li>
+<li>expose that the C function</li>
+<li>
+<code>defcfun</code> in Lisp with CFFI to use it</li>
+</ol>
+<p>If the above feels too complicated, we can also use <a href="https://ecl.common-lisp.dev/static/manual/Foreign-Function-Interface.html#SFFI-Reference" rel="nofollow">SFFI</a> from ECL, to (write JavaScript code (inside C code (inside Lisp code))), <em>maybe</em> like this:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">alert</span> (x)
+  (ffi:clines <span class="pl-s"><span class="pl-pds">"</span>#include &lt;emscripten.h&gt;<span class="pl-pds">"</span></span>)
+  (ffi:c-inline (x) (:cstring) :void <span class="pl-s"><span class="pl-pds">"</span></span>
+<span class="pl-s">        EM_JS(void, call_alert, (), {</span>
+<span class="pl-s">          alert('hello world!');</span>
+<span class="pl-s">          throw 'all done';</span>
+<span class="pl-s">        });</span>
+<span class="pl-s">        call_alert(#0);</span>
+<span class="pl-s"><span class="pl-pds">"</span></span>))</pre></div>
+<p>Beautiful, right? I wouldn't dare to touch things like that, it's holy and sacred, and it should be reserved for sainthood.</p>
+<p>Now let's forget the SFFI approach and sort out our tasks:</p>
+<ul>
+<li>
+<p>make WASM Dynamic Linking, ASDF, CFFI, and ECL work,</p>
+<p>or make ASDF, CFFI, WASM ECL statically linked with Cairo working</p>
+</li>
+<li>
+<p>write an unknown amount of JavaScript in C and wrap them in CFFI</p>
+</li>
+<li>
+<p>compile all those pieces of spaghetti code into WebAssembly</p>
+</li>
+<li>
+<p>press our palms together and pray</p>
+</li>
+</ul>
+<p>I am only good at the last one.</p>
+<h4><a name="using-sdl2-and-cairo-with-lisp-in-jscl" class="anchor" aria-hidden="true" href="#using-sdl2-and-cairo-with-lisp-in-jscl"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using SDL2 and Cairo With Lisp in JSCL</h4>
+<p>If</p>
+<ol>
+<li>using JavaScript were inevitable</li>
+<li>using SDL2 and Cairo with WASM Lisp were hard to achieve</li>
+</ol>
+<p>then, why don't we</p>
+<ul>
+<li>use a JavaScript-powered Lisp to interact with JavaScript, then</li>
+<li>use SDL2, Cairo WASM exported functions within JavaScript, then</li>
+<li>wrap the JavaScript call with some Lisp code?</li>
+</ul>
+<p>Let's try <a href="https://jscl-project.github.io/" rel="nofollow">JSCL</a>, to call JavaScript within Lisp:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-c1">#j:alert</span> <span class="pl-s"><span class="pl-pds">"</span>this is an alert<span class="pl-pds">"</span></span>)</pre></div>
+<p>If we exported <a href="https://wiki.libsdl.org/SDL2/SDL_GetTicks" rel="nofollow">SDL_GetTicks</a> via <a href="https://emscripten.org/" rel="nofollow">emscripten</a>, we could call it in Lisp, like:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-c1">#j:_SDL_GetTicks</span>)</pre></div>
+<p>Convenient, right?</p>
+<p>Now, let's sort out our tasks again:</p>
+<ul>
+<li>export all the needed functions via emscripten</li>
+<li>wrap them a little for ease of use</li>
+<li>done</li>
+</ul>
+<p>Oh, really?</p>
+<p>Yes, really.</p>
+<p>I <a href="https://github.com/VitoVan/calm/blob/b683b2a8e983ff508069ad95aa7c9ab6415b8080/s/usr/web/wasm.lisp#L46">exported</a> all the frequently used SDL2 and Cairo functions, then wrapped them with <a href="https://github.com/VitoVan/calm/blob/main/src/web/cairo.lisp#L268">some Lisp code</a>, and then I can call them as if I were on the desktop operating system:</p>
+<div class="highlight highlight-source-lisp"><pre>(<span class="pl-k">defun</span> <span class="pl-en">draw-blade</span> (&amp;optional (degree <span class="pl-c1">0</span>))
+  (c:save)
+  (c:translate <span class="pl-c1">300</span> <span class="pl-c1">170</span>)
+  (c:rotate (* degree (/ pi <span class="pl-c1">180</span>)))
+  (c:move-to <span class="pl-c1">0</span> -<span class="pl-c1">15</span>)
+  (c:line-to <span class="pl-c1">0</span> -<span class="pl-c1">100</span>)
+  (c:curve-to <span class="pl-c1">0</span> -<span class="pl-c1">110</span> <span class="pl-c1">100</span> -<span class="pl-c1">65</span> <span class="pl-c1">15</span> <span class="pl-c1">0</span>)
+  (c:stroke-preserve)
+
+  (c:set-source-rgba (/ <span class="pl-c1">12</span> <span class="pl-c1">255</span>) (/ <span class="pl-c1">55</span> <span class="pl-c1">255</span>) (/ <span class="pl-c1">132</span> <span class="pl-c1">255</span>) <span class="pl-c1">0.1</span>)
+  (c:fill-path)
+  (c:restore))</pre></div>
+<p><a target="_blank" rel="noopener noreferrer" href="porting.assets/calm-fan.png"><img src="porting.assets/calm-fan.png" alt="Calm Example Fan" style="max-width: 100%;"></a></p>
+<p>You can try it yourself <a href="https://vitovan.com/calm/examples-0.1.1/fan/calm.html" rel="nofollow">with this link</a>, the source code is <a href="https://github.com/VitoVan/calm/tree/examples-0.1.1/docs/examples/fan">here</a>.</p>
+<p>As I clicked on the blue circle in the upper right corner, a gentle  breeze carrying the scent of freshly cut grass wafted out of the screen. It was then that I knew it was time to call it a day.</p>
+<h2><a name="what-now" class="anchor" aria-hidden="true" href="#what-now"><span aria-hidden="true" class="octicon octicon-link"></span></a>What Now?</h2>
+<p>With the availability of Lisp in the browser, along with SDL2 and Cairo, the possibilities for interesting projects are endless.</p>
+<p>The day-to-day development could happen on the desktop with <a href="https://www.sbcl.org/" rel="nofollow">SBCL</a> + <a href="https://slime.common-lisp.dev/" rel="nofollow">SLIME</a> enabled to get an interactive programming experience. When done, compile everything to WebAssembly + JavaScript, and publish the result online, then you have an application that supports Linux, macOS, Windows, and the web browser!</p>
+<p>But, JSCL is <a href="https://github.com/jscl-project/jscl/#status">far from complete</a>.</p>
+<p>In the perfect new world, we should expect:</p>
+<ul>
+<li>
+<p>JSCL (or any other <em>JavaScript</em> Lisp) is complete, like <a href="https://webstore.ansi.org/standards/incits/incits2261994s2008" rel="nofollow">ANSI complete</a>, or</p>
+</li>
+<li>
+<p>ECL (or any other <em>complete</em> Lisp) and the surrounding ecosystem function seamlessly in the browser</p>
+</li>
+</ul>
+<p>If you're interested, then go for it!</p>
+<p>And we don't need a complete Lisp to have fun, right?</p>
+<p>I can't wait to see what you are going to make.</p>
+<p>;-)</p>
+
+            </div>
+        <script src="https://giscus.app/client.js"
+        data-repo="VitoVan/vitovan.github.io"
+        data-repo-id="MDEwOlJlcG9zaXRvcnk0MDk1OTU3MQ=="
+        data-category="Announcements"
+        data-category-id="DIC_kwDOAnD-U84CUWbP"
+        data-mapping="title"
+        data-strict="1"
+        data-reactions-enabled="0"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async>
+        </script>
+        </div>
+    </body>
+</html>

@@ -1,7 +1,7 @@
 body{
     display: flex;
     justify-content: center;
-    font-family: Optima, "Open Sans", Palatino, "Hiragino Sans GB", "Microsoft Yahei", Tahoma, serif;
+    font-family: Optima, Palatino, Charter, "Bitstream Charter", serif;
     color: #000;
     background: #F0F1EE none repeat scroll 0% 0%;
     font-size: 12pt;
@@ -22,7 +22,7 @@ body{
     padding-bottom: 50px;
 }
 .container img{
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 4px;
 }
 .panel{
@@ -52,7 +52,7 @@ body{
 .panel a:hover{
     text-decoration: underline;
 }
-@media (max-width: 1000px) {
+@media (max-width: 700px) {
     body {
       display: block;
     }
@@ -65,16 +65,24 @@ body{
         border-bottom-style: dashed;
         border-bottom-width: 0.1em;
     }
-    .panel>ul>li{
+    .panel>ul>li {
         float: left;
         margin: 0 0.8em;
     }
-    .container{
+    .container {
         width: 100%;
+    }
+    .container img {
+      margin: 0 auto;
+      display: block;
     }
     .markdown-body{
         min-width: inherit !important;
         border-radius: 0 !important;
+    }
+    .giscus {
+        padding: 1%;
+        width: 98%;
     }
 }
 .head{
@@ -87,7 +95,7 @@ body{
 }
 .content{
     padding:0 1em;
-    font-size: 1.1em;
+    font-size: 1em;
     line-height: 1.5em;
 }
 .index>a{

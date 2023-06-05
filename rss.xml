@@ -12,6 +12,252 @@
             <link>https://vitovan.com/</link>
         </image>
         <item>
+            <title>Porting Lisp Game to the Web</title>
+            <link>https://vitovan.com/porting.html</link>
+            <description>
+&lt;h1&gt;&lt;a name=&quot;porting-lisp-game-to-the-web&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#porting-lisp-game-to-the-web&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Porting Lisp Game to the Web&lt;/h1&gt;
+&lt;p&gt;2023/06&lt;/p&gt;
+&lt;h2&gt;&lt;a name=&quot;tldr&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#tldr&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
+&lt;p&gt;Here is a game written in Common Lisp and ported to the web:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/VitoVan/pelusica/#readme&quot;&gt;Pel&#xFA;sica: Survive and make melodies&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/VitoVan/pelusica/#readme&quot;&gt;&lt;img src=&quot;porting.assets/pelusica.png&quot; alt=&quot;pelusica&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;It&apos;s an action game in which you can control the blue dot with your keyboard to create music and avoid colliding with other dots.&lt;/p&gt;
+&lt;p&gt;You can play it in your browser:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://vitovan.com/pelusica/0.0.5/calm.html&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;https://camo.githubusercontent.com/31e3a7e8e1d3bc65a63c82ce83a0fb7e1db381b57be3917a220baa46ccaa4e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6f70656e2d696e25323074686525323062726f777365722d627269676874677265656e3f6c6f676f3d776562617373656d626c79266c6f676f436f6c6f723d7768697465&quot; alt=&quot;open in the browser&quot; data-canonical-src=&quot;https://img.shields.io/badge/open-in%20the%20browser-brightgreen?logo=webassembly&amp;amp;logoColor=white&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;or download it for &lt;a href=&quot;https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.AppImage&quot;&gt;Linux&lt;/a&gt;, &lt;a href=&quot;https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.macos-13.dmg&quot;&gt;macOS&lt;/a&gt;, and &lt;a href=&quot;https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.exe&quot;&gt;Windows&lt;/a&gt;.&lt;/p&gt;
+&lt;h2&gt;&lt;a name=&quot;motivation&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#motivation&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Motivation&lt;/h2&gt;
+&lt;p&gt;I made a game, and I sent it to &lt;a href=&quot;https://vitovan.com/jack.html&quot; rel=&quot;nofollow&quot;&gt;Jack&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Jack asked: &quot;How to run it?&quot;&lt;/p&gt;
+&lt;p&gt;I thought Jack was stupid, so I ignored him and sent it to Emma.&lt;/p&gt;
+&lt;p&gt;Emma said: &quot;It cannot be opened.&quot;&lt;/p&gt;
+&lt;p&gt;I was like: &quot;Really?&quot;&lt;/p&gt;
+&lt;p&gt;It turns out Microsoft and Apple were sitting between me and my friends, saying:&lt;/p&gt;
+&lt;p&gt;&quot;No, you are not opening this, because Vito didn&apos;t pay.&quot;&lt;/p&gt;
+&lt;p&gt;Like this:&lt;/p&gt;
+&lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; href=&quot;porting.assets/windows-smart-screen.png&quot;&gt;&lt;img src=&quot;porting.assets/windows-smart-screen.png&quot; alt=&quot;Windows protected your PC&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;or this:&lt;/p&gt;
+&lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; href=&quot;porting.assets/macos-cannot-open.png&quot;&gt;&lt;img src=&quot;porting.assets/macos-cannot-open.png&quot; alt=&quot;&amp;quot;Pelusica.app&amp;quot; cannot be opened because the developer cannot be verified.&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I hate this.&lt;/p&gt;
+&lt;p&gt;&quot;Who watches the watchmen?&quot; I don&apos;t know.&lt;/p&gt;
+&lt;p&gt;I just want to share my game without making deal with the OS police. Since I don&apos;t have the resources to fight them, I have to find a workaround. So I tried porting this game to the web.&lt;/p&gt;
+&lt;p&gt;Hopefully, we won&apos;t encounter the web police too soon.&lt;/p&gt;
+&lt;h2&gt;&lt;a name=&quot;exploration&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#exploration&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Exploration&lt;/h2&gt;
+&lt;h3&gt;&lt;a name=&quot;to-lisp&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#to-lisp&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;to Lisp&lt;/h3&gt;
+&lt;p&gt;The first step should be running Lisp in the browser.&lt;/p&gt;
+&lt;p&gt;Today we can run &lt;a href=&quot;https://bellard.org/jslinux/&quot; rel=&quot;nofollow&quot;&gt;Linux&lt;/a&gt; and &lt;a href=&quot;https://copy.sh/v86/&quot; rel=&quot;nofollow&quot;&gt;Windows&lt;/a&gt; inside a browser, running a Lisp system is just a piece of cake, compared to an operating system.&lt;/p&gt;
+&lt;p&gt;I found the following two approaches:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;via WebAssembly
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://news.ycombinator.com/item?id=31590819&quot; rel=&quot;nofollow&quot;&gt;Common Lisp running over WebAssembly for the first time&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://gitlab.com/embeddable-common-lisp/ecl/-/merge_requests/277/commits&quot; rel=&quot;nofollow&quot;&gt;ECL targetting WASM via Emscripten - preliminary support&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;http://weitz.de/chaitin/&quot; rel=&quot;nofollow&quot;&gt;A WebAssembly Version of Chaitin&apos;s Lisp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.fermyon.com/wasm-languages/lisp&quot; rel=&quot;nofollow&quot;&gt;Wisp - Lisp in WebAssembly&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;via JavaScript
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://lisperator.net/slip/&quot; rel=&quot;nofollow&quot;&gt;SLip — a Lisp system in JavaScript&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://tailrecursion.com/JACL/&quot; rel=&quot;nofollow&quot;&gt;JACL: JavaScript Assisted Common Lisp&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/cxxxr/valtan&quot;&gt;Valtan: Common Lisp to JavaScript Compiler&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://github.com/jscl-project/jscl/&quot;&gt;JSCL - A Lisp-to-JavaScript compiler&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I didn&apos;t list everything here, you could find more. I also didn&apos;t list the approach of (Lisp (inside an emulated x86 (inside a browser))), because it sounds too aggressive.&lt;/p&gt;
+&lt;p&gt;The point is the work could be done or has already been done.&lt;/p&gt;
+&lt;p&gt;So, what now?&lt;/p&gt;
+&lt;h3&gt;&lt;a name=&quot;to-game&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#to-game&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;to Game&lt;/h3&gt;
+&lt;p&gt;We need to be able to provide an interactive multimedia experience to the players, that is:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;to respond to the user inputs&lt;/li&gt;
+&lt;li&gt;to present dynamic graphics&lt;/li&gt;
+&lt;li&gt;to play music and sounds&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Lisp the great and powerful itself won&apos;t do any good to that, unless you cut the graphic and sound parts, and decide to make a text-based game.&lt;/p&gt;
+&lt;h4&gt;&lt;a name=&quot;compiling-sdl2-and-cairo&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#compiling-sdl2-and-cairo&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Compiling SDL2 and Cairo&lt;/h4&gt;
+&lt;p&gt;I was using &lt;a href=&quot;https://libsdl.org/&quot; rel=&quot;nofollow&quot;&gt;SDL2&lt;/a&gt; and &lt;a href=&quot;https://www.cairographics.org/&quot; rel=&quot;nofollow&quot;&gt;Cairo&lt;/a&gt; to provide the interactive multimedia experience on the desktop, with the assistance of &lt;a href=&quot;https://github.com/lispgames/cl-sdl2&quot;&gt;cl-sdl2&lt;/a&gt; and &lt;a href=&quot;https://github.com/rpav/cl-cairo2&quot;&gt;cl-cairo2&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;How do I use them in the browser?&lt;/p&gt;
+&lt;p&gt;Maybe we could try WebAssembly.&lt;/p&gt;
+&lt;p&gt;SDL2 is WebAssembly-ready since &lt;a href=&quot;https://github.com/emscripten-core/emscripten/pull/15452&quot;&gt;the last year&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;And I spent some time on Cairo and &lt;a href=&quot;https://github.com/VitoVan/pango-cairo-wasm/&quot;&gt;compiled Cairo into WebAssembly&lt;/a&gt;.&lt;/p&gt;
+&lt;h4&gt;&lt;a name=&quot;try-to-use-sdl2-and-cairo-with-lisp&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#try-to-use-sdl2-and-cairo-with-lisp&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Try to Use SDL2 and Cairo With Lisp&lt;/h4&gt;
+&lt;p&gt;Now we know that we can use SDL2 and Cairo in the browser, but how?&lt;/p&gt;
+&lt;p&gt;On the desktop, we use &lt;a href=&quot;https://github.com/lispgames/cl-sdl2&quot;&gt;cl-sdl2&lt;/a&gt; and &lt;a href=&quot;https://github.com/rpav/cl-cairo2&quot;&gt;cl-cairo2&lt;/a&gt;, which is &lt;a href=&quot;https://cffi.common-lisp.dev/&quot; rel=&quot;nofollow&quot;&gt;CFFI&lt;/a&gt; → &lt;code&gt;load-shared-object&lt;/code&gt; →  &lt;code&gt;dlopen&lt;/code&gt; under the hood.&lt;/p&gt;
+&lt;p&gt;How do we do it in WebAssembly?  Or, is it possible?&lt;/p&gt;
+&lt;p&gt;It is possible.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://emscripten.org/docs/compiling/Dynamic-Linking.html&quot; rel=&quot;nofollow&quot;&gt;Dynamic Linking&lt;/a&gt; and &lt;a href=&quot;https://emscripten.org/docs/compiling/Dynamic-Linking.html#practical-details&quot; rel=&quot;nofollow&quot;&gt;dlopen&lt;/a&gt; in WebAssembly is &lt;a href=&quot;https://github.com/emscripten-core/emscripten/blob/9eff02bc816c50ab0e3b70a3bd5b72a8dc2893a2/test/other/test_dlopen_blocking.c#LL7C18-L7C24&quot;&gt;not&lt;/a&gt; a &lt;a href=&quot;https://github.com/emscripten-core/emscripten/blob/9eff02bc816c50ab0e3b70a3bd5b72a8dc2893a2/test/other/test_dlopen_async.c#L25&quot;&gt;problem&lt;/a&gt;, the problem is to make CFFI work with it.&lt;/p&gt;
+&lt;p&gt;No, not with &lt;em&gt;it&lt;/em&gt;, with the Lisp implementation we chose.&lt;/p&gt;
+&lt;p&gt;CFFI depends on &lt;a href=&quot;https://asdf.common-lisp.dev/&quot; rel=&quot;nofollow&quot;&gt;ASDF&lt;/a&gt; and &lt;a href=&quot;https://sourceware.org/libffi/&quot; rel=&quot;nofollow&quot;&gt;libffi&lt;/a&gt;. libffi had its WebAssembly support &lt;a href=&quot;https://github.com/libffi/libffi/pull/763&quot;&gt;earlier this year&lt;/a&gt;, so we only need to focus on ASDF.&lt;/p&gt;
+&lt;p&gt;Only one of the above Lisps was officially supported by ASDF, which is &lt;a href=&quot;https://ecl.common-lisp.dev/&quot; rel=&quot;nofollow&quot;&gt;ECL&lt;/a&gt;. So, to save time, we should stick to ECL and see if we can make any progress.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;I paused.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;I was intimidated by ECL when I was young and fragile.&lt;/p&gt;
+&lt;p&gt;It was a long long time ago, one day morning, I loaded my project into ECL and tried to generate a standalone application. It took a thousand years to compile and end up with some &lt;a href=&quot;https://stackoverflow.com/questions/46520876/building-an-executable-with-ecl-missing-dependency-or-can-not-find-make-build-i&quot; rel=&quot;nofollow&quot;&gt;weird&lt;/a&gt; ASDF-related &lt;a href=&quot;https://old.reddit.com/r/Common_Lisp/comments/hicmyt/error_with_uiop_running_ecl_application_built_by/&quot; rel=&quot;nofollow&quot;&gt;error&lt;/a&gt; that I still can&apos;t solve today. I also failed to upgrade &lt;a href=&quot;https://gitlab.common-lisp.net/ecl/ecl/-/blob/develop/contrib/asdf/README.ECL&quot; rel=&quot;nofollow&quot;&gt;ASDF for ECL&lt;/a&gt; after many hours of scrambling. I must say this was solely because of my stupidity, ECL is great, I am just too dumb.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;And I paused.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;I was so frightened by this task, so I asked Daniel, whose name will be printed out along with the word &quot;Copyright&quot; when you were starting ECL, like this:&lt;/p&gt;
+&lt;div class=&quot;highlight highlight-source-lisp&quot;&gt;&lt;pre&gt;ECL (Embeddable Common-Lisp) &lt;span class=&quot;pl-c1&quot;&gt;21.2.1&lt;/span&gt; (git:6af4b3e51f80d569d88f0e8a4782b21c8b04970e)
+Copyright (C) &lt;span class=&quot;pl-c1&quot;&gt;1984&lt;/span&gt; Taiichi Yuasa &lt;span class=&quot;pl-k&quot;&gt;and&lt;/span&gt; Masami Hagiya
+Copyright (C) &lt;span class=&quot;pl-c1&quot;&gt;1993&lt;/span&gt; Giuseppe Attardi
+Copyright (C) &lt;span class=&quot;pl-c1&quot;&gt;2013&lt;/span&gt; Juan J. Garcia-Ripoll
+Copyright (C) &lt;span class=&quot;pl-c1&quot;&gt;2018&lt;/span&gt; Daniel Kochmanski &lt;span class=&quot;pl-c&quot;&gt;&lt;span class=&quot;pl-c&quot;&gt;;&lt;/span&gt;; &amp;lt;---- this Daniel&lt;/span&gt;
+Copyright (C) &lt;span class=&quot;pl-c1&quot;&gt;2021&lt;/span&gt; Daniel Kochmanski &lt;span class=&quot;pl-k&quot;&gt;and&lt;/span&gt; Marius Gerbershagen
+ECL is free software, &lt;span class=&quot;pl-k&quot;&gt;and&lt;/span&gt; you are welcome to redistribute it
+under certain conditions&lt;span class=&quot;pl-c&quot;&gt;&lt;span class=&quot;pl-c&quot;&gt;;&lt;/span&gt; see file &apos;Copyright&apos; for details.&lt;/span&gt;
+Type :h for Help.
+Top level.
+&amp;gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And Daniel &lt;a href=&quot;https://www.reddit.com/r/lisp/comments/ys7jpl/ecl_targetting_wasm_via_emscripten_preliminary/jjz39oh/&quot; rel=&quot;nofollow&quot;&gt;said&lt;/a&gt;: &quot;go for it!&quot;&lt;/p&gt;
+&lt;p&gt;Then I went for it.&lt;/p&gt;
+&lt;p&gt;That&apos;s when the nightmare began. It turns out that making ASDF work with ECL in the browser is way more difficult than on the desktop.&lt;/p&gt;
+&lt;p&gt;I was drowned in the sea of ECL source code; suffocated on the mountain of Emscripten reference; and lost in the forest of 13987 lines of asdf.lisp.&lt;/p&gt;
+&lt;p&gt;Although &lt;a href=&quot;https://gitlab.com/spaghettisalat&quot; rel=&quot;nofollow&quot;&gt;Marius Gerbershagen&lt;/a&gt; (another ECL maintainer, also listed in the ECL copyright notice) pointed out &lt;a href=&quot;https://gitlab.com/embeddable-common-lisp/ecl/-/merge_requests/277#note_1398797537&quot; rel=&quot;nofollow&quot;&gt;another path&lt;/a&gt; (static linking) for me to achieve the goal, I still haven&apos;t made it.&lt;/p&gt;
+&lt;p&gt;My intelligence was heavily questioned.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;I felt sad and paused again.&lt;/p&gt;
+&lt;p&gt;Until one day.&lt;/p&gt;
+&lt;br&gt;
+&lt;p&gt;I was talking with Jack on the phone:&lt;/p&gt;
+&lt;p&gt;&quot;Now, press the &lt;kbd&gt;return&lt;/kbd&gt; key.&quot;&lt;/p&gt;
+&lt;p&gt;&quot;Where is the &lt;kbd&gt;return&lt;/kbd&gt; key?&quot;&lt;/p&gt;
+&lt;p&gt;&quot;It&apos;s on your keyboard, damn! The one above &lt;kbd&gt;shift&lt;/kbd&gt;!&quot;&lt;/p&gt;
+&lt;p&gt;&quot;Oh, you mean &lt;kbd&gt;Enter&lt;/kbd&gt;?&quot;&lt;/p&gt;
+&lt;p&gt;&quot;......&quot;&lt;/p&gt;
+&lt;p&gt;Jack was using a Windows PC, and the letter on his keycap is &quot;Enter&quot;.&lt;/p&gt;
+&lt;p&gt;I was using a MacBook, it is &quot;return&quot;.&lt;/p&gt;
+&lt;p&gt;So: If my game were running in the browser one day, how do I know the player&apos;s operating system?&lt;/p&gt;
+&lt;p&gt;Did you just say &lt;code&gt;navigator.userAgent&lt;/code&gt;? &lt;code&gt;navigator.platform&lt;/code&gt;?&lt;/p&gt;
+&lt;p&gt;Yeah, that&apos;s it!&lt;/p&gt;
+&lt;p&gt;Wait, what language is that? JavaScript?&lt;/p&gt;
+&lt;p&gt;No, shit.&lt;/p&gt;
+&lt;h4&gt;&lt;a name=&quot;if-using-javascript-were-inevitable&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#if-using-javascript-were-inevitable&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;If Using JavaScript Were Inevitable&lt;/h4&gt;
+&lt;p&gt;It seems to be it.&lt;/p&gt;
+&lt;p&gt;Running in the browser, you have to deal with the browser.&lt;/p&gt;
+&lt;p&gt;Not only to detect the operating system but also:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;to &lt;a href=&quot;https://github.com/emscripten-core/emscripten/issues/3985&quot;&gt;detect&lt;/a&gt; the browser&apos;s preferred sampleRate of &lt;a href=&quot;https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext&quot; rel=&quot;nofollow&quot;&gt;AudioContext&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;to get the parameter of the URL, like: &lt;code&gt;?name=Jack&lt;/code&gt;
+&lt;/li&gt;
+&lt;li&gt;to get the current window size&lt;/li&gt;
+&lt;li&gt;to redirect the page to my cool web blog&lt;/li&gt;
+&lt;li&gt;to show an evil alert&lt;/li&gt;
+&lt;li&gt;...&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;With C, we can &lt;a href=&quot;https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-from-c-c&quot; rel=&quot;nofollow&quot;&gt;call JavaScript&lt;/a&gt; like this:&lt;/p&gt;
+&lt;div class=&quot;highlight highlight-source-c&quot;&gt;&lt;pre&gt;#&lt;span class=&quot;pl-k&quot;&gt;include&lt;/span&gt; &lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&amp;lt;&lt;/span&gt;emscripten.h&lt;span class=&quot;pl-pds&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/span&gt;
+
+&lt;span class=&quot;pl-en&quot;&gt;EM_JS&lt;/span&gt;(&lt;span class=&quot;pl-k&quot;&gt;void&lt;/span&gt;, call_alert, (), {
+  &lt;span class=&quot;pl-c1&quot;&gt;alert&lt;/span&gt;(&lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&apos;&lt;/span&gt;hello world!&lt;span class=&quot;pl-pds&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;);
+  throw &lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&apos;&lt;/span&gt;all done&lt;span class=&quot;pl-pds&quot;&gt;&apos;&lt;/span&gt;&lt;/span&gt;;
+});
+
+&lt;span class=&quot;pl-k&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;pl-en&quot;&gt;main&lt;/span&gt;() {
+  &lt;span class=&quot;pl-c1&quot;&gt;call_alert&lt;/span&gt;();
+  &lt;span class=&quot;pl-k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;0&lt;/span&gt;;
+}&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;With Lisp, how?&lt;/p&gt;
+&lt;p&gt;We can:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;write JavaScript in a C function&lt;/li&gt;
+&lt;li&gt;expose that the C function&lt;/li&gt;
+&lt;li&gt;
+&lt;code&gt;defcfun&lt;/code&gt; in Lisp with CFFI to use it&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If the above feels too complicated, we can also use &lt;a href=&quot;https://ecl.common-lisp.dev/static/manual/Foreign-Function-Interface.html#SFFI-Reference&quot; rel=&quot;nofollow&quot;&gt;SFFI&lt;/a&gt; from ECL, to (write JavaScript code (inside C code (inside Lisp code))), &lt;em&gt;maybe&lt;/em&gt; like this:&lt;/p&gt;
+&lt;div class=&quot;highlight highlight-source-lisp&quot;&gt;&lt;pre&gt;(&lt;span class=&quot;pl-k&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;pl-en&quot;&gt;alert&lt;/span&gt; (x)
+  (ffi:clines &lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&quot;&lt;/span&gt;#include &amp;lt;emscripten.h&amp;gt;&lt;span class=&quot;pl-pds&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;)
+  (ffi:c-inline (x) (:cstring) :void &lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span class=&quot;pl-s&quot;&gt;        EM_JS(void, call_alert, (), {&lt;/span&gt;
+&lt;span class=&quot;pl-s&quot;&gt;          alert(&apos;hello world!&apos;);&lt;/span&gt;
+&lt;span class=&quot;pl-s&quot;&gt;          throw &apos;all done&apos;;&lt;/span&gt;
+&lt;span class=&quot;pl-s&quot;&gt;        });&lt;/span&gt;
+&lt;span class=&quot;pl-s&quot;&gt;        call_alert(#0);&lt;/span&gt;
+&lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;))&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Beautiful, right? I wouldn&apos;t dare to touch things like that, it&apos;s holy and sacred, and it should be reserved for sainthood.&lt;/p&gt;
+&lt;p&gt;Now let&apos;s forget the SFFI approach and sort out our tasks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;make WASM Dynamic Linking, ASDF, CFFI, and ECL work,&lt;/p&gt;
+&lt;p&gt;or make ASDF, CFFI, WASM ECL statically linked with Cairo working&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;write an unknown amount of JavaScript in C and wrap them in CFFI&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;compile all those pieces of spaghetti code into WebAssembly&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;press our palms together and pray&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I am only good at the last one.&lt;/p&gt;
+&lt;h4&gt;&lt;a name=&quot;using-sdl2-and-cairo-with-lisp-in-jscl&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#using-sdl2-and-cairo-with-lisp-in-jscl&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Using SDL2 and Cairo With Lisp in JSCL&lt;/h4&gt;
+&lt;p&gt;If&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;using JavaScript were inevitable&lt;/li&gt;
+&lt;li&gt;using SDL2 and Cairo with WASM Lisp were hard to achieve&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;then, why don&apos;t we&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;use a JavaScript-powered Lisp to interact with JavaScript, then&lt;/li&gt;
+&lt;li&gt;use SDL2, Cairo WASM exported functions within JavaScript, then&lt;/li&gt;
+&lt;li&gt;wrap the JavaScript call with some Lisp code?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Let&apos;s try &lt;a href=&quot;https://jscl-project.github.io/&quot; rel=&quot;nofollow&quot;&gt;JSCL&lt;/a&gt;, to call JavaScript within Lisp:&lt;/p&gt;
+&lt;div class=&quot;highlight highlight-source-lisp&quot;&gt;&lt;pre&gt;(&lt;span class=&quot;pl-c1&quot;&gt;#j:alert&lt;/span&gt; &lt;span class=&quot;pl-s&quot;&gt;&lt;span class=&quot;pl-pds&quot;&gt;&quot;&lt;/span&gt;this is an alert&lt;span class=&quot;pl-pds&quot;&gt;&quot;&lt;/span&gt;&lt;/span&gt;)&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;If we exported &lt;a href=&quot;https://wiki.libsdl.org/SDL2/SDL_GetTicks&quot; rel=&quot;nofollow&quot;&gt;SDL_GetTicks&lt;/a&gt; via &lt;a href=&quot;https://emscripten.org/&quot; rel=&quot;nofollow&quot;&gt;emscripten&lt;/a&gt;, we could call it in Lisp, like:&lt;/p&gt;
+&lt;div class=&quot;highlight highlight-source-lisp&quot;&gt;&lt;pre&gt;(&lt;span class=&quot;pl-c1&quot;&gt;#j:_SDL_GetTicks&lt;/span&gt;)&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Convenient, right?&lt;/p&gt;
+&lt;p&gt;Now, let&apos;s sort out our tasks again:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;export all the needed functions via emscripten&lt;/li&gt;
+&lt;li&gt;wrap them a little for ease of use&lt;/li&gt;
+&lt;li&gt;done&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Oh, really?&lt;/p&gt;
+&lt;p&gt;Yes, really.&lt;/p&gt;
+&lt;p&gt;I &lt;a href=&quot;https://github.com/VitoVan/calm/blob/b683b2a8e983ff508069ad95aa7c9ab6415b8080/s/usr/web/wasm.lisp#L46&quot;&gt;exported&lt;/a&gt; all the frequently used SDL2 and Cairo functions, then wrapped them with &lt;a href=&quot;https://github.com/VitoVan/calm/blob/main/src/web/cairo.lisp#L268&quot;&gt;some Lisp code&lt;/a&gt;, and then I can call them as if I were on the desktop operating system:&lt;/p&gt;
+&lt;div class=&quot;highlight highlight-source-lisp&quot;&gt;&lt;pre&gt;(&lt;span class=&quot;pl-k&quot;&gt;defun&lt;/span&gt; &lt;span class=&quot;pl-en&quot;&gt;draw-blade&lt;/span&gt; (&amp;amp;optional (degree &lt;span class=&quot;pl-c1&quot;&gt;0&lt;/span&gt;))
+  (c:save)
+  (c:translate &lt;span class=&quot;pl-c1&quot;&gt;300&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;170&lt;/span&gt;)
+  (c:rotate (* degree (/ pi &lt;span class=&quot;pl-c1&quot;&gt;180&lt;/span&gt;)))
+  (c:move-to &lt;span class=&quot;pl-c1&quot;&gt;0&lt;/span&gt; -&lt;span class=&quot;pl-c1&quot;&gt;15&lt;/span&gt;)
+  (c:line-to &lt;span class=&quot;pl-c1&quot;&gt;0&lt;/span&gt; -&lt;span class=&quot;pl-c1&quot;&gt;100&lt;/span&gt;)
+  (c:curve-to &lt;span class=&quot;pl-c1&quot;&gt;0&lt;/span&gt; -&lt;span class=&quot;pl-c1&quot;&gt;110&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;100&lt;/span&gt; -&lt;span class=&quot;pl-c1&quot;&gt;65&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;15&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;0&lt;/span&gt;)
+  (c:stroke-preserve)
+
+  (c:set-source-rgba (/ &lt;span class=&quot;pl-c1&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;255&lt;/span&gt;) (/ &lt;span class=&quot;pl-c1&quot;&gt;55&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;255&lt;/span&gt;) (/ &lt;span class=&quot;pl-c1&quot;&gt;132&lt;/span&gt; &lt;span class=&quot;pl-c1&quot;&gt;255&lt;/span&gt;) &lt;span class=&quot;pl-c1&quot;&gt;0.1&lt;/span&gt;)
+  (c:fill-path)
+  (c:restore))&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; href=&quot;porting.assets/calm-fan.png&quot;&gt;&lt;img src=&quot;porting.assets/calm-fan.png&quot; alt=&quot;Calm Example Fan&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can try it yourself &lt;a href=&quot;https://vitovan.com/calm/examples-0.1.1/fan/calm.html&quot; rel=&quot;nofollow&quot;&gt;with this link&lt;/a&gt;, the source code is &lt;a href=&quot;https://github.com/VitoVan/calm/tree/examples-0.1.1/docs/examples/fan&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;As I clicked on the blue circle in the upper right corner, a gentle  breeze carrying the scent of freshly cut grass wafted out of the screen. It was then that I knew it was time to call it a day.&lt;/p&gt;
+&lt;h2&gt;&lt;a name=&quot;what-now&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#what-now&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;What Now?&lt;/h2&gt;
+&lt;p&gt;With the availability of Lisp in the browser, along with SDL2 and Cairo, the possibilities for interesting projects are endless.&lt;/p&gt;
+&lt;p&gt;The day-to-day development could happen on the desktop with &lt;a href=&quot;https://www.sbcl.org/&quot; rel=&quot;nofollow&quot;&gt;SBCL&lt;/a&gt; + &lt;a href=&quot;https://slime.common-lisp.dev/&quot; rel=&quot;nofollow&quot;&gt;SLIME&lt;/a&gt; enabled to get an interactive programming experience. When done, compile everything to WebAssembly + JavaScript, and publish the result online, then you have an application that supports Linux, macOS, Windows, and the web browser!&lt;/p&gt;
+&lt;p&gt;But, JSCL is &lt;a href=&quot;https://github.com/jscl-project/jscl/#status&quot;&gt;far from complete&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the perfect new world, we should expect:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;JSCL (or any other &lt;em&gt;JavaScript&lt;/em&gt; Lisp) is complete, like &lt;a href=&quot;https://webstore.ansi.org/standards/incits/incits2261994s2008&quot; rel=&quot;nofollow&quot;&gt;ANSI complete&lt;/a&gt;, or&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ECL (or any other &lt;em&gt;complete&lt;/em&gt; Lisp) and the surrounding ecosystem function seamlessly in the browser&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you&apos;re interested, then go for it!&lt;/p&gt;
+&lt;p&gt;And we don&apos;t need a complete Lisp to have fun, right?&lt;/p&gt;
+&lt;p&gt;I can&apos;t wait to see what you are going to make.&lt;/p&gt;
+&lt;p&gt;;-)&lt;/p&gt;
+</description>
+            <author>Vito Van</author>
+            <pubDate></pubDate>
+        </item>
+        <item>
             <title>Jack&apos;s Ass</title>
             <link>https://vitovan.com/jack.html</link>
             <description>
