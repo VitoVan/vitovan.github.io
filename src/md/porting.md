@@ -17,7 +17,7 @@ It's an action game in which you can control the blue dot with your keyboard to 
 
 You can play it in your browser:
 
-[![open in the browser](https://img.shields.io/badge/open-in%20the%20browser-brightgreen?logo=webassembly&logoColor=white)](https://vitovan.com/pelusica/0.0.5/calm.html)
+[![open in the browser](https://img.shields.io/badge/open-in%20the%20browser-brightgreen?logo=webassembly&logoColor=white)](https://vitovan.com/pelusica/0.0.6/calm.html)
 
 or download it for [Linux](https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.AppImage), [macOS](https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.macos-13.dmg), and [Windows](https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.exe).
 

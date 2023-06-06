@@ -23,7 +23,7 @@
 &lt;p&gt;&lt;a href=&quot;https://github.com/VitoVan/pelusica/#readme&quot;&gt;&lt;img src=&quot;porting.assets/pelusica.png&quot; alt=&quot;pelusica&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;It&apos;s an action game in which you can control the blue dot with your keyboard to create music and avoid colliding with other dots.&lt;/p&gt;
 &lt;p&gt;You can play it in your browser:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://vitovan.com/pelusica/0.0.5/calm.html&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;https://camo.githubusercontent.com/31e3a7e8e1d3bc65a63c82ce83a0fb7e1db381b57be3917a220baa46ccaa4e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6f70656e2d696e25323074686525323062726f777365722d627269676874677265656e3f6c6f676f3d776562617373656d626c79266c6f676f436f6c6f723d7768697465&quot; alt=&quot;open in the browser&quot; data-canonical-src=&quot;https://img.shields.io/badge/open-in%20the%20browser-brightgreen?logo=webassembly&amp;amp;logoColor=white&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://vitovan.com/pelusica/0.0.6/calm.html&quot; rel=&quot;nofollow&quot;&gt;&lt;img src=&quot;https://camo.githubusercontent.com/31e3a7e8e1d3bc65a63c82ce83a0fb7e1db381b57be3917a220baa46ccaa4e52/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f6f70656e2d696e25323074686525323062726f777365722d627269676874677265656e3f6c6f676f3d776562617373656d626c79266c6f676f436f6c6f723d7768697465&quot; alt=&quot;open in the browser&quot; data-canonical-src=&quot;https://img.shields.io/badge/open-in%20the%20browser-brightgreen?logo=webassembly&amp;amp;logoColor=white&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;or download it for &lt;a href=&quot;https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.AppImage&quot;&gt;Linux&lt;/a&gt;, &lt;a href=&quot;https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.macos-13.dmg&quot;&gt;macOS&lt;/a&gt;, and &lt;a href=&quot;https://github.com/VitoVan/pelusica/releases/latest/download/Pelusica.exe&quot;&gt;Windows&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;&lt;a name=&quot;motivation&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#motivation&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Motivation&lt;/h2&gt;
 &lt;p&gt;I made a game, and I sent it to &lt;a href=&quot;https://vitovan.com/jack.html&quot; rel=&quot;nofollow&quot;&gt;Jack&lt;/a&gt;.&lt;/p&gt;
@@ -255,7 +255,7 @@ Top level.
 &lt;p&gt;;-)&lt;/p&gt;
 </description>
             <author>Vito Van</author>
-            <pubDate></pubDate>
+            <pubDate>Mon, 05 Jun 2023 15:28:05 +0000</pubDate>
         </item>
         <item>
             <title>Jack&apos;s Ass</title>
