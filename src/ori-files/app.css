@@ -24,8 +24,6 @@ body{
 .container img{
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 4px;
-  margin: 0 auto;
-  display: block;
 }
 .panel{
     float: left;
@@ -67,12 +65,16 @@ body{
         border-bottom-style: dashed;
         border-bottom-width: 0.1em;
     }
-    .panel>ul>li{
+    .panel>ul>li {
         float: left;
         margin: 0 0.8em;
     }
-    .container{
+    .container {
         width: 100%;
+    }
+    .container img {
+      margin: 0 auto;
+      display: block;
     }
     .markdown-body{
         min-width: inherit !important;
