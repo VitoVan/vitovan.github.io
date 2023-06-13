@@ -14,9 +14,7 @@
         <item>
             <title>Porting Lisp Game to the Web</title>
             <link>https://vitovan.com/porting.html</link>
-            <description>
-&lt;h1&gt;&lt;a name=&quot;porting-lisp-game-to-the-web&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#porting-lisp-game-to-the-web&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Porting Lisp Game to the Web&lt;/h1&gt;
-&lt;p&gt;2023/06&lt;/p&gt;
+            <description>&lt;p&gt;2023/06&lt;/p&gt;
 &lt;h2&gt;&lt;a name=&quot;tldr&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#tldr&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;TL;DR&lt;/h2&gt;
 &lt;p&gt;Here is a game written in Common Lisp and ported to the web:&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://github.com/VitoVan/pelusica/#readme&quot;&gt;Pel&#xFA;sica: Survive and make melodies&lt;/a&gt;&lt;/p&gt;
@@ -252,17 +250,14 @@ Top level.
 &lt;p&gt;If you&apos;re interested, then go for it!&lt;/p&gt;
 &lt;p&gt;And we don&apos;t need a complete Lisp to have fun, right?&lt;/p&gt;
 &lt;p&gt;I can&apos;t wait to see what you are going to make.&lt;/p&gt;
-&lt;p&gt;;-)&lt;/p&gt;
-</description>
+&lt;p&gt;;-)&lt;/p&gt;</description>
             <author>Vito Van</author>
             <pubDate>Mon, 05 Jun 2023 15:28:05 +0000</pubDate>
         </item>
         <item>
             <title>Jack&apos;s Ass</title>
             <link>https://vitovan.com/jack.html</link>
-            <description>
-&lt;h1&gt;&lt;a name=&quot;jacks-ass&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#jacks-ass&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Jack&apos;s Ass&lt;/h1&gt;
-&lt;p&gt;2023/02&lt;/p&gt;
+            <description>&lt;p&gt;2023/02&lt;/p&gt;
 &lt;p&gt;Jack is my friend, he had hemorrhoids.&lt;/p&gt;
 &lt;p&gt;Hemorrhoid is one of the experiences which could be legitimately called: &quot;the pain in the ass&quot;. Something grows in the ass and causes pain.&lt;/p&gt;
 &lt;h2&gt;&lt;a name=&quot;1&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#1&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;1&lt;/h2&gt;
@@ -296,17 +291,14 @@ Top level.
 &lt;p&gt;Suddenly, a huge pain came from my ass.&lt;/p&gt;
 &lt;h2&gt;&lt;a name=&quot;4&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#4&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;4&lt;/h2&gt;
 &lt;p&gt;If you have any interest, here is the ass-curing software: &lt;a href=&quot;https://vitovan.com/focalizzare/&quot; rel=&quot;nofollow&quot;&gt;Focolizzare&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;And here is the framework used to build it: &lt;a href=&quot;https://github.com/VitoVan/calm/&quot;&gt;CALM&lt;/a&gt;.&lt;/p&gt;
-</description>
+&lt;p&gt;And here is the framework used to build it: &lt;a href=&quot;https://github.com/VitoVan/calm/&quot;&gt;CALM&lt;/a&gt;.&lt;/p&gt;</description>
             <author>Vito Van</author>
             <pubDate>Sun, 19 Feb 2023 09:38:19 +0000</pubDate>
         </item>
         <item>
             <title>ख़िंलेर्मोर्ना - xinlermorna</title>
             <link>https://vitovan.com/xinlermorna.html</link>
-            <description>
-&lt;h1&gt;&lt;a name=&quot;ख़िंलेर्मोर्ना---xinlermorna&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#ख़िंलेर्मोर्ना---xinlermorna&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;ख़िंलेर्मोर्ना - xinlermorna&lt;/h1&gt;
-&lt;p&gt;2019/09, revision: 2019/10&lt;/p&gt;
+            <description>&lt;p&gt;2019/09, revision: 2019/10&lt;/p&gt;
 &lt;p&gt;By: la vitno, Version: &lt;strong&gt;ख़िं 0.6&lt;/strong&gt; , PDF: &lt;a href=&quot;xinlermorna/xinlermorna-V0.6.pdf&quot;&gt;xinlermorna-V0.6.pdf&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Devanagari Orthography for &lt;a href=&quot;https://mw.lojban.org/papri/Lojban&quot; rel=&quot;nofollow&quot;&gt;Lojban&lt;/a&gt; based on Hindi pronunciation&lt;/p&gt;
 &lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; href=&quot;xinlermorna/xinlermorna.png&quot;&gt;&lt;img src=&quot;xinlermorna/xinlermorna.png&quot; alt=&quot;xinlermorna&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
@@ -685,17 +677,14 @@ Top level.
 &lt;p&gt;* Martel &lt;a href=&quot;https://fonts.google.com/specimen/Martel&quot; rel=&quot;nofollow&quot;&gt;https://fonts.google.com/specimen/Martel&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; href=&quot;xinlermorna/Martel.png&quot;&gt;&lt;img src=&quot;xinlermorna/Martel.png&quot; alt=&quot;Martel&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;You can try it with the &lt;a href=&quot;https://vitovan.com/xinlermorna-transliteration/&quot; rel=&quot;nofollow&quot;&gt;xinlermorna transliteration tool&lt;/a&gt;.&lt;/p&gt;
-</description>
+&lt;p&gt;You can try it with the &lt;a href=&quot;https://vitovan.com/xinlermorna-transliteration/&quot; rel=&quot;nofollow&quot;&gt;xinlermorna transliteration tool&lt;/a&gt;.&lt;/p&gt;</description>
             <author>Vito Van</author>
             <pubDate>Sat, 28 Sep 2019 00:53:58 +0000</pubDate>
         </item>
         <item>
             <title>Dinosaur and Lisp</title>
             <link>https://vitovan.com/dino.html</link>
-            <description>
-&lt;h1&gt;&lt;a name=&quot;dinosaur-and-lisp&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#dinosaur-and-lisp&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;Dinosaur and Lisp&lt;/h1&gt;
-&lt;p&gt;2016/08&lt;/p&gt;
+            <description>&lt;p&gt;2016/08&lt;/p&gt;
 &lt;p&gt;&lt;a target=&quot;_blank&quot; rel=&quot;noopener noreferrer&quot; href=&quot;dino/high-score.png&quot;&gt;&lt;img src=&quot;dino/high-score.png&quot; alt=&quot;High Score&quot; style=&quot;max-width: 100%;&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Dinosaur is old enough, as well as Lisp, they may like each other. When I am talking about dinosaur here, I mean the dinosaur hiding in Google Chrome, it shows up when &quot;There is no Internet connection&quot;.&lt;/p&gt;
 &lt;h3&gt;&lt;a name=&quot;whats-this-all-about&quot; class=&quot;anchor&quot; aria-hidden=&quot;true&quot; href=&quot;#whats-this-all-about&quot;&gt;&lt;span aria-hidden=&quot;true&quot; class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;&lt;/a&gt;What&apos;s This All about?&lt;/h3&gt;
@@ -830,8 +819,7 @@ Top level.
 &lt;p&gt;&lt;strong&gt;Related:&lt;/strong&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;http://postd.cc/dinosaur-and-lisp/&quot; rel=&quot;nofollow&quot;&gt;Japanese Translation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+&lt;/ul&gt;</description>
             <author>Vito Van</author>
             <pubDate>Mon, 10 Jun 2019 05:58:35 +0000</pubDate>
         </item>

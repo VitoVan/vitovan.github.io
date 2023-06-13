@@ -29,7 +29,7 @@
 (setf sb-impl::*default-external-format* :UTF-8)
 ;; (declaim (optimize (debug 3)))
 
-(ql:quickload '(drakma html-template cl-ppcre cl-fad xml-emitter hunchentoot))
+(ql:quickload '(drakma html-template cl-ppcre cl-fad xml-emitter hunchentoot str))
 
 (defpackage vitovan
   (:use :cl :drakma :html-template :cl-ppcre :cl-fad :xml-emitter))
@@ -178,7 +178,7 @@
   (rss-item title
             :link (concat "https://vitovan.com/" name ".html")
             :author "Vito Van"
-            :description (gh-markdown (truename (concat "md/" name ".md")))
+            :description (str:trim (regex-replace "<h1>.+?</h1>" (gh-markdown (truename (concat "md/" name ".md"))) ""))
             :pubdate (get-item-rss-pubdate name)))
 
 
