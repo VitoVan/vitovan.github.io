@@ -116,30 +116,13 @@
     (regex-replace-all "id=\"user-content-" result "name=\"")))
 
 (defun make-post(name)
-  (regex-replace-all "#COMMENT-SCRIPT#"
-                     (regex-replace-all "#THE-TITLE#"
-                                        (regex-replace-all "#THE-CONTENT#" (the-tmpl)
-                                                           (concat
-                                                            (if (member name *shit-list* :test #'string=)
-                                                                "<div style=\"text-align: center;background: yellow;color: black;font-weight: bold;padding: 10px 0;\">depreciated content, please close your eyes, DO NOT READ!</div>" "")
-                                                            (gh-markdown (truename (concat *md-path* name ".md")))))
-                                        (get-title (truename (concat *md-path* name ".md"))))
-                     "<script src=\"https://giscus.app/client.js\"
-        data-repo=\"VitoVan/vitovan.github.io\"
-        data-repo-id=\"MDEwOlJlcG9zaXRvcnk0MDk1OTU3MQ==\"
-        data-category=\"Announcements\"
-        data-category-id=\"DIC_kwDOAnD-U84CUWbP\"
-        data-mapping=\"title\"
-        data-strict=\"1\"
-        data-reactions-enabled=\"0\"
-        data-emit-metadata=\"0\"
-        data-input-position=\"bottom\"
-        data-theme=\"light\"
-        data-lang=\"en\"
-        data-loading=\"lazy\"
-        crossorigin=\"anonymous\"
-        async>
-        </script>"))
+  (regex-replace-all "#THE-TITLE#"
+                     (regex-replace-all "#THE-CONTENT#" (the-tmpl)
+                                        (concat
+                                         (if (member name *shit-list* :test #'string=)
+                                             "<div style=\"text-align: center;background: yellow;color: black;font-weight: bold;padding: 10px 0;\">depreciated content, please close your eyes, DO NOT READ!</div>" "")
+                                         (gh-markdown (truename (concat *md-path* name ".md")))))
+                     (get-title (truename (concat *md-path* name ".md")))))
 
 (defun write-post (name)
   (format t "WRITING POST ~A ~%" name)

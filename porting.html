@@ -169,15 +169,15 @@ Top level.
 <li>...</li>
 </ul>
 <p>With C, we can <a href="https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#calling-javascript-from-c-c" rel="nofollow">call JavaScript</a> like this:</p>
-<div class="highlight highlight-source-c"><pre>#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>emscripten.h<span class="pl-pds">&gt;</span></span>
+<div class="highlight highlight-source-c"><pre><span class="pl-k">#include</span> <span class="pl-s">&lt;emscripten.h&gt;</span>
 
-<span class="pl-en">EM_JS</span>(<span class="pl-k">void</span>, call_alert, (), {
-  <span class="pl-c1">alert</span>(<span class="pl-s"><span class="pl-pds">'</span>hello world!<span class="pl-pds">'</span></span>);
-  throw <span class="pl-s"><span class="pl-pds">'</span>all done<span class="pl-pds">'</span></span>;
+<span class="pl-en">EM_JS</span>(<span class="pl-s1">void</span>, <span class="pl-s1">call_alert</span>, (<span class="pl-s1"></span>), {
+  <span class="pl-en">alert</span>('h<span class="pl-s1">ello</span> <span class="pl-s1">world</span>!');
+  <span class="pl-s1">throw</span> '<span class="pl-s1">all</span> <span class="pl-s1">done</span>';
 });
 
-<span class="pl-k">int</span> <span class="pl-en">main</span>() {
-  <span class="pl-c1">call_alert</span>();
+<span class="pl-smi">int</span> <span class="pl-en">main</span>() {
+  <span class="pl-en">call_alert</span>();
   <span class="pl-k">return</span> <span class="pl-c1">0</span>;
 }</pre></div>
 <p>With Lisp, how?</p>
@@ -276,22 +276,6 @@ Top level.
 <p>;-)</p>
 
             </div>
-        <script src="https://giscus.app/client.js"
-        data-repo="VitoVan/vitovan.github.io"
-        data-repo-id="MDEwOlJlcG9zaXRvcnk0MDk1OTU3MQ=="
-        data-category="Announcements"
-        data-category-id="DIC_kwDOAnD-U84CUWbP"
-        data-mapping="title"
-        data-strict="1"
-        data-reactions-enabled="0"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="light"
-        data-lang="en"
-        data-loading="lazy"
-        crossorigin="anonymous"
-        async>
-        </script>
         </div>
     </body>
 </html>
